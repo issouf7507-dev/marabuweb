@@ -1,0 +1,1033 @@
+{
+  "header": {
+    "links": [
+      {
+        "id": 1,
+        "tilte": "Accueil",
+        "herf": "/"
+      },
+      {
+        "id": 2,
+        "tilte": "Nos Solutions",
+        "herf": "/solutions"
+      },
+
+      {
+        "id": 3,
+        "tilte": "Qui sommes-nous",
+        "herf": "/apropos"
+      },
+      {
+        "id": 4,
+        "tilte": "Blog",
+        "herf": "/actualites"
+      }
+    ],
+
+    "cta": "Nous contacter"
+  },
+  "home": {
+    "slider": [
+      {
+        "heading": "Des stratégies innovantes \n pour une croissance \n durable et performante",
+        "subheading": "Marabu accompagne les entreprises et institutions avec des solutions sur mesure pour booster leur croissance et optimiser leur performance.",
+        "cta": "Nous contacter"
+      },
+      {
+        "heading": "Des services optimisés \n pour votre développement",
+        "subheading": "Nous connectons votre entreprise aux bons partenaires pour accélérer votre croissance et saisir de nouvelles opportunités.",
+        "cta": "Nous contacter"
+      },
+      {
+        "heading": "Un réseau puissant \n pour une intermédiation efficace",
+        "subheading": "Nous aidons les entreprises et investisseurs à réussir leur implantation en Afrique de l’Ouest en identifiant les meilleures opportunités",
+        "cta": "Nous contacter"
+      }
+    ],
+
+    "solutions": {
+      "headingup": "nos différents savoir-faire",
+      "heading": "Nos Solutions",
+      "subheading": "Guidés par un héritage profondément enraciné et une expertise contemporaine,\n nous offrons un éventail de solutions adaptées à vos besoins. Nos services stratégiques,\n nos intermédiations expertes et nos solutions pratiques transforment vos ambitions en succès concrets",
+      "cta1": "Prenez contact avec nous",
+      "cardservices": [
+        {
+          "id": 1,
+          "title": "Conseil",
+          "description": "Nos solutions de conseil sont conçues pour vous accompagner dans vos défis. Nous proposons des stratégies personnalisées et innovantes axées sur la transformation, l'optimisation des processus et la conduite du changement tout en intégrant des approches sur mesure pour moderniser les structures et renforcer les compétences, pour moderniser les structures et renforcer les compétences"
+        },
+        {
+          "id": 2,
+          "title": "Services",
+          "description": "Nos solutions d'intermédiation visent à créer des synergies efficaces entre vous et vos partenaires clés. Nous facilitons les connexions, favorisons les collaborations fructueuses et accompagnons la mise en œuvre de vos projets innovants. Grâce à notre expertise, nous optimisons les échanges et assurons des partenariats durables pour maximiser votre impact."
+        },
+        {
+          "id": 3,
+          "title": "Intermédiation",
+          "description": "Nos services sont conçus pour faciliter vos projets et accélérer votre croissance. Nous vous accompagnons dans la mise en œuvre de solutions pragmatiques et efficaces. Grâce à des approches sur mesure, nous favorisons la gestion optimisée des opérations pour concrétiser vos ambitions."
+        }
+      ],
+      "cta2": "Voir plus"
+    },
+
+    "partners": {
+      "headingup": "NOS PARTENAIRES",
+      "heading": "Ils nous ont ",
+      "heading2": "faire confiance",
+      "subheading1": "Ils nous ont fait confiance pour accompagner leur croissance",
+      "subheading2": "et leurs projets stratégiques."
+    },
+
+    "us": {
+      "headingup": "A PROPOS DE NOUS",
+      "heading": "Qui sommes nous ?",
+      "subheading1": "Depuis des siècles, les marabouts africains ont guidé les communautés avec sagesse et clairvoyance. Conseillers, médiateurs et gardiens de la connaissance, ils incarnaient une autorité éclairée, capable de transformer les défis en opportunités. Aujourd'hui, Marabu réinvente cet héritage.",
+
+      "subheading2": "Fondé en 2023, Marabu s'impose comme un acteur stratégique en conseils, services et intermédiations, alliant tradition et technologie pour accompagner ses partenaires dans un monde en perpétuelle évolution.",
+
+      "subheading3": "Nos Valeurs Fondamentales",
+
+      "lititle": "Innovation Inspirée : ",
+      "lidescription": "Unir les traditions aux technologies modernes.",
+
+      "lititle2": "Impact Positif : ",
+      "lidescription2": "Contribuer à un développement durable et inclusif.",
+
+      "lititle3": "Engagement Client : ",
+      "lidescription3": "Offrir des solutions personnalisées à vos besoins.",
+
+      "textdownn": "Nous sommes les traducteurs contemporains de la sagesse africaine en action stratégique moderne.",
+
+      "cta": "En savoir plus..."
+    },
+
+    "expertise": {
+      "headingup": "NOTRE EXPERTISE",
+      "heading": "Une approche stratégique et impactante",
+      "subheading": "Marabu accompagne les entreprises et institutions dans leur croissance et leur transformation grâce à des stratégies adaptées et une méthodologie éprouvée. Nous apportons des solutions concrètes pour renforcer votre positionnement et votre impact.",
+
+      "experience": [
+        {
+          "id": 1,
+          "step": "Etape 1",
+          "title": "Capacité d'Innovation ",
+          "desc": "Nous nous appuyons sur une forte capacité d'innovation pour anticiper les tendances du marché et nous adaptons aux besoins spécifiques de chaque client, garantissant des solutions fiable.",
+          "icons": "/icons/innovation_marabu.svg",
+          "alt": "Innovation Marabu"
+        },
+        {
+          "id": 2,
+          "step": "Etape 2",
+          "title": "Crédibilité et Réputation",
+          "desc": "Marabu bénéficie d'une solide crédibilité et réputation dans l'accompagnement des entreprises, grâce à notre expertise reconnue et notre approche axée sur la réussite à long terme de nos clients.",
+          "icons": "/icons/reputation_marabu.svg",
+          "alt": "Réputation Marabu"
+        },
+        {
+          "id": 3,
+          "step": "Etape 3",
+          "title": "Offre de Services Structurée",
+          "desc": "Nous offrons une gamme complète de services structurés, allant de la stratégie marketing à la transformation digitale, en passant par la gestion de la réputation et le branding.",
+          "icons": "/icons/services_structuree_marabu.svg",
+          "alt": "Services Structurée Marabu"
+        },
+        {
+          "id": 4,
+          "step": "Etape 4",
+          "title": "Méthodologie et Outils",
+          "desc": "Nous appliquons une méthodologie rigoureuse, soutenue par des outils de pointe, pour garantir une gestion optimale des projets et une exécution fluide, tout en maximisant la performance.",
+          "icons": "/icons/methodologie_outils_marabu.svg",
+          "alt": "Methodologie et Outils Marabu"
+        }
+      ]
+    },
+
+    "boost": {
+      "heading": "Boostez votre croissance avec ",
+      "heading2": "des solutions sur mesure !",
+      "subheading1": "Des solutions personnalisées pour booster votre compétitivité, optimiser votre croissance",
+      "subheading2": " et renforcer votre réseaustratégique. Ensemble, donnons vie à vos ambitions.",
+      "cta": "Contactez-nous"
+    },
+
+    "clients": {
+      "headingup": "AVIS CLIENTS",
+      "heading1": " Retours ",
+      "heading2": "d'expérience",
+      "clients1": [
+        {
+          "id": 1,
+          "name": "Zanyiwe Asare",
+          "comment": "Avec Marabu, j'ai trouvé bien plus qu'un partenaire : une vraie famille professionnelle. Entre vision stratégique, engagement sincère et humanité rare, cette collaboration a marqué un tournant dans mon parcours",
+          "image": "/persons/Zanyiwe_Asare_yango_marabu.jpeg",
+          "alt": "Zanyiwe Asare - Vice-Présidente Affaires Publiques Yango",
+          "position1": "Vice-Présidente Affaires Publiques ",
+          "position2": " Yango"
+        }
+      ],
+      "clients2": [
+        {
+          "id": 1,
+          "name": "TOURE Abdoulaye",
+          "comment": "Avec Marabu, nous avons construit bien plus qu'une collaboration : une relation de confiance durable. Leur professionnalisme, leur capacité d'écoute et leur sens de l'impact font d'eux des partenaires précieux… et une famille de travail avec qui l'on avance avec sérénité.",
+          "image": "/persons/TOURE_Abdoulaye_guce-ci_marabu.jpeg",
+          "alt": "TOURE Abdoulaye - Directeur des Études et du Développement GUCE CI",
+          "position1": "Directeur des Études et du Développement ",
+          "position2": " GUCE CI"
+        }
+      ],
+      "clients3": [
+        {
+          "id": 1,
+          "name": "Ismahill Diaby",
+          "comment": "Les Journées du Digital en Milieu Rural organisées par Marabu ont été une véritable leçon d'impact social et d'innovation responsable. Une initiative rare, qui allie humanité, vision et transformation digitale.",
+          "image": "/persons/Ismahill_Diaby_visa_marabu.jpeg",
+          "alt": "Ismahill Diaby - Vice President de Visa Afrique centrale et ouest",
+          "position1": "Vice President de Visa Afrique centrale et ouest",
+          "position2": " Visa Afrique centrale et ouest"
+        }
+      ],
+      "clients4": [
+        {
+          "id": 1,
+          "name": "Ayebi Modeste",
+          "comment": "Marabu a su allier rigueur stratégique et sens de l'humain pour faire avancer nos projets de protection sociale. Au-delà de l'expertise, j'ai découvert une équipe engagée, proche du terrain, et portée par une vraie vision de l'impact.",
+          "image": "/persons/Ayebi_Modeste_ministere-emploi_marabu.jpeg",
+          "alt": "Ayebi Modeste - Directeur de la Sécurité Sociale et de la Mutualité - Ministère de l'Emploi et de la Protection Sociale",
+          "position1": "Directeur de la Sécurité Sociale et de la Mutualité ",
+          "position2": " Ministère de l'Emploi et de la Protection Sociale"
+        }
+      ],
+      "clients5": [
+        {
+          "id": 1,
+          "name": "Raley White",
+          "comment": "Marabu n'est pas simplement un partenaire stratégique, c'est un moteur d'impact. Leur compréhension fine du terrain, leur agilité et leur engagement ont été essentiels pour faire avancer Yango avec efficacité et ambition.",
+          "image": "/persons/Raley_White_yango_marabu.jpeg",
+          "alt": "Raley White - Vice President of Operations Yango",
+          "position1": "Vice President of Operations ",
+          "position2": " Yango"
+        }
+      ],
+      "clients6": [
+        {
+          "id": 1,
+          "name": "M. Esmel Meledje",
+          "comment": "Avec Marabu, nous avons posé les bases d'un cadre structurant pour le e-commerce en Côte d'Ivoire. Leur approche collaborative, stratégique et engagée a été un véritable levier pour faire émerger un Livre Blanc ambitieux et inclusif.",
+          "image": "/persons/M._Esmel_Meledje_ministere-commerce_marabu.jpeg",
+          "alt": "M. Esmel Meledje - Directeur du Commerce Électronique - Ministère du Commerce et de l'Industrie",
+          "position1": "Directeur du Commerce Électronique ",
+          "position2": " Ministère du Commerce et de l'Industrie"
+        }
+      ],
+      "clients7": [
+        {
+          "id": 1,
+          "name": "Yohannes Mekebebe",
+          "comment": "Marabu incarne une nouvelle génération d'expertise africaine : agile, engagée et tournée vers l'impact. Leur capacité à fédérer, structurer et livrer avec excellence en fait un partenaire de choix pour l'AmCham et pour tout acteur tourné vers l'avenir.",
+          "image": "/persons/Yohannes_Mekebebe_AmCham_marabu.jpeg",
+          "alt": "Yohannes Mekebebe - Président AmCham Côte d'Ivoire",
+          "position1": "Président AmCham Côte d'Ivoire",
+          "position2": " AmCham Côte d'Ivoire"
+        }
+      ],
+
+      "clients8": [
+        {
+          "id": 1,
+          "name": "Djigbenou Antoine",
+          "comment": "Marabu, c'est l'alliance parfaite entre visionstratégique et proximité humaine. Un partenaire rare avec qui j'ai partagé des projets porteurs de sens, d'innovation et de transformation réelle.",
+          "image": "/persons/Djigbenou_Antoine_GS2E_marabu.jpeg",
+          "alt": "Djigbenou Antoine - Directeur Général Adjoint du GS2E",
+          "position1": "Directeur Général Adjoint ",
+          "position2": " GS2E"
+        }
+      ]
+    },
+
+    "growth": {
+      "headingup": "nos STATISTIQUES",
+      "heading": "Notre Croissance",
+      "subheading": "Chez Marabu.Services, nous croyons en l'impact par les chiffres. Chaque collaboration, chaque stratégie, chaque accompagnement reflète notre engagement à transformer les ambitions en résultats concrets. Voici quelques indicateurs clés de notre croissance :",
+      "statistics1": "PARTENAIRES D'AFFAIRES",
+      "statistics2": "DIRIGEANTS FORMéS",
+      "statistics3": "STRATéGIE éLABORéE",
+      "statistics4": "CONSEIL ET COLLABORATION"
+    },
+
+    "magazine": {
+      "headingup": "NOUS L'AVONS FAIT",
+      "heading": "Magazine interactif",
+      "subheading": "Nous combinons expertise et innovation pour créer des expériences interactives uniques. Grâce à notre magazine digital, nous engageons votre audience avec du contenu dynamique, captivant et conçu pour renforcer votre visibilité et votre impact.",
+      "cta": "Voir plus"
+    }
+  },
+
+  "solutions": {
+    "conseil": {
+      "heading": "Conseil",
+      "subheading": "Chez ",
+      "subheading2": "MARABU ",
+      "subheading3": "conseil",
+      "subheading4": "sont pensés pour répondre concrètement à vos défis organisationnels et stratégiques. Nous vous accompagnons avec des approches personnalisées et innovantes afin de transformer durablement vos structures, optimiser vos processus et renforcer vos capacités internes.",
+
+      "heading2": "Transformation & Innovation",
+      "subheading5": " Nous aidons les organisations à anticiper les mutations de leur environnement et à se réinventer :",
+
+      "step1": "Élaboration de stratégies de développement ",
+      "step2": "Transformation digitale",
+      "step3": "Conduite du changement",
+      "step4": "Déploiement de démarches RSE",
+
+      "heading3": " Gouvernance & Gestion des risques",
+      "subheading6": "Nous assurons la robustesse de vos structures à travers une meilleure maîtrise des risques et de la conformité :",
+
+      "step5": "Mise en conformité réglementaire ",
+      "step6": "Évaluation et cartographie des risques",
+      "step7": "Définition de stratégies de cybersécurité",
+      "step8": "Réalisation d'audits internes",
+
+      "heading4": "Excellence opérationnelle",
+      "subheading7": "  Nous vous aidons à atteindre vos objectifs de performance grâce à une organisation agile et efficiente :",
+
+      "step9": "Optimisation des processus métier",
+      "step10": "Mise en place de systèmes de gestion de la performance",
+      "step11": "Développement de programmes de formation sur mesure"
+    },
+
+    "services": {
+      "heading": "Services",
+      "subheading": "Nos solutions de services sont conçues pour faciliter les connexions stratégiques, renforcer les collaborations et accompagner la réalisation de projets à fort impact. Grâce à notre expertise multidisciplinaire, nous agissons comme catalyseur de synergies durables entre vous et vos parties prenantes. Nous vous aidons à communiquer efficacement, vous positionner stratégiquement et valoriser vos initiatives.",
+
+      "heading2": "Communication stratégique",
+      "subheading3": "Nous développons une stratégie de communication alignée sur vos objectifs : ",
+
+      "step1": "Définition de stratégie de positionnement",
+      "step2": "Création de contenus à forte valeur ajoutée",
+      "step3": "Gestion de l'e-réputation & communication de crise",
+      "step4": "Mise en place de chaînes de communication efficaces",
+      "step5": "Gestion des relations publiques et médiatiques",
+
+      "heading3": "Organisation d'événements",
+      "subheading4": "Nous concevons et déployons des événements sur mesure, adaptés à vos objectifs et à vos publics cibles :",
+      "step6": "Conception, planification et gestion logistique d'événements",
+      "step7": " Coordination de campagnes et activations"
+    },
+
+    "intermediation": {
+      "heading": "Intermédiation",
+      "subheading": "Nous mettons à votre service notre expertise en intermédiation pour accélérer vos projets, renforcer vos positions et activer les leviers de croissance adaptés à vos ambitions. À travers des solutions pragmatiques et des approches personnalisées, nous facilitons la mise en relation stratégique, la négociation, la gestion des parties prenantes et la sécurisation de vos opérations.",
+
+      "heading2": "Diplomatie privée",
+      "subheading5": "Nous facilitons vos relations institutionnelles et internationales pour sécuriser vos projets :",
+
+      "step1": "Médiations et négociations à l'échelle internationale",
+      "step2": "Lobbying stratégique & gestion des relations institutionnelles",
+      "step3": "Identification de partenaires et facilitation des engagements",
+      "step4": "Mobilisation d'investisseurs & accompagnement post-financement",
+      "step5": "Relations avec les autorités publiques & gouvernements",
+
+      "heading3": "Intelligence économique",
+      "subheading6": "Nous vous aidons à anticiper, analyser et piloter votre environnement complexe pour prendre des décisions éclairées :",
+
+      "step6": "Cartographie des réseaux d'influence et des circuits de décision",
+
+      "step7": "Analyse proactive des risques politiques, économiques et sectoriels",
+      "step8": "Réalisation d'études stratégiques sectorielles ou géographiques",
+      "step9": "Veille concurrentielle, réglementaire et géopolitique"
+    }
+  },
+
+  "apropos": {
+    "about": {
+      "headingup": "A PROPOS DE NOUS",
+      "heading": "Qui sommes nous ?",
+      "subheading": "Depuis des siècles, les marabouts africains ont guidé les communautés avec sagesse et clairvoyance. Conseillers, médiateurs et gardiens de la connaissance, ils incarnaient une autorité éclairée, capable de transformer les défis en opportunités. Aujourd'hui, Marabu réinvente cet héritage. ",
+      "subheading2": "Fondé en 2023, Marabu s'impose comme un acteur stratégique en conseils, services et intermédiations, alliant tradition et technologie pour accompagner ses partenaires dans un monde en perpétuelle évolution. ",
+      "heading2": "Nos Valeurs Fondamentales",
+
+      "lititle": "Innovation Inspirée : ",
+      "lidescription": "Unir les traditions aux technologies modernes.",
+
+      "lititle2": "Impact Positif : ",
+      "lidescription2": "Contribuer à un développement durable et inclusif.",
+
+      "lititle3": "Engagement Client : ",
+      "lidescription3": "Offrir des solutions personnalisées à vos besoins",
+
+      "textdownn": "Nous sommes les traducteurs contemporains de la sagesse africaine en action stratégique moderne.",
+
+      "cta": "Nous contacter"
+    },
+
+    "mission": {
+      "headingup": "NOS MISSIONS",
+      "heading": "Fonctions à accomplir",
+      "subheading": "La mission de Marabu est d'incarner l'excellence et l'innovation à travers des solutions concrètes et stratégiques. Nous nous positionnons comme un catalyseur de transformation pour les entreprises et institutions, en les accompagnant dans leurs ambitions de croissance, de digitalisation et de performance durable. Notre approche repose sur une compréhension fine des enjeux actuels et futurs, ainsi qu'une capacité à anticiper les mutations économiques, sociales et technologiques.",
+
+      "subheading2": "À travers nos services d'intermédiation, de conseil et d'accompagnement opérationnel, nous construisons des ponts entre les besoins locaux et les opportunités globales. Marabu s'engage à apporter des réponses sur mesure, à forte valeur ajoutée, tout en plaçant l'humain, l'innovation et la vision à long terme au cœur de chaque mission. Ensemble, nous façonnons les trajectoires de réussite, avec agilité, audace et impact."
+    },
+
+    "team": {
+      "headingup": "NOTRE ÉQUIPE",
+      "heading": "Rencontrez Notre Équipe",
+      "subheading": "Une équipe passionnée et dévouée, prête à vous accompagner dans vos projets",
+
+      "teams": [
+        {
+          "id": "1",
+          "name": "Houssène Ben Souda",
+          "params": "housseine-ben-souda",
+          "role": "Managing Partner",
+          "image": "/persons/HOUSSEINE-BEN-SOUDA-430x560.jpg",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/hbensouda/?originalSubdomain=ci"
+        },
+        {
+          "id": "2",
+          "name": "Thomas Dabadie",
+          "params": "thomas-dabadie",
+          "role": "Partner",
+          "image": "/persons/M-Thomas-430x560.png",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/thomas-dabadie-68b2345/?originalSubdomain=ci"
+        },
+
+        {
+          "id": "22",
+          "name": "Kandas Camara",
+          "params": "kandas-camara",
+          "role": "Partner",
+          "image": "/persons/kandas-c.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/kandasc/?originalSubdomain=ci"
+        },
+
+        {
+          "id": "3",
+          "name": "Gilles Dogbo",
+          "params": "gilles-dogbo",
+          "role": "Senior Consultant",
+          "image": "/persons/Gil.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/gillesdogbo"
+        },
+        {
+          "id": "4",
+          "name": "Guy Marcel Aka Bossoh",
+          "params": "guy-marcel-aka-bossoh",
+          "role": "Senior Consultant",
+          "image": "/persons/Guy-marcel.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/marcel-aka-921784133?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        },
+        {
+          "id": "100",
+          "name": "Ezechiel DEGNY",
+          "params": "ezechiel-degny",
+          "role": "Senior Consultant",
+          "image": "/persons/Eze.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/ezechiel-degny-254a65ba/"
+        },
+        {
+          "id": "7",
+          "name": "Hervé Touré",
+          "params": "herve-toure",
+          "role": "Senior Consultant",
+          "image": "/persons/vetcho2.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "#"
+        },
+        {
+          "id": "5",
+          "name": "Ouattara Bitcheresse Issouf",
+          "params": "ouattara-bitcheresse-issouf",
+          "role": "Consultant",
+          "image": "/persons/Issouf.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara-a350aa341/"
+        },
+        {
+          "id": "6",
+          "name": "Ouattara Bitcheresse Issouf",
+          "params": "ouattara-bitcheresse-issouf",
+          "role": "Consultant",
+          "image": "/persons/Issouf.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara-a350aa341/"
+        },
+        {
+          "id": "7",
+          "name": "Ouattara Bitcheresse Issouf",
+          "params": "ouattara-bitcheresse-issouf",
+          "role": "Consultant",
+          "image": "/persons/Issouf.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara-a350aa341/"
+        }
+      ],
+
+      "teamMembers": [
+        {
+          "id": 1,
+          "name": "Houssène Ben Souda",
+          "role": "Managing Partner – Marabu.Services",
+          "params": "housseine-ben-souda",
+          "image": "/persons/HOUSSEINE-BEN-SOUDA-430x560.jpg",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/hbensouda/?originalSubdomain=ci",
+          "cv": "/cvs/houssene-cv.pdf",
+          "contact": {
+            "email": "hbs@marabu.services",
+            "phone": "(+225) 07 88 70 88 88"
+          },
+          "bio": "Avec plus de 20 ans d'expérience dans le conseil stratégique et la transformation d'entreprise, Houssène Ben Souda accompagne entreprises et institutions dans le développement de projets à fort impact en Afrique et en Europe. Diplômé de grandes écoles internationales, il associe expertise technique et vision stratégique pour créer des solutions innovantes et adaptées.",
+          "education": [
+            "MBA en Management Stratégique ",
+            "Master en Transformation Digitale ",
+            "Certificat en Leadership & Innovation  "
+          ],
+          "expertise": [
+            "Conseil stratégique et pilotage d'entreprise",
+            "Développement des affaires et croissance commerciale",
+            "Transformation digitale et innovation",
+            "Structuration de projets PPP (Partenariats Public-Privé)",
+            "Intelligence économique et diplomatie d'affaires"
+          ],
+          "skills": [
+            "Élaboration de plans stratégiques",
+            "Management de l'innovation",
+            "Conduite du changement organisationnel",
+            "Communication d'influence & relations institutionnelles",
+            "Formation et coaching de dirigeants"
+          ],
+          "achievements": [
+            "Accompagnement stratégique de Yango en Afrique francophone (négociations institutionnelles, expansion territoriale)",
+            "Pilotage du Livre Blanc sur le e-commerce en Côte d'Ivoire",
+            "Conseil au GUCE CI pour la transformation digitale du Guichet Unique",
+            "Coordination d'ateliers nationaux sur l'inclusion numérique et la protection sociale (ex : intégration des chauffeurs VTC)",
+            "Structuration de projets d'intermédiation RSE pour le secteur privé"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Thomas Dabadie",
+          "role": "Partner – Marabu.Services",
+          "params": "thomas-dabadie",
+          "image": "/persons/M-Thomas-430x560.png",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/thomas-dabadie/",
+          "cv": "/cvs/thomas-cv.pdf",
+          "contact": {
+            "email": "thomas.dabadie@marabu.services",
+            "phone": "(+225) XX XX XX XX XX"
+          },
+          "bio": "Avec 15 ans d'expérience au sein de grands cabinets de conseil, Thomas Dabadie accompagne les maîtrises d'ouvrage dans l'exécution de plans stratégiques, la refonte d'organisation et l'optimisation des processus. Spécialisé dans les secteurs banque, assurance, industrie et secteur public, il intervient de l'audit initial jusqu'à la conduite du changement et l'amélioration continue via la robotisation des processus (RPA).",
+          "education": [
+            "Diplôme d'ingénieur – ESTIA",
+            "Master en Robotique et Automatique – Université de Salford, Manchester"
+          ],
+          "expertise": [
+            "Exécution de plans stratégiques",
+            "Audit organisationnel et refonte de processus",
+            "Management de projet et conduite du changement",
+            "Transformation digitale et systèmes d'information",
+            "Optimisation de la performance achats et supply chain"
+          ],
+          "skills": [
+            "Diagnostic et analyse stratégique",
+            "Définition de processus cibles",
+            "Rédaction de cahiers des charges",
+            "Management de la performance",
+            "Robotics Process Automation (RPA)"
+          ],
+          "achievements": [
+            "Participation à l'élaboration de la stratégie nationale de gouvernance des données en Côte d'Ivoire",
+            "Pilotage de projets de transformation organisationnelle pour des banques et compagnies d'assurance en Afrique de l'Ouest",
+            "Optimisation des processus supply chain pour des acteurs industriels majeurs",
+            "Accompagnement de directions générales dans des projets de transformation digitale",
+            "Mise en place de solutions RPA pour améliorer la productivité et réduire les coûts opérationnels"
+          ]
+        },
+        {
+          "id": 22,
+          "name": "Kandas Camara",
+          "role": "Partner – Marabu.Services",
+          "params": "kandas-camara",
+          "image": "/persons/kandas-c.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/kandasc/",
+          "cv": "/cvs/kandas-cv.pdf",
+          "contact": {
+            "email": "kandas@marabu.services",
+            "phone": "(+225) XX XX XX XX XX"
+          },
+          "bio": "Senior Vice President chez Kanda, Kandas Camara est un expert en transformation digitale avec un focus sur la formation immersive en réalité virtuelle. Fort d'une expérience dans l'innovation, la fintech et le digital banking, il accompagne les organisations dans leur croissance via des solutions technologiques immersives. Son engagement pour l'Afrique et son esprit entrepreneurial en font un acteur clé de la modernisation de la formation et de la performance des entreprises.",
+          "education": [
+            "Master's degree, Business Intelligence – Université de Toulouse (2005–2006)",
+            "Bachelor's degree, Méthodes Statistiques Appliquées aux Entreprises – Université Gamal Abdel Nasser de Conakry (2001–2002)"
+          ],
+          "expertise": [
+            "Développement stratégique et commercial",
+            "Transformation digitale",
+            "Banque digitale et fintech",
+            "Formation immersive (VR)",
+            "Leadership & mentoring"
+          ],
+          "skills": [
+            "Stratégie commerciale",
+            "Conduite du changement",
+            "Développement de partenariats",
+            "Communication d'impact",
+            "Management de l’innovation"
+          ],
+          "achievements": [
+            "Lancement et développement de la plateforme immersive Kanda en Afrique et en Europe",
+            "Déploiement de formations certifiantes en réalité virtuelle dans les secteurs de l’énergie, santé et industrie",
+            "Représentation de Kanda dans les grands événements internationaux (WindEurope, Global Offshore Wind)",
+            "Contribution à la démocratisation de la formation VR sur le continent africain",
+            "Promotion de solutions éducatives disruptives accessibles et scalables"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Gilles Dogbo",
+          "role": "Senior Consultant – Marabu.Services",
+          "params": "gilles-dogbo",
+          "image": "/persons/Gil.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/gillesdogbo/",
+          "cv": "/cvs/gilles-cv.pdf",
+          "contact": {
+            "email": "gfd@marabu.services",
+            "phone": "(+225) 01 02 61 83 37"
+          },
+          "bio": "Consultant d'affaires bilingue (français/anglais), Gilles Dogbo accompagne les organisations dans l'amélioration de leur performance, de leur efficacité et de leur rentabilité. Auteur publié sur Amazon, il associe expertise en stratégie d'entreprise, finance et négociation pour apporter des solutions innovantes aux défis complexes. Il est également Secrétaire Général de Hope Restorers en Côte d'Ivoire.",
+          "education": [
+            "MBA en Stratégie et Innovation – Université Laval",
+            "MBA en Finance – Unicaf University",
+            "Program on Negotiation – Harvard University"
+          ],
+          "expertise": [
+            "Conseil en stratégie d'entreprise",
+            "Développement commercial",
+            "Optimisation de la collecte et de l'analyse de données",
+            "Négociation stratégique",
+            "Gestion de projet et management d'équipes"
+          ],
+          "skills": [
+            "Stratégie d'innovation",
+            "Analyse financière",
+            "Management de projet",
+            "Négociation d'affaires",
+            "Communication stratégique"
+          ],
+          "achievements": [
+            "Publication de trois ouvrages sur Amazon, dont deux recueils de poésie et un livre sur la science des affaires",
+            "Optimisation des processus de collecte et d'analyse de données pour Marabu.Services",
+            "Coordination de projets de conseil stratégique pour des clients en Afrique francophone",
+            "Obtention de 17 certificats professionnels en leadership, management et marketing",
+            "Promotion de l'inclusion sociale et professionnelle via son engagement associatif"
+          ]
+        },
+
+        {
+          "id": 4,
+          "name": "Marcel AKA",
+          "role": "Consultant en Finance, Contrôle de Gestion et Audit Interne",
+          "params": "guy-marcel-aka-bossoh",
+          "image": "/persons/Guy-marcel.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/marcel-aka/",
+          "cv": "/cvs/marcel-cv.pdf",
+          "contact": {
+            "email": "gma@marabu.services",
+            "phone": "(+225) 07 58 98 76 36"
+          },
+          "bio": "Spécialisé en finance, contrôle de gestion et audit interne, Marcel AKA accompagne les organisations dans l'analyse de performance, la restructuration organisationnelle et l'amélioration des processus. Il possède une solide expérience dans le secteur bancaire, pharmaceutique et le conseil en gestion.",
+          "education": [
+            "Master 2 Comptabilité et Finance – Pigier Côte d'Ivoire"
+          ],
+          "expertise": [
+            "Contrôle de gestion et reporting financier",
+            "Audit interne et évaluation des risques",
+            "Restructuration organisationnelle",
+            "Analyse financière et optimisation de la performance",
+            "Mise en place de dispositifs comptables et financiers"
+          ],
+          "skills": [
+            "Analyse financière",
+            "Indicateurs de performance (KPI)",
+            "Audit de procédures",
+            "Contrôle de gestion",
+            "Amélioration continue"
+          ],
+          "achievements": [
+            "Mise en place d'un système de contrôle de gestion pour une pharmacie de premier plan",
+            "Accompagnement d'une holding régionale dans le reporting de 11 filiales",
+            "Évaluation de dispositifs LBCFT dans le secteur bancaire",
+            "Restructuration organisationnelle et financière pour plusieurs PME",
+            "Optimisation de la gestion de trésorerie pour des institutions financières"
+          ]
+        },
+
+        {
+          "id": 5,
+          "name": "Bitcheresse Issouf Ouattara",
+          "role": "Développeur Web & Mobile – MARABU",
+          "params": "ouattara-bitcheresse-issouf",
+          "image": "/persons/Issouf.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara/",
+          "cv": "/cvs/bitcheresse-cv.pdf",
+          "contact": {
+            "email": "consultant@marabu.services",
+            "phone": "(+225) 05 07 44 86 35"
+          },
+          "bio": "Développeur passionné, Bitcheresse Issouf Ouattara a débuté dans le développement web avec React.js et Next.js avant de se spécialiser dans le développement mobile avec React Native. Il intervient aujourd'hui au sein de MARABU pour créer des solutions digitales innovantes et performantes.",
+          "education": [
+            "Licence en Sciences Informatiques et de l'Information – Université de Technologies d'Abidjan (UTA)"
+          ],
+          "expertise": [
+            "Développement d'applications web avec React.js et Next.js",
+            "Création d'applications mobiles cross-platform avec React Native",
+            "Gestion de projet et travail en équipe agile",
+            "Optimisation des performances front-end",
+            "Mise en place et maintenance de la documentation technique"
+          ],
+          "skills": [
+            "React.js",
+            "Next.js",
+            "React Native",
+            "Développement mobile cross-platform",
+            "Documentation technique",
+            "Gestion de projet",
+            "Développement de logiciels"
+          ],
+          "achievements": [
+            "Transition réussie du développement web au développement mobile avec React Native",
+            "Création de plusieurs projets web et mobiles performants",
+            "Promotion de l'importance de la documentation dans les projets de développement",
+            "Animation d'une communauté autour des meilleures pratiques en développement",
+            "Développement d'applications mobiles pour le compte de MARABU"
+          ]
+        },
+
+        {
+          "id": 98,
+          "name": "Hervé Touré",
+          "role": "Consultant Logistique & Moyens Généraux",
+          "params": "herve-toure",
+          "image": "/persons/vetcho2.webp",
+          "social": {
+            "linkedin": "/linkedincirclegreen.svg",
+            "facebook": "/facegreen.svg"
+          },
+          "linkLinkedin": "",
+          "cv": "",
+          "contact": {
+            "email": "hevertour84@gmail.com",
+            "phone": "(+225) 07 09 94 66 10"
+          },
+          "bio": "Professionnel expérimenté dans la logistique et la gestion des moyens généraux, Hervé Touré évolue actuellement chez MARABU à Abidjan. Fort de plusieurs années d'expérience, il a occupé des fonctions variées, notamment en tant que préposé au courrier à la Poste de Côte d'Ivoire, avant de rejoindre MARABU où il coordonne les opérations logistiques et encadre les conducteurs.",
+          "education": [],
+          "expertise": [
+            "Gestion logistique",
+            "Planification des opérations",
+            "Gestion des moyens généraux",
+            "Formation des conducteurs",
+            "Coordination des activités hybrides"
+          ],
+          "skills": [
+            "Logistique",
+            "Planification",
+            "Conduite",
+            "Organisation des moyens",
+            "Gestion d'équipes terrain"
+          ],
+          "achievements": [
+            "Mise en place de processus logistiques optimisés chez MARABU",
+            "Encadrement et formation de conducteurs professionnels",
+            "Gestion efficace du courrier pendant plus de 7 ans à La Poste de Côte d'Ivoire"
+          ]
+        },
+
+        {
+          "id": 6,
+          "name": "Thierry Koffi",
+          "role": "Développeur Web & Mobile – MARABU",
+          "params": "thierry-koffi",
+          "image": "/persons/thierry.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara/",
+          "cv": "/cvs/bitcheresse-cv.pdf",
+          "contact": {
+            "email": "consultant@marabu.services",
+            "phone": "(+225) 05 07 44 86 35"
+          },
+          "bio": "Passionate developer, Bitcheresse Issouf Ouattara started in web development with React.js and Next.js before specializing in mobile development with React Native. He is currently working at MARABU to create innovative and performant digital solutions.",
+          "education": [
+            "License in Computer Science and Information Technology – University of Technologies of Abidjan (UTA)"
+          ],
+          "expertise": [
+            "Web application development with React.js and Next.js",
+            "Creation of cross-platform mobile applications with React Native",
+            "Project management and agile team work",
+            "Optimization of front-end performance",
+            "Technical documentation implementation and maintenance"
+          ],
+          "skills": [
+            "React.js",
+            "Next.js",
+            "React Native",
+            "Mobile cross-platform development",
+            "Technical documentation",
+            "Project management",
+            "Software development"
+          ],
+          "achievements": [
+            "Successful transition from web development to mobile development with React Native",
+            "Creation of several performant web and mobile projects",
+            "Promotion of the importance of documentation in development projects",
+            "Animation of a community around the best practices in development",
+            "Development of mobile applications for MARABU"
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Nourgo Fantiele Coulibaly",
+          "role": "Consultant – MARABU",
+          "params": "nourgo-fantiele-coulibaly",
+          "image": "/persons/souley.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/nourgo-fantiele-coulibaly-%E2%9C%94-ab54aa339/",
+          "cv": "/cvs/nourgo-cv.pdf",
+          "contact": {
+            "email": "design@marabu.services",
+            "phone": "(+225) XX XX XX XX XX"
+          },
+          "bio": "Développeur Full-Stack passionné et polyvalent, Nourgo Fantiele Coulibaly combine des compétences en développement web (React, Next.js), marketing digital B2B/B2C, design UI/UX et graphisme. En parallèle, il explore l’administration réseau et la cybersécurité. Très actif sur des projets personnels et professionnels, il place l'expérience utilisateur et la performance au cœur de son approche.",
+          "education": [
+            "Programmation / Développement Informatique – UIPH-HETEC (depuis 2018)"
+          ],
+          "expertise": [
+            "Développement web et mobile (ReactJS / NextJS)",
+            "UI/UX Design & Graphisme",
+            "Marketing Digital & Conversion B2B/B2C",
+            "Création de portfolio & identité visuelle",
+            "Amateur cybersécurité & réseau"
+          ],
+          "skills": [
+            "Développement d’applications web/mobile",
+            "SEO / Génération de leads",
+            "Adobe Creative Suite",
+            "Optimisation UI/UX",
+            "Rédaction & gestion de contenu",
+            "Conception vidéo et motion design"
+          ],
+          "achievements": [
+            "Refonte de son portfolio en 3 thèmes (sombre & clair) pour démontrer ses compétences techniques",
+            "Création d’un chatbot IA d’aide à la programmation (YooriBot)",
+            "Plusieurs expériences réussies en freelance dans le design, le développement et le marketing",
+            "Collaboration avec des structures comme Marabu, Madata, Trifolium Afrique et Groupe Eradone",
+            "Obtention de la certification 'Préparer sa carrière dans la cybersécurité' par Microsoft & LinkedIn"
+          ]
+        },
+        {
+          "id": 100,
+          "name": "Ezéchiel Degny",
+          "role": "Directeur Juridique – Benicci Immobilier",
+          "params": "ezechiel-degny",
+          "image": "/persons/Eze.webp",
+          "social": {
+            "facebook": "/facegreen.svg",
+            "linkedin": "/linkedincirclegreen.svg"
+          },
+          "linkLinkedin": "https://www.linkedin.com/in/ezechiel-degny-254a65ba/",
+          "cv": "/cvs/ezechiel-dcv.pdf",
+          "contact": {
+            "email": "contact@marabu.services",
+            "phone": "(+225) XX XX XX XX XX"
+          },
+          "bio": "Je suis une personne dotée de grandes qualités, j’apprends très rapidement et je fais preuve d’une grande assiduité au travail. La concentration et le travail bien fait sont mes devises. De plus, je suis une personne sociable et disponible pour tous dans l’environnement professionnel.",
+          "education": [
+            "Institut Universitaire d'Abidjan (IUA)",
+            "Université de l'Atlantique",
+            "Cours Secondaire Méthodiste de Cocody (CSM Cocody)"
+          ],
+          "expertise": [
+            "Analyse juridique",
+            "Rédaction et revue de contrats",
+            "Droit immobilier et BTP",
+            "Assistance juridique aux entreprises",
+            "Conformité et gouvernance"
+          ],
+          "skills": [
+            "Négociation contractuelle",
+            "Conseil juridique",
+            "Rédaction juridique",
+            "Veille réglementaire",
+            "Communication professionnelle"
+          ],
+          "achievements": [
+            "Nomination en tant que Directeur Juridique chez Benicci Immobilier (il y a environ 1 an)",
+            "Publication d’analyses sur la clause résolutoire en droit immobilier ivoirien",
+            "Communication juridique récente sur l’ordonnance n°2024‑368 concernant les OSC en Côte d’Ivoire",
+            "Engagement à promouvoir la conformité et la sécurité juridique via ses publications sur LinkedIn"
+          ]
+        }
+      ]
+    },
+
+    "objectif": {
+      "headingup": "Pourquoi nous ",
+      "headingup2": "choisir ?",
+
+      "subheading": "Choisir Marabu, c'est opter pour un partenaire engagé, agile et visionnaire. Nous mettons notre expertise au service de votre transformation, avec une approche personnalisée, centrée sur l'impact et la durabilité.",
+
+      "step1": "Expertise stratégique, digitale et opérationnelle réunies",
+      "step2": "Accompagnement sur mesure, adapté à chaque secteur et contexte",
+      "step3": "Engagement fort pour des résultats concrets et durables",
+      "cta": "Contactez-nous"
+    },
+
+    "visions": {
+      "headingup": "NOS VISIONS",
+      "heading": "Objectif clé",
+      "subheading": "Chez Marabu, notre vision repose sur la conviction que la réussite durable des entreprises et des institutions passe par l'innovation, l'agilité et l'intelligence collective. Nous aspirons à devenir un acteur de référence dans l'accompagnement stratégique et digital, en créant des ponts entre les ambitions locales et les opportunités globales.",
+
+      "subheading2": "Notre objectif clé : permettre à nos partenaires de prendre une longueur d'avance dans un monde en constante évolution. Nous mettons notre expertise au service de solutions concrètes, inclusives et durables, en intégrant l'humain, la technologie et la performance au cœur de chaque projet. Parce que penser globalement, agir localement et réussir mondialement, c'est plus qu'un slogan — c'est notre engagement.",
+
+      "step1": "Ecoute 24/24",
+      "step1value": "Disponibles à tout moment pour répondre à vos besoins.",
+      "step2": "Guide",
+      "step2value": "Un accompagnement sur mesure, étape par étape.",
+      "step3": "Innovation",
+      "step3value": "Engagement, rigueur et performance au cœur de nos actions."
+    }
+  },
+
+  "blog": {
+    "mm": {
+      "headingup": "Nous l'avons fait",
+      "heading": "Magazine interactif",
+      "subheading": "Nous combinons expertise et innovation pour créer des expériences interactives uniques. Grâce à notre magazine digital, nous engageons votre audience avec du contenu dynamique, captivant et conçu pour renforcer votre visibilité et votre impact.",
+      "cta": "Voir plus..."
+    },
+
+    "tabsarticles": {
+      "tabs": [
+        { "id": "tous", "label": "Tous les articles" },
+        { "id": "conseils", "label": "Conseils" },
+        { "id": "intermediations", "label": "Intermédiations" },
+        { "id": "services", "label": "Services" }
+      ],
+      "cta": "Voir plus...",
+      "recent": "Articles récents",
+      "next": "Suivant",
+      "previous": "Précédent",
+
+      "cta2": "Découvrir nos services"
+    }
+  },
+
+  "contact": {
+    "sheet": {
+      "heading": "NOUS JOINDRE",
+      "subheading": "Contactez-nous pour toute demande de service ou de collaboration.",
+      "telText": "Contact Téléphonique",
+      "telNumber": "+225 07 20 77 70 00",
+      "emailText": "Adresse E-mail",
+      "email": "contact@marabu.services",
+      "locationText": "Géolocalisation",
+      "location1": "Cocody Danga, ",
+      "location2": "Carrefour rue Lepic",
+      "openingHoursText": "Horaires d'ouverture",
+      "openingHours1": "Lundi - Vendredi",
+      "openingHours2": "08:30-18:30",
+      "namePlaceholder": "Nom et Prénoms",
+      "emailPlaceholder": "Adresse E-mail",
+      "subjectPlaceholder": "Sujets",
+      "messagePlaceholder": "Votre message",
+      "sendButton": "Envoyer"
+    }
+  },
+
+  "footer": {
+    "navigation": {
+      "heading": "CABINET MARABU",
+      "subheading": "Conseil - Intermédiation - Services",
+
+      "title1": "Navigation",
+      "link1": "Accueil",
+      "link2": "Nos Solutions",
+      "link3": "Qui sommes-nous",
+      "link4": "Blog",
+
+      "title3": "Informations",
+      "telNumber": "+225 07 20 77 70 00",
+      "email": "contact@marabu.services",
+      "location": "Cocody Danga, Carrefour rue Lepic",
+
+      "title2": "Horaires d'ouverture",
+      "link5": "Lun-Vend : 08h30-19h30",
+      "link6": "Sam : Fermé",
+      "link7": "Dim : Fermé"
+    }
+  }
+}
