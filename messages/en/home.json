@@ -476,7 +476,7 @@
           "id": "6",
           "name": "Tano Thierry",
           "params": "tano-thierry",
-          "role": "Consultant ¡",
+          "role": "Consultant",
           "image": "/persons/thierry.webp",
           "social": {
             "facebook": "/facegreen.svg",
@@ -488,7 +488,7 @@
           "id": "7",
           "name": "Nourgo Fantiele Coulibaly",
           "params": "nourgo-fantiele-coulibaly",
-          "role": "Consultant graphiste",
+          "role": "Consultant",
           "image": "/persons/souley.webp",
           "social": {
             "facebook": "/facegreen.svg",
@@ -677,7 +677,7 @@
         {
           "id": 4,
           "name": "Marcel AKA",
-          "role": "Consultant en Finance, Contrôle de Gestion et Audit Interne",
+          "role": "Consultant in Finance, Management Control and Internal Audit",
           "params": "guy-marcel-aka-bossoh",
           "image": "/persons/Guy-marcel.webp",
           "social": {
@@ -800,48 +800,42 @@
             "Efficient management of mail for more than 7 years at La Poste de Côte d'Ivoire"
           ]
         },
+
         {
           "id": 6,
-          "name": "Thierry Koffi",
-          "role": "Développeur Web & Mobile – MARABU",
-          "params": "thierry-koffi",
-          "image": "/persons/thierry.webp",
+          "name": "Thierry Tano",
+          "role": "Stagiaire in software development – Marabu Services",
+          "params": "thierry-tano",
+          "image": "/persons/thierry-t.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
           },
-          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara/",
-          "cv": "/cvs/bitcheresse-cv.pdf",
+          "linkLinkedin": "https://www.linkedin.com/in/thierry-tano",
+          "cv": "/cvs/thierry-cv.pdf",
           "contact": {
-            "email": "consultant@marabu.services",
-            "phone": "(+225) 05 07 44 86 35"
+            "email": "thierry@marabu.services",
+            "phone": ""
           },
-          "bio": "Passionate developer, Bitcheresse Issouf Ouattara started in web development with React.js and Next.js before specializing in mobile development with React Native. He is currently working at MARABU to create innovative and performant digital solutions.",
+          "bio": "Thierry Tano is a passionate young developer, currently a software development intern at Marabu Services. He has a good mastery of computer tools, web development and system installation. His academic path is focused on software engineering, with several technical stages in networks and web development.",
           "education": [
-            "License in Computer Science and Information Technology – University of Technologies of Abidjan (UTA)"
+            "License, Software Engineering Option – University of Technology of Abidjan (2021 - 2024)",
+            "C Series Baccalaureate – Municipal Port Bouet High School (2020)"
           ],
           "expertise": [
-            "Web application development with React.js and Next.js",
-            "Creation of cross-platform mobile applications with React Native",
-            "Project management and agile team work",
-            "Optimization of front-end performance",
-            "Technical documentation implementation and maintenance"
+            "Development of web applications",
+            "Maintenance of computer systems",
+            "Installation of operating systems"
           ],
           "skills": [
-            "React.js",
-            "Next.js",
-            "React Native",
-            "Mobile cross-platform development",
-            "Technical documentation",
-            "Project management",
-            "Software development"
+            "Good mastery of computer tools",
+            "Web development",
+            "Basic network administration"
           ],
           "achievements": [
-            "Successful transition from web development to mobile development with React Native",
-            "Creation of several performant web and mobile projects",
-            "Promotion of the importance of documentation in development projects",
-            "Animation of a community around the best practices in development",
-            "Development of mobile applications for MARABU"
+            "Software development internship at Marabu Services (2025)",
+            "Network internship at the National Center for Arts and Culture (CNAC) – 2025",
+            "Web development internship at the Information Systems and Digitalization Directorate (DSID) – 2023"
           ]
         },
         {

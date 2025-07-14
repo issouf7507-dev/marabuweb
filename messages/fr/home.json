@@ -379,7 +379,7 @@
           "name": "Houssène Ben Souda",
           "params": "housseine-ben-souda",
           "role": "Managing Partner",
-          "image": "/persons/HOUSSEINE-BEN-SOUDA-430x560.jpg",
+          "image": "/persons/bensouda2.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
@@ -391,7 +391,7 @@
           "name": "Thomas Dabadie",
           "params": "thomas-dabadie",
           "role": "Partner",
-          "image": "/persons/M-Thomas-430x560.png",
+          "image": "/persons/thomas-d.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
@@ -474,10 +474,10 @@
         },
         {
           "id": "6",
-          "name": "Ouattara Bitcheresse Issouf",
-          "params": "ouattara-bitcheresse-issouf",
+          "name": "Tano Thierry",
+          "params": "tano-thierry",
           "role": "Consultant",
-          "image": "/persons/Issouf.webp",
+          "image": "/persons/thierry.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
@@ -486,15 +486,15 @@
         },
         {
           "id": "7",
-          "name": "Ouattara Bitcheresse Issouf",
-          "params": "ouattara-bitcheresse-issouf",
+          "name": "Nourgo Fantiele Coulibaly",
+          "params": "nourgo-fantiele-coulibaly",
           "role": "Consultant",
-          "image": "/persons/Issouf.webp",
+          "image": "/persons/souley.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
           },
-          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara-a350aa341/"
+          "linkLinkedin": "https://www.linkedin.com/in/nourgo-fantiele-coulibaly-%E2%9C%94-ab54aa339/"
         }
       ],
 
@@ -504,7 +504,7 @@
           "name": "Houssène Ben Souda",
           "role": "Managing Partner – Marabu.Services",
           "params": "housseine-ben-souda",
-          "image": "/persons/HOUSSEINE-BEN-SOUDA-430x560.jpg",
+          "image": "/persons/bensouda2.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
@@ -548,7 +548,7 @@
           "name": "Thomas Dabadie",
           "role": "Partner – Marabu.Services",
           "params": "thomas-dabadie",
-          "image": "/persons/M-Thomas-430x560.png",
+          "image": "/persons/thomas-d.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
