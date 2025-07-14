@@ -464,7 +464,7 @@
           "id": "5",
           "name": "Ouattara Bitcheresse Issouf",
           "params": "ouattara-bitcheresse-issouf",
-          "role": "Consultant",
+          "role": "Consultant ",
           "image": "/persons/Issouf.webp",
           "social": {
             "facebook": "/facegreen.svg",
@@ -476,7 +476,7 @@
           "id": "6",
           "name": "Tano Thierry",
           "params": "tano-thierry",
-          "role": "Consultant",
+          "role": "Consultant ¡",
           "image": "/persons/thierry.webp",
           "social": {
             "facebook": "/facegreen.svg",
@@ -488,7 +488,7 @@
           "id": "7",
           "name": "Nourgo Fantiele Coulibaly",
           "params": "nourgo-fantiele-coulibaly",
-          "role": "Consultant",
+          "role": "Consultant graphiste",
           "image": "/persons/souley.webp",
           "social": {
             "facebook": "/facegreen.svg",
