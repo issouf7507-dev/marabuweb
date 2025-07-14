@@ -29,7 +29,7 @@ rm -rf $TEMP_DIR/*
 # Cloner le code depuis GitHub
 echo "📥 Téléchargement du code depuis GitHub..."
 cd $TEMP_DIR
-git clone -b dev-issouf https://github.com/issouf7507-dev/marabuweb.git .
+git clone -b dev-issouf-f https://github.com/issouf7507-dev/marabuweb.git .
 
 # Installer les dépendances
 echo "📦 Installation des dépendances..."
