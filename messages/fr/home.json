@@ -803,46 +803,39 @@
 
         {
           "id": 6,
-          "name": "Thierry Koffi",
-          "role": "Développeur Web & Mobile – MARABU",
-          "params": "thierry-koffi",
-          "image": "/persons/thierry.webp",
+          "name": "Thierry Tano",
+          "role": "Stagiaire en développement logiciel – Marabu Services",
+          "params": "thierry-tano",
+          "image": "/persons/thierry-t.webp",
           "social": {
             "facebook": "/facegreen.svg",
             "linkedin": "/linkedincirclegreen.svg"
           },
-          "linkLinkedin": "https://www.linkedin.com/in/bitcheresse-issouf-ouattara/",
-          "cv": "/cvs/bitcheresse-cv.pdf",
+          "linkLinkedin": "https://www.linkedin.com/in/thierry-tano",
+          "cv": "/cvs/thierry-cv.pdf",
           "contact": {
-            "email": "consultant@marabu.services",
-            "phone": "(+225) 05 07 44 86 35"
+            "email": "thierry@marabu.services",
+            "phone": ""
           },
-          "bio": "Passionate developer, Bitcheresse Issouf Ouattara started in web development with React.js and Next.js before specializing in mobile development with React Native. He is currently working at MARABU to create innovative and performant digital solutions.",
+          "bio": "Thierry Tano est un jeune développeur passionné, actuellement stagiaire en développement logiciel chez Marabu Services. Il possède une bonne maîtrise des outils informatiques, du développement web et de l’installation de systèmes. Son parcours académique est axé sur le génie logiciel, avec plusieurs stages techniques en réseaux et développement web.",
           "education": [
-            "License in Computer Science and Information Technology – University of Technologies of Abidjan (UTA)"
+            "Licence, Informatique option Génie Logiciel – Université de Technologie d’Abidjan (2021 - 2024)",
+            "Baccalauréat série C – Lycée Municipal de Port Bouet (2020)"
           ],
           "expertise": [
-            "Web application development with React.js and Next.js",
-            "Creation of cross-platform mobile applications with React Native",
-            "Project management and agile team work",
-            "Optimization of front-end performance",
-            "Technical documentation implementation and maintenance"
+            "Développement d’applications web",
+            "Maintenance de systèmes informatiques",
+            "Installation de systèmes d’exploitation"
           ],
           "skills": [
-            "React.js",
-            "Next.js",
-            "React Native",
-            "Mobile cross-platform development",
-            "Technical documentation",
-            "Project management",
-            "Software development"
+            "Bonne maîtrise de l’outil informatique",
+            "Développement web",
+            "Bases en administration réseau"
           ],
           "achievements": [
-            "Successful transition from web development to mobile development with React Native",
-            "Creation of several performant web and mobile projects",
-            "Promotion of the importance of documentation in development projects",
-            "Animation of a community around the best practices in development",
-            "Development of mobile applications for MARABU"
+            "Stage en développement logiciel chez Marabu Services (2025)",
+            "Stage en réseaux au Centre National des Arts et de la Culture (CNAC) – 2025",
+            "Stage en développement web à la Direction des Systèmes d'Information et de la Digitalisation (DSID) – 2023"
           ]
         },
         {
