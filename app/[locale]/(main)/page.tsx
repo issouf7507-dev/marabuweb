@@ -245,6 +245,20 @@ export default function Home() {
   const subheadingAnimed = splitStringUsing(currentSlide?.subheading);
   const cta = currentSlide?.cta;
 
+  // const fetchArticles = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt,categorie&per_page=100"
+  //     );
+  //     // const res = await fetch("https://adminer.marabu.services/api/articles");
+  //     const data = await res.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Erreur lors de la récupération des articles :", error);
+  //     return [];
+  //   }
+  // };
+
   const fetchArticles = async () => {
     try {
       // c est
@@ -1594,6 +1608,61 @@ export default function Home() {
                     </Link>
                   </div>
                 ))}
+
+              {/* backoffice */}
+              {/* {queryArticles?.data &&
+                queryArticles.data.articles
+                  .slice(0, 3)
+                  .map((el: any, idx: number) => (
+                    <div
+                      className="bg-white shadow hover:shadow-lg transition-shadow duration-300"
+                      key={idx}
+                    >
+                      <Link
+                        href={`/actualites/${el?.id}`}
+                        className="cursor-pointer"
+                      >
+                        <div className="flex flex-col h-full">
+                          <div className="h-[380px] relative">
+                            <Image
+                              src={el?.featuredImage}
+                              alt=""
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+
+                          <div className="flex-1 flex flex-col justify-between">
+                            <div className="px-4 mt-4 pb-3.5">
+                              <h2 className="text-xs">
+                                {new Date(
+                                  el.publishedAt || el.createdAt
+                                ).toLocaleDateString("fr-FR", {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                })}
+                              </h2>
+                              <h1 className="text-[#689D71] font-semibold mb-2">
+                                {decodeHtmlEntities(el?.title)}
+                              </h1>
+                              {el?.excerpt && (
+                                <p className="text-sm text-gray-600 line-clamp-3">
+                                  {decodeHtmlEntities(el.excerpt)}
+                                </p>
+                              )}
+                            </div>
+                            <div className="bg-[#689D71] px-4 flex items-center justify-between">
+                              <span className="text-sm text-white block"></span>
+                              <div>
+                                <MoveRight className="text-white" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))} */}
             </div>
           </div>
 

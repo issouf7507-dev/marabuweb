@@ -43,7 +43,7 @@ const Page = () => {
     queryFn: fetchArticles,
   });
 
-  // console.log(queryArticles.data);
+  console.log(queryArticles?.data);
 
   function decodeHtmlEntities(text: string) {
     const textarea = document.createElement("textarea");
