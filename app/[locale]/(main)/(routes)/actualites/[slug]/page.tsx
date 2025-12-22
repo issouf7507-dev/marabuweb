@@ -104,6 +104,19 @@ const Page = () => {
     }
   };
 
+  const fetchArticlesbyMarabuById = async (id: string) => {
+    try {
+      const res = await fetch(
+        `https://adminer.marabu.services/api/articles/${id}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des articles :", error);
+      return [];
+    }
+  };
+
   function decodeHtmlEntities(text: string) {
     const textarea = document.createElement("textarea");
     textarea.innerHTML = text;
@@ -114,6 +127,13 @@ const Page = () => {
     queryKey: ["articlesbyid"],
     queryFn: () => fetchArticlesById(parseInt(id ?? "0") as number),
   });
+
+  const queryArticlesbyMarabuById = useQuery({
+    queryKey: ["articlesbyidmarabu"],
+    queryFn: () => fetchArticlesbyMarabuById(id ?? "Mzd8NWEwYg"),
+  });
+
+  console.log(queryArticlesbyMarabuById.data);
 
   const queryArticles = useQuery({
     queryKey: ["articles2"],
@@ -164,7 +184,7 @@ const Page = () => {
         <motion.div
           className="w-full h-screen bg-no-repeat bg-cover bg-center flex items-center relative overflow-hidden"
           style={{
-            backgroundImage: `url(${queryArticlesById.data?.acf?.large_image})`,
+            backgroundImage: `url(${queryArticlesbyMarabuById.data?.featuredImage})`,
           }}
         >
           <div className="absolute top-0 left-0 w-full h-full bg-[#00000080] z-10"></div>
@@ -172,19 +192,18 @@ const Page = () => {
             <div>
               <motion.h1 className="text-4xl md:text-7xl text-[#EDF2D0] font-bold tracking-wider relative z-30">
                 <motion.span>
-                  {decodeHtmlEntities(queryArticlesById.data?.title?.rendered)}
+                  {decodeHtmlEntities(queryArticlesbyMarabuById.data?.title)}
                 </motion.span>
               </motion.h1>
 
               <p className="text-lg font-bold text-[#EDF2D0]  mt-4 relative z-30">
-                {new Date(queryArticlesById.data?.date).toLocaleDateString(
-                  "fr-FR",
-                  {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  }
-                )}
+                {new Date(
+                  queryArticlesbyMarabuById.data?.createdAt
+                ).toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </p>
             </div>
 
@@ -250,8 +269,8 @@ const Page = () => {
               className="text-lg text-[#1D4851] h-svh overflow-auto"
               dangerouslySetInnerHTML={{
                 __html:
-                  queryArticlesById.data &&
-                  queryArticlesById.data?.acf?.sammury,
+                  queryArticlesbyMarabuById.data &&
+                  queryArticlesbyMarabuById.data?.content,
               }}
             />
           </div>

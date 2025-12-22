@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
         hostname: "main.marabu.services",
       },
     ],
+    unoptimized: true, // Bypass image optimization to allow private IP resolution
   },
 };
 

@@ -245,20 +245,23 @@ export default function Home() {
   const subheadingAnimed = splitStringUsing(currentSlide?.subheading);
   const cta = currentSlide?.cta;
 
-  // const fetchArticles = async () => {
-  //   try {
-  //     const res = await fetch(
-  //       "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt,categorie&per_page=100"
-  //     );
-  //     // const res = await fetch("https://adminer.marabu.services/api/articles");
-  //     const data = await res.json();
-  //     return data;
-  //   } catch (error) {
-  //     console.error("Erreur lors de la récupération des articles :", error);
-  //     return [];
-  //   }
-  // };
+  const fetchArticlesbyMarabu = async () => {
+    try {
+      const res = await fetch("https://adminer.marabu.services/api/articles");
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des articles :", error);
+      return [];
+    }
+  };
 
+  const queryArticlesbyMarabu = useQuery({
+    queryKey: ["articlesbyMarabu"],
+    queryFn: fetchArticlesbyMarabu,
+  });
+
+  console.log(queryArticlesbyMarabu?.data);
   const fetchArticles = async () => {
     try {
       // c est
@@ -1563,7 +1566,7 @@ export default function Home() {
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-16 
             "
             >
-              {queryArticles?.data &&
+              {/* {queryArticles?.data &&
                 queryArticles?.data.slice(0, 3)?.map((el: any, idx: number) => (
                   <div className="bg-white shadow " key={idx}>
                     <Link
@@ -1590,7 +1593,7 @@ export default function Home() {
                               })}
                             </h2>
                             <h1 className="text-[#689D71] font-semibold">
-                              {/* {el?.title?.rendered} */}
+
                               {decodeHtmlEntities(el?.title?.rendered)}
                             </h1>
                             <p className="text-sm">{el.desc}</p>
@@ -1607,11 +1610,11 @@ export default function Home() {
                       </div>
                     </Link>
                   </div>
-                ))}
+                ))} */}
 
               {/* backoffice */}
-              {/* {queryArticles?.data &&
-                queryArticles.data.articles
+              {queryArticlesbyMarabu?.data &&
+                queryArticlesbyMarabu?.data?.articles
                   .slice(0, 3)
                   .map((el: any, idx: number) => (
                     <div
@@ -1662,7 +1665,7 @@ export default function Home() {
                         </div>
                       </Link>
                     </div>
-                  ))} */}
+                  ))}
             </div>
           </div>
 
