@@ -261,7 +261,7 @@ export default function Home() {
     queryFn: fetchArticlesbyMarabu,
   });
 
-  console.log(queryArticlesbyMarabu?.data);
+  // console.log(queryArticlesbyMarabu?.data);
   const fetchArticles = async () => {
     try {
       // c est

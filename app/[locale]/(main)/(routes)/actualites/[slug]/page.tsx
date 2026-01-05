@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useParams } from "next/navigation";
 
 import Load from "@/components/load";
 import Link from "next/link";
@@ -29,10 +29,11 @@ import { useTranslations } from "next-intl";
 const Page = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const params = useParams();
+  const locale = (params?.locale as string) || "fr";
   const id = pathname.split("/").pop();
   const [currentArticleIndex, setCurrentArticleIndex] = React.useState(0);
   const [openContact, setOpenContact] = useState(false);
-  const articlesPerPage = 3;
 
   const t = useTranslations("blog");
 
@@ -76,34 +77,6 @@ const Page = () => {
     sendButton: string;
   };
 
-  const fetchArticles = async () => {
-    try {
-      const res = await fetch(
-        "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt"
-      );
-      const data = await res.json(); // Lire la réponse brute
-
-      return data;
-    } catch (error) {
-      console.error("Erreur lors de la récupération des articles :", error);
-      return [];
-    }
-  };
-
-  const fetchArticlesById = async (id: number) => {
-    try {
-      const res = await fetch(
-        `https://main.marabu.services/wp-json/wp/v2/articles/${id}?acf_format=standard&_fields=id,title,acf,date,date_gmt`
-      );
-      const data = await res.json(); // Lire la réponse brute
-
-      return data;
-    } catch (error) {
-      console.error("Erreur lors de la récupération des articles :", error);
-      return [];
-    }
-  };
-
   const fetchArticlesbyMarabuById = async (id: string) => {
     try {
       const res = await fetch(
@@ -113,67 +86,69 @@ const Page = () => {
       return data;
     } catch (error) {
       console.error("Erreur lors de la récupération des articles :", error);
-      return [];
+      return null;
+    }
+  };
+
+  const fetchArticlesbyMarabu = async () => {
+    try {
+      const res = await fetch(
+        `https://adminer.marabu.services/api/articles?page=1&limit=100`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des articles :", error);
+      return { articles: [], pagination: null };
     }
   };
 
   function decodeHtmlEntities(text: string) {
+    if (typeof window === "undefined") return text;
     const textarea = document.createElement("textarea");
     textarea.innerHTML = text;
     return textarea.value;
   }
 
-  const queryArticlesById = useQuery({
-    queryKey: ["articlesbyid"],
-    queryFn: () => fetchArticlesById(parseInt(id ?? "0") as number),
-  });
-
   const queryArticlesbyMarabuById = useQuery({
-    queryKey: ["articlesbyidmarabu"],
-    queryFn: () => fetchArticlesbyMarabuById(id ?? "Mzd8NWEwYg"),
+    queryKey: ["articlesbyidmarabu", id],
+    queryFn: () => fetchArticlesbyMarabuById(id ?? ""),
+    enabled: !!id,
   });
-
-  console.log(queryArticlesbyMarabuById.data);
 
   const queryArticles = useQuery({
-    queryKey: ["articles2"],
-    queryFn: fetchArticles,
+    queryKey: ["articlesbyMarabuList"],
+    queryFn: fetchArticlesbyMarabu,
   });
 
-  const totalPages = Math.ceil(
-    (queryArticles.data?.length || 0) / articlesPerPage
-  );
+  const articles = queryArticles.data?.articles || [];
+  const totalPages = articles.length;
 
   const handleNextArticle = () => {
-    if (
-      queryArticles.data &&
-      currentArticleIndex < queryArticles.data.length - 1
-    ) {
-      const nextArticle = queryArticles.data[currentArticleIndex + 1];
-      router.push(`/actualites/${nextArticle.id}`);
+    if (articles && currentArticleIndex < articles.length - 1) {
+      const nextArticle = articles[currentArticleIndex + 1];
+      router.push(`/${locale}/actualites/${nextArticle.id}`);
     }
   };
 
   const handlePrevArticle = () => {
-    if (queryArticles.data && currentArticleIndex > 0) {
-      const prevArticle = queryArticles.data[currentArticleIndex - 1];
-      router.push(`/actualites/${prevArticle.id}`);
+    if (articles && currentArticleIndex > 0) {
+      const prevArticle = articles[currentArticleIndex - 1];
+      router.push(`/${locale}/actualites/${prevArticle.id}`);
     }
   };
 
   // Trouver l'index de l'article courant dans la liste complète
-  React.useEffect(() => {
-    if (queryArticles.data && id) {
-      const index = queryArticles.data.findIndex(
-        (article: any) => article.id === parseInt(id)
-      );
+  useEffect(() => {
+    if (articles && id) {
+      const index = articles.findIndex((article: any) => article.id === id);
       if (index !== -1) {
         setCurrentArticleIndex(index);
       }
     }
-  }, [queryArticles.data, id]);
+  }, [articles, id]);
 
-  if (queryArticlesById.isPending) {
+  if (queryArticlesbyMarabuById.isPending) {
     return <Load />;
   }
 
@@ -198,7 +173,8 @@ const Page = () => {
 
               <p className="text-lg font-bold text-[#EDF2D0]  mt-4 relative z-30">
                 {new Date(
-                  queryArticlesbyMarabuById.data?.createdAt
+                  queryArticlesbyMarabuById.data?.publishedAt ||
+                    queryArticlesbyMarabuById.data?.createdAt
                 ).toLocaleDateString("fr-FR", {
                   day: "numeric",
                   month: "long",
@@ -211,9 +187,9 @@ const Page = () => {
             <div className="flex gap-4 z-30">
               <button
                 onClick={handlePrevArticle}
-                disabled={currentArticleIndex === 0}
+                disabled={currentArticleIndex === 0 || articles.length === 0}
                 className={`p-4 rounded-full ${
-                  currentArticleIndex === 0
+                  currentArticleIndex === 0 || articles.length === 0
                     ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                     : "bg-[#689D71] text-white hover:bg-[#1D4851]"
                 }`}
@@ -235,10 +211,12 @@ const Page = () => {
               <button
                 onClick={handleNextArticle}
                 disabled={
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
+                  currentArticleIndex === articles.length - 1 ||
+                  articles.length === 0
                 }
                 className={`p-4 rounded-full ${
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
+                  currentArticleIndex === articles.length - 1 ||
+                  articles.length === 0
                     ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                     : "bg-[#689D71] text-white hover:bg-[#1D4851]"
                 }`}
@@ -298,81 +276,70 @@ const Page = () => {
               {tabs.recent}
             </h2>
             <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
-              {/* {currentArticles?.map((article: any) => ( */}
-              {queryArticles.data?.slice(0, 3).map((article: any) => (
-                <Link
-                  href={`/actualites/${article.id}`}
-                  key={article.id}
-                  className="block group w-full"
-                >
-                  <div className="relative h-40 mb-2 overflow-hidden rounded-lg w-full">
-                    <Image
-                      src={article.acf?.large_image || "/placeholder.jpg"}
-                      alt={article.title?.rendered}
-                      className="object-cover  transition-transform duration-300 group-hover:scale-110"
-                      fill
-                    />
-                  </div>
-                  <h3 className="text-[#1D4851] font-medium group-hover:text-[#689D71] transition-colors">
-                    {decodeHtmlEntities(article.title?.rendered)}
-                  </h3>
-                  <p className="text-sm text-gray-950 mt-1">
-                    {new Date(article.date).toLocaleDateString("fr-FR", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </p>
-                </Link>
-              ))}
+              {articles
+                .filter((article: any) => article.id !== id)
+                .slice(0, 3)
+                .map((article: any) => (
+                  <Link
+                    href={`/actualites/${article.id}`}
+                    key={article.id}
+                    className="block group w-full"
+                  >
+                    <div className="relative h-40 mb-2 overflow-hidden rounded-lg w-full">
+                      <Image
+                        src={article.featuredImage || "/placeholder.jpg"}
+                        alt={decodeHtmlEntities(article.title)}
+                        className="object-cover  transition-transform duration-300 group-hover:scale-110"
+                        fill
+                      />
+                    </div>
+                    <h3 className="text-[#1D4851] font-medium group-hover:text-[#689D71] transition-colors">
+                      {decodeHtmlEntities(article.title)}
+                    </h3>
+                    <p className="text-sm text-gray-950 mt-1">
+                      {new Date(
+                        article.publishedAt || article.createdAt
+                      ).toLocaleDateString("fr-FR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </Link>
+                ))}
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
-              <button
-                onClick={handlePrevArticle}
-                disabled={currentArticleIndex === 0}
-                className={`px-4 py-2 rounded-md ${
-                  currentArticleIndex === 0
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                {tabs.previous}
-              </button>
-              <span className="text-[#1D4851]">
-                Page {currentArticleIndex + 1} sur {totalPages}
-              </span>
-              <button
-                onClick={handleNextArticle}
-                disabled={
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                }
-                className={`px-4 py-2 rounded-md ${
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                {tabs.next}
-              </button>
-            </div>
+            {articles.length > 0 && (
+              <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+                <button
+                  onClick={handlePrevArticle}
+                  disabled={currentArticleIndex === 0}
+                  className={`px-4 py-2 rounded-md ${
+                    currentArticleIndex === 0
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                      : "bg-[#689D71] text-white hover:bg-[#1D4851]"
+                  }`}
+                >
+                  {tabs.previous}
+                </button>
+                <span className="text-[#1D4851]">
+                  {currentArticleIndex + 1} / {totalPages}
+                </span>
+                <button
+                  onClick={handleNextArticle}
+                  disabled={currentArticleIndex === articles.length - 1}
+                  className={`px-4 py-2 rounded-md ${
+                    currentArticleIndex === articles.length - 1
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                      : "bg-[#689D71] text-white hover:bg-[#1D4851]"
+                  }`}
+                >
+                  {tabs.next}
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
-
-      <section className="px-10  w-full mx-auto z-40 relative  py-10">
-        <div className="grid grid-cols-2 gap-10">
-          <div
-            className="text-sm text-[#1D4851]"
-            dangerouslySetInnerHTML={{
-              __html:
-                // decodeHtmlEntities(
-                queryArticlesById.data &&
-                queryArticlesById.data?.acf?.sammury_1,
-              // ),
-            }}
-          />
         </div>
       </section>
 
@@ -440,7 +407,7 @@ const Page = () => {
       </section>
 
       <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-[100vw] h-[100vh] lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
+        <SheetContent className="w-screen h-screen lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
           <SheetHeader>
             <SheetTitle className="text-center">
               {translatedContact.heading}
