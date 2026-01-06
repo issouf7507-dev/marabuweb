@@ -93,6 +93,16 @@ export const logosSlide: logosSlideTypes[] = [
     logo: "/logos/logo_vitib_marabu.png",
     href: "https://www.vitib.ci/",
   },
+  {
+    id: 12,
+    logo: "/logos/logo-ansut.webp",
+    href: "https://www.ansut.ci/",
+  },
+  {
+    id: 13,
+    logo: "/logos/LogoMSCI.png",
+    href: "#",
+  },
   // {
   //   id: 9,
   //   logo: "/logos/ministere_du_commerce.png",

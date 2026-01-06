@@ -28,12 +28,16 @@ import { useTranslations } from "next-intl";
 
 const Page = () => {
   const pathname = usePathname();
+
   const router = useRouter();
   const params = useParams();
   const locale = (params?.locale as string) || "fr";
   const id = pathname.split("/").pop();
   const [currentArticleIndex, setCurrentArticleIndex] = React.useState(0);
   const [openContact, setOpenContact] = useState(false);
+
+  const currentLocaleData = locale === "fr" ? "fr-FR" : "en-US";
+  // const currentLocale = params?.locale ?? "fr"; // fallback au français
 
   const t = useTranslations("blog");
 
@@ -80,7 +84,9 @@ const Page = () => {
   const fetchArticlesbyMarabuById = async (id: string) => {
     try {
       const res = await fetch(
-        `https://adminer.marabu.services/api/articles/${id}`
+        locale == "fr"
+          ? `https://adminer.marabu.services/api/articles/${id}?lang=fr`
+          : `https://adminer.marabu.services/api/articles/${id}?lang=en`
       );
       const data = await res.json();
       return data;
@@ -93,7 +99,9 @@ const Page = () => {
   const fetchArticlesbyMarabu = async () => {
     try {
       const res = await fetch(
-        `https://adminer.marabu.services/api/articles?page=1&limit=100`
+        locale == "fr"
+          ? `https://adminer.marabu.services/api/articles?page=1&limit=100&lang=fr`
+          : `https://adminer.marabu.services/api/articles?page=1&limit=100&lang=en`
       );
       const data = await res.json();
       return data;
@@ -111,13 +119,13 @@ const Page = () => {
   }
 
   const queryArticlesbyMarabuById = useQuery({
-    queryKey: ["articlesbyidmarabu", id],
+    queryKey: ["articlesbyidmarabu", id, locale],
     queryFn: () => fetchArticlesbyMarabuById(id ?? ""),
     enabled: !!id,
   });
 
   const queryArticles = useQuery({
-    queryKey: ["articlesbyMarabuList"],
+    queryKey: ["articlesbyMarabuList", locale],
     queryFn: fetchArticlesbyMarabu,
   });
 
@@ -146,7 +154,7 @@ const Page = () => {
         setCurrentArticleIndex(index);
       }
     }
-  }, [articles, id]);
+  }, [articles, id, locale]);
 
   if (queryArticlesbyMarabuById.isPending) {
     return <Load />;
@@ -175,7 +183,7 @@ const Page = () => {
                 {new Date(
                   queryArticlesbyMarabuById.data?.publishedAt ||
                     queryArticlesbyMarabuById.data?.createdAt
-                ).toLocaleDateString("fr-FR", {
+                ).toLocaleDateString(currentLocaleData, {
                   day: "numeric",
                   month: "long",
                   year: "numeric",

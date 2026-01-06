@@ -42,10 +42,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 export default function Home() {
   const t = useTranslations("home");
   const t2 = useTranslations("contact");
+
+  const params = useParams();
+  const locale = (params?.locale as string) || "fr";
+  const currentLocaleData = locale === "fr" ? "fr-FR" : "en-US";
 
   // Récupérer toutes les slides traduites
   const translatedSlides = t.raw("slider") as {
@@ -247,7 +252,11 @@ export default function Home() {
 
   const fetchArticlesbyMarabu = async () => {
     try {
-      const res = await fetch("https://adminer.marabu.services/api/articles");
+      const res = await fetch(
+        locale == "fr"
+          ? "https://adminer.marabu.services/api/articles?lang=fr"
+          : "https://adminer.marabu.services/api/articles?lang=en"
+      );
       const data = await res.json();
       return data;
     } catch (error) {
@@ -257,30 +266,30 @@ export default function Home() {
   };
 
   const queryArticlesbyMarabu = useQuery({
-    queryKey: ["articlesbyMarabu"],
+    queryKey: ["articlesbyMarabu", locale],
     queryFn: fetchArticlesbyMarabu,
   });
 
-  // console.log(queryArticlesbyMarabu?.data);
-  const fetchArticles = async () => {
-    try {
-      // c est
-      const res = await fetch(
-        "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt"
-      );
-      const data = await res.json(); // Lire la réponse brute
+  // // console.log(queryArticlesbyMarabu?.data);
+  // const fetchArticles = async () => {
+  //   try {
+  //     // c est
+  //     const res = await fetch(
+  //       "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt"
+  //     );
+  //     const data = await res.json(); // Lire la réponse brute
 
-      return data;
-    } catch (error) {
-      console.error("Erreur lors de la récupération des articles :", error);
-      return [];
-    }
-  };
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Erreur lors de la récupération des articles :", error);
+  //     return [];
+  //   }
+  // };
 
-  const queryArticles = useQuery({
-    queryKey: ["articles21"],
-    queryFn: fetchArticles,
-  });
+  // const queryArticles = useQuery({
+  //   queryKey: ["articles21"],
+  //   queryFn: fetchArticles,
+  // });
 
   function decodeHtmlEntities(text: string) {
     const textarea = document.createElement("textarea");
@@ -1640,7 +1649,7 @@ export default function Home() {
                               <h2 className="text-xs">
                                 {new Date(
                                   el.publishedAt || el.createdAt
-                                ).toLocaleDateString("fr-FR", {
+                                ).toLocaleDateString(currentLocaleData, {
                                   day: "numeric",
                                   month: "long",
                                   year: "numeric",

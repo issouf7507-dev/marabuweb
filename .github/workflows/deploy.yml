@@ -2,7 +2,7 @@ name: Deploy to VPS
 
 on:
   push:
-    branches: [dev-issouf]
+    branches: [test-dev]
   workflow_dispatch:
 
 jobs:
@@ -29,13 +29,14 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 168.231.106.21
-          username: root
+          username: admin_marabu
           key: ${{ secrets.VPS_SSH_KEY }}
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
           port: 22
 
           script: |
             # Naviguer vers le répertoire du projet
-            cd /var/www/webapp/marabuweb
+            cd /home/admin_marabu/apps/marabu_website_test
 
             # Sauvegarder l'ancienne version
             if [ -d "current" ]; then
@@ -46,7 +47,7 @@ jobs:
             mkdir -p current
 
             # Cloner le code depuis GitHub
-            git clone -b dev-issouf https://github.com/${{ github.repository }}.git temp-deploy
+            git clone -b test-dev https://github.com/${{ github.repository }}.git temp-deploy
 
             # Copier les fichiers nécessaires
             cp -r temp-deploy/* current/
@@ -71,20 +72,20 @@ jobs:
             fi
 
             # Arrêter le processus PM2 existant s'il existe
-            pm2 stop marabuweb 2>/dev/null || true
-            pm2 delete marabuweb 2>/dev/null || true
+            pm2 stop marabuwebtest 2>/dev/null || true
+            pm2 delete marabuwebtest 2>/dev/null || true
 
-            # Tuer tout processus utilisant le port 3000
-            lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+            # Tuer tout processus utilisant le port 3001
+            lsof -ti:3001 | xargs kill -9 2>/dev/null || true
 
-            # Démarrer le service PM2 sur le port 3000
-            pm2 start npm --name "marabuweb" -- start -- -p 3000
+            # Démarrer le service PM2 sur le port 3001
+            pm2 start npm --name "marabuwebtest" -- start -- -p 3001
 
             # Sauvegarder la configuration PM2
             pm2 save
 
             # Nettoyer les anciennes sauvegardes (garder les 5 plus récentes)
-            cd /var/www/webapp/marabuweb
+            cd /home/admin_marabu/apps/marabu_website_test
             ls -t backup-* | tail -n +6 | xargs -r rm -rf
 
             echo "Déploiement terminé avec succès!"

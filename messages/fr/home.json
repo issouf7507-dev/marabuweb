@@ -377,7 +377,7 @@
         {
           "id": "1",
           "name": "Houssène Ben Souda",
-          "params": "housseine-ben-souda",
+          "params": "houssene-ben-souda",
           "role": "Managing Partner",
           "image": "/persons/bensouda2.webp",
           "social": {
@@ -436,18 +436,7 @@
           },
           "linkLinkedin": "https://www.linkedin.com/in/marcel-aka-921784133?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
         },
-        {
-          "id": "100",
-          "name": "Ezechiel DEGNY",
-          "params": "ezechiel-degny",
-          "role": "Senior Consultant",
-          "image": "/persons/Eze.webp",
-          "social": {
-            "facebook": "/facegreen.svg",
-            "linkedin": "/linkedincirclegreen.svg"
-          },
-          "linkLinkedin": "https://www.linkedin.com/in/ezechiel-degny-254a65ba/"
-        },
+
         {
           "id": "7",
           "name": "Hervé Touré",
@@ -503,7 +492,7 @@
           "id": 1,
           "name": "Houssène Ben Souda",
           "role": "Managing Partner – Marabu.Services",
-          "params": "housseine-ben-souda",
+          "params": "houssene-ben-souda",
           "image": "/persons/bensouda2.webp",
           "social": {
             "facebook": "/facegreen.svg",
@@ -879,49 +868,6 @@
             "Plusieurs expériences réussies en freelance dans le design, le développement et le marketing",
             "Collaboration avec des structures comme Marabu, Madata, Trifolium Afrique et Groupe Eradone",
             "Obtention de la certification 'Préparer sa carrière dans la cybersécurité' par Microsoft & LinkedIn"
-          ]
-        },
-        {
-          "id": 100,
-          "name": "Ezéchiel Degny",
-          "role": "Directeur Juridique – Benicci Immobilier",
-          "params": "ezechiel-degny",
-          "image": "/persons/Eze.webp",
-          "social": {
-            "facebook": "/facegreen.svg",
-            "linkedin": "/linkedincirclegreen.svg"
-          },
-          "linkLinkedin": "https://www.linkedin.com/in/ezechiel-degny-254a65ba/",
-          "cv": "/cvs/ezechiel-dcv.pdf",
-          "contact": {
-            "email": "contact@marabu.services",
-            "phone": "(+225) 07 20 77 70 00"
-          },
-          "bio": "Je suis une personne dotée de grandes qualités, j’apprends très rapidement et je fais preuve d’une grande assiduité au travail. La concentration et le travail bien fait sont mes devises. De plus, je suis une personne sociable et disponible pour tous dans l’environnement professionnel.",
-          "education": [
-            "Institut Universitaire d'Abidjan (IUA)",
-            "Université de l'Atlantique",
-            "Cours Secondaire Méthodiste de Cocody (CSM Cocody)"
-          ],
-          "expertise": [
-            "Analyse juridique",
-            "Rédaction et revue de contrats",
-            "Droit immobilier et BTP",
-            "Assistance juridique aux entreprises",
-            "Conformité et gouvernance"
-          ],
-          "skills": [
-            "Négociation contractuelle",
-            "Conseil juridique",
-            "Rédaction juridique",
-            "Veille réglementaire",
-            "Communication professionnelle"
-          ],
-          "achievements": [
-            "Nomination en tant que Directeur Juridique chez Benicci Immobilier (il y a environ 1 an)",
-            "Publication d’analyses sur la clause résolutoire en droit immobilier ivoirien",
-            "Communication juridique récente sur l’ordonnance n°2024‑368 concernant les OSC en Côte d’Ivoire",
-            "Engagement à promouvoir la conformité et la sécurité juridique via ses publications sur LinkedIn"
           ]
         }
       ]

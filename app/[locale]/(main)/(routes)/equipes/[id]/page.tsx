@@ -79,13 +79,13 @@ const TeamMemberPage = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-xl font-semibold text-[#1D4851]">
+                  <h2 className="text-xl font-semibold text-[#1D4851] mt-10">
                     {local === "fr" ? "À propos" : "About"}
                   </h2>
                   <p className="text-gray-600">{member.bio}</p>
                 </div>
 
-                <div className="mt-5 grid md:grid-cols-2 items-start gap-5">
+                {/* <div className="mt-5 grid md:grid-cols-2 items-start gap-5">
                   {member.education && member.education.length > 0 && (
                     <div className="space-y-4 m">
                       <h2 className="text-xl font-semibold text-[#1D4851]">
@@ -111,9 +111,9 @@ const TeamMemberPage = () => {
                       </ul>
                     </div>
                   )}
-                </div>
+                </div> */}
 
-                <div>
+                {/* <div>
                   {member.achievements && member.achievements.length > 0 && (
                     <div className="space-y-4">
                       <h2 className="text-xl font-semibold text-[#1D4851]">
@@ -126,7 +126,7 @@ const TeamMemberPage = () => {
                       </ul>
                     </div>
                   )}
-                </div>
+                </div>*/}
 
                 <div>
                   {member.contact && (

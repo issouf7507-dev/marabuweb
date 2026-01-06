@@ -7,10 +7,18 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState("tous");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const params = useParams();
+
+  // Pour récupérer dynamiquement la langue actuelle :
+  const currentLocale = params?.locale ?? "fr"; // fallback au français
+
+  // const locales = ["fr", "en"]; //
 
   const t = useTranslations("blog");
   const tabs = t.raw("tabsarticles") as {
@@ -27,9 +35,15 @@ const Page = () => {
 
   const fetchArticlesbyMarabu = async (page: number = 1, category?: string) => {
     try {
-      let url = `https://adminer.marabu.services/api/articles?page=${page}`;
+      let url =
+        currentLocale == "fr"
+          ? `https://adminer.marabu.services/api/articles?page=${page}&lang=fr`
+          : `https://adminer.marabu.services/api/articles?page=${page}&lang=en`;
       if (category && category !== "tous") {
-        url += `&category=${category}`;
+        url +=
+          currentLocale == "fr"
+            ? `&category=${category}&lang=fr`
+            : `&category=${category}&lang=en`;
       }
       const res = await fetch(url);
       const data = await res.json();
@@ -41,7 +55,7 @@ const Page = () => {
   };
 
   const queryArticlesbyMarabu = useQuery({
-    queryKey: ["articlesbyMarabu", currentPage, activeTab],
+    queryKey: ["articlesbyMarabu", currentPage, activeTab, currentLocale],
     queryFn: () => fetchArticlesbyMarabu(currentPage, activeTab),
   });
 
@@ -55,6 +69,11 @@ const Page = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [activeTab]);
+
+  // Réinitialiser à la page 1 quand on change de langue
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [currentLocale]);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
