@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "main.marabu.services",
+        hostname: "adminer-test.marabu.services",
       },
     ],
     unoptimized: true, // Bypass image optimization to allow private IP resolution

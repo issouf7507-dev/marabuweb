@@ -85,8 +85,8 @@ const Page = () => {
     try {
       const res = await fetch(
         locale == "fr"
-          ? `https://adminer.marabu.services/api/articles/${id}?lang=fr`
-          : `https://adminer.marabu.services/api/articles/${id}?lang=en`
+          ? `https://adminer-test.marabu.services/api/articles/${id}?lang=fr`
+          : `https://adminer-test.marabu.services/api/articles/${id}?lang=en`
       );
       const data = await res.json();
       return data;
@@ -100,8 +100,8 @@ const Page = () => {
     try {
       const res = await fetch(
         locale == "fr"
-          ? `https://adminer.marabu.services/api/articles?page=1&limit=100&lang=fr`
-          : `https://adminer.marabu.services/api/articles?page=1&limit=100&lang=en`
+          ? `https://adminer-test.marabu.services/api/articles?page=1&limit=100&lang=fr`
+          : `https://adminer-test.marabu.services/api/articles?page=1&limit=100&lang=en`
       );
       const data = await res.json();
       return data;
