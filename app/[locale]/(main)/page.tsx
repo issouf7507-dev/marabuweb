@@ -254,8 +254,8 @@ export default function Home() {
     try {
       const res = await fetch(
         locale == "fr"
-          ? "https://adminer.marabu.services/api/articles?lang=fr"
-          : "https://adminer.marabu.services/api/articles?lang=en"
+          ? "https://adminer-test.marabu.services/api/articles?lang=fr"
+          : "https://adminer-test.marabu.services/api/articles?lang=en"
       );
       const data = await res.json();
       return data;

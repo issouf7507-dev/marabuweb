@@ -37,8 +37,8 @@ const Page = () => {
     try {
       let url =
         currentLocale == "fr"
-          ? `https://adminer.marabu.services/api/articles?page=${page}&lang=fr`
-          : `https://adminer.marabu.services/api/articles?page=${page}&lang=en`;
+          ? `https://adminer-test.marabu.services/api/articles?page=${page}&lang=fr`
+          : `https://adminer-test.marabu.services/api/articles?page=${page}&lang=en`;
       if (category && category !== "tous") {
         url +=
           currentLocale == "fr"
