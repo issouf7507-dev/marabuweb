@@ -48,7 +48,8 @@ export async function POST(request: NextRequest) {
       return text.replace(/[&<>"']/g, (m) => map[m]);
     };
 
-    // Échapper les valeurs pour éviter les injections XSS
+    // Échapper les val
+    // eurs pour éviter les injections XSS
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
     const safeSubject = subject ? escapeHtml(subject) : "";
