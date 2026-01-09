@@ -24,8 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Vérification de la clé API Brevo
     const apiKey =
-      process.env.NEXT_PUBLIC_SMTP_KEY_BREVO ||
-      process.env.NEXT_PUBLIC_SMTP_KEY_BREVO;
+      process.env.NEXT_PUBLIC_SMTP_KEY_BREVO || process.env.BREVO_API_KEY;
     if (!apiKey) {
       console.error(
         "BREVO_API_KEY ou NEXT_PUBLIC_SMTP_KEY_BREVO n'est pas définie"
@@ -48,8 +47,7 @@ export async function POST(request: NextRequest) {
       return text.replace(/[&<>"']/g, (m) => map[m]);
     };
 
-    // Échapper les val
-    // eurs pour éviter les injections XSS
+    // Échapper les valeurs pour éviter les injections XSS
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
     const safeSubject = subject ? escapeHtml(subject) : "";
