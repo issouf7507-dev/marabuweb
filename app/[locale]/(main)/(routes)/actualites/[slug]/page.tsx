@@ -14,9 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import ContactForm from "@/app/components/contact-form";
 import {
   Sheet,
   SheetContent,
@@ -25,6 +23,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
+import { User, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Page = () => {
   const pathname = usePathname();
@@ -85,8 +84,8 @@ const Page = () => {
     try {
       const res = await fetch(
         locale == "fr"
-          ? `https://adminer-test.marabu.services/api/articles/${id}?lang=fr`
-          : `https://adminer-test.marabu.services/api/articles/${id}?lang=en`
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles/${id}?lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles/${id}?lang=en`
       );
       const data = await res.json();
       return data;
@@ -100,8 +99,8 @@ const Page = () => {
     try {
       const res = await fetch(
         locale == "fr"
-          ? `https://adminer-test.marabu.services/api/articles?page=1&limit=100&lang=fr`
-          : `https://adminer-test.marabu.services/api/articles?page=1&limit=100&lang=en`
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=100&lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=100&lang=en`
       );
       const data = await res.json();
       return data;
@@ -163,188 +162,225 @@ const Page = () => {
   return (
     <div className="font-light text-gray-500">
       {/* <div className="h-40 bg-[#D9D9D9]"></div> */}
-      <section className="w-full ">
+      <section className="w-full relative">
         <motion.div
-          className="w-full h-screen bg-no-repeat bg-cover bg-center flex items-center relative overflow-hidden"
+          className="w-full h-screen bg-no-repeat bg-cover bg-center flex items-end relative overflow-hidden"
           style={{
             backgroundImage: `url(${queryArticlesbyMarabuById.data?.featuredImage})`,
           }}
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-[#00000080] z-10"></div>
-          <div className="px-10  lg:max-w-[1450px] w-full mx-auto flex justify-between items-center">
-            <div>
-              <motion.h1 className="text-4xl md:text-7xl text-[#EDF2D0] font-bold tracking-wider relative z-30">
+          {/* Overlay gradient moderne */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 z-10"></div>
+
+          {/* Badge jaune style magazine */}
+          <div className="absolute top-8 left-8 w-4 h-4 bg-[#FFD700] rounded-sm z-30"></div>
+
+          <div className="px-6 md:px-10 lg:max-w-[1450px] w-full mx-auto pb-16 relative z-30">
+            <div className="max-w-4xl">
+              {/* Métadonnées style magazine */}
+              <div className="flex items-center gap-3 mb-6 text-white/90 text-sm uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  <span>MARABU</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>
+                    {new Date(
+                      queryArticlesbyMarabuById.data?.publishedAt ||
+                        queryArticlesbyMarabuById.data?.createdAt
+                    ).toLocaleDateString(currentLocaleData, {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              </div>
+
+              {/* Titre */}
+              <motion.h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold tracking-tight mb-8 leading-tight">
                 <motion.span>
                   {decodeHtmlEntities(queryArticlesbyMarabuById.data?.title)}
                 </motion.span>
               </motion.h1>
 
-              <p className="text-lg font-bold text-[#EDF2D0]  mt-4 relative z-30">
-                {new Date(
-                  queryArticlesbyMarabuById.data?.publishedAt ||
-                    queryArticlesbyMarabuById.data?.createdAt
-                ).toLocaleDateString(currentLocaleData, {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="flex gap-4 z-30">
-              <button
-                onClick={handlePrevArticle}
-                disabled={currentArticleIndex === 0 || articles.length === 0}
-                className={`p-4 rounded-full ${
-                  currentArticleIndex === 0 || articles.length === 0
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Navigation Controls modernisée */}
+              <div className="flex items-center gap-4 mt-8">
+                <button
+                  onClick={handlePrevArticle}
+                  disabled={currentArticleIndex === 0 || articles.length === 0}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 ${
+                    currentArticleIndex === 0 || articles.length === 0
+                      ? "bg-white/20 text-white/50 cursor-not-allowed"
+                      : "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 border border-white/20"
+                  }`}
                 >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                onClick={handleNextArticle}
-                disabled={
-                  currentArticleIndex === articles.length - 1 ||
-                  articles.length === 0
-                }
-                className={`p-4 rounded-full ${
-                  currentArticleIndex === articles.length - 1 ||
-                  articles.length === 0
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  <ChevronLeft className="w-5 h-5" />
+                  <span className="font-semibold">{tabs.previous}</span>
+                </button>
+                <span className="text-white/80 text-sm font-medium px-4">
+                  {currentArticleIndex + 1} / {totalPages}
+                </span>
+                <button
+                  onClick={handleNextArticle}
+                  disabled={
+                    currentArticleIndex === articles.length - 1 ||
+                    articles.length === 0
+                  }
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 ${
+                    currentArticleIndex === articles.length - 1 ||
+                    articles.length === 0
+                      ? "bg-white/20 text-white/50 cursor-not-allowed"
+                      : "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 border border-white/20"
+                  }`}
                 >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
+                  <span className="font-semibold">{tabs.next}</span>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
       </section>
 
-      <section className="grid lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto z-40 relative py-10">
-        <div className="lg:col-span-3 ">
-          <div className="px-4 lg:px-10  w-full mx-auto z-40 relative py-10 border border-[#1b8398] ">
-            <div
-              className="text-lg text-[#1D4851] h-svh overflow-auto"
-              dangerouslySetInnerHTML={{
-                __html:
-                  queryArticlesbyMarabuById.data &&
-                  queryArticlesbyMarabuById.data?.content,
-              }}
-            />
-          </div>
-          <div className="mt-4 flex items-center justify-center">
+      <section className="grid lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto z-40 relative py-12 px-6 md:px-10">
+        <div className="lg:col-span-3">
+          <article className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="px-6 md:px-12 py-10 md:py-16">
+              <div
+                className="prose prose-lg max-w-none text-[#1D4851] leading-relaxed
+                  prose-headings:text-[#1D4851] prose-headings:font-bold
+                  prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                  prose-p:text-lg prose-p:leading-8 prose-p:mb-6
+                  prose-a:text-[#689D71] prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-[#1D4851] prose-strong:font-semibold
+                  prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-6
+                  prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-6
+                  prose-li:mb-2 prose-li:text-lg
+                  prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
+                  prose-blockquote:border-l-4 prose-blockquote:border-[#689D71] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
+                  prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                  prose-pre:bg-gray-900 prose-pre:text-gray-100"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    queryArticlesbyMarabuById.data &&
+                    queryArticlesbyMarabuById.data?.content,
+                }}
+              />
+            </div>
+          </article>
+
+          {/* CTA Button modernisé */}
+          <div className="mt-8 flex items-center justify-center">
             <Link href="/solutions">
-              <motion.span
+              <motion.button
                 variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
+                  hidden: { y: 20, opacity: 0 },
+                  reveal: { y: 0, opacity: 1 },
                 }}
                 initial="hidden"
                 whileInView="reveal"
                 transition={{ duration: 0.5 }}
-                className="inline-block py-2 px-10 bg-[#689D71] mt-4 font-semibold relative z-30 cursor-pointer text-white"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#689D71] hover:bg-[#1D4851] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                {tabs.cta2}
-              </motion.span>
+                <span>{tabs.cta2}</span>
+                <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             </Link>
           </div>
         </div>
 
-        <div className="mt-10 lg:mt-0 lg:col-span-1 px-4  w-full">
+        <div className="mt-10 lg:mt-0 lg:col-span-1 px-4 w-full">
           <div className="sticky top-24 w-full">
-            <h2 className="text-xl font-semibold text-[#1D4851] mb-6">
-              {tabs.recent}
-            </h2>
-            <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
+            {/* Header de la sidebar */}
+            <div className="mb-8 pb-4 border-b-2 border-[#689D71]">
+              <h2 className="text-2xl font-bold text-[#1D4851] uppercase tracking-wider">
+                {tabs.recent}
+              </h2>
+            </div>
+
+            {/* Articles récents modernisés */}
+            <div className="space-y-6 max-h-[calc(100vh-300px)] overflow-y-auto pr-2">
               {articles
                 .filter((article: any) => article.id !== id)
                 .slice(0, 3)
-                .map((article: any) => (
+                .map((article: any, idx: number) => (
                   <Link
                     href={`/actualites/${article.id}`}
                     key={article.id}
                     className="block group w-full"
                   >
-                    <div className="relative h-40 mb-2 overflow-hidden rounded-lg w-full">
-                      <Image
-                        src={article.featuredImage || "/placeholder.jpg"}
-                        alt={decodeHtmlEntities(article.title)}
-                        className="object-cover  transition-transform duration-300 group-hover:scale-110"
-                        fill
-                      />
-                    </div>
-                    <h3 className="text-[#1D4851] font-medium group-hover:text-[#689D71] transition-colors">
-                      {decodeHtmlEntities(article.title)}
-                    </h3>
-                    <p className="text-sm text-gray-950 mt-1">
-                      {new Date(
-                        article.publishedAt || article.createdAt
-                      ).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
+                    <article className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-[#689D71]/50 hover:shadow-lg transition-all duration-300">
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={article.featuredImage || "/placeholder.jpg"}
+                          alt={decodeHtmlEntities(article.title)}
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          fill
+                        />
+                        {/* Overlay au survol */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {/* Badge jaune sur le premier */}
+                        {idx === 0 && (
+                          <div className="absolute top-3 left-3 w-3 h-3 bg-[#FFD700] rounded-sm z-10" />
+                        )}
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-base font-bold text-[#1D4851] mb-2 group-hover:text-[#689D71] transition-colors line-clamp-2">
+                          {decodeHtmlEntities(article.title)}
+                        </h3>
+                        <div className="flex items-center gap-2 text-xs text-gray-500 uppercase tracking-wider">
+                          <Clock className="w-3 h-3" />
+                          <span>
+                            {new Date(
+                              article.publishedAt || article.createdAt
+                            ).toLocaleDateString("fr-FR", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </article>
                   </Link>
                 ))}
             </div>
 
-            {/* Pagination Controls */}
+            {/* Navigation Controls modernisée */}
             {articles.length > 0 && (
-              <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
-                <button
-                  onClick={handlePrevArticle}
-                  disabled={currentArticleIndex === 0}
-                  className={`px-4 py-2 rounded-md ${
-                    currentArticleIndex === 0
-                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                      : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                  }`}
-                >
-                  {tabs.previous}
-                </button>
-                <span className="text-[#1D4851]">
-                  {currentArticleIndex + 1} / {totalPages}
-                </span>
-                <button
-                  onClick={handleNextArticle}
-                  disabled={currentArticleIndex === articles.length - 1}
-                  className={`px-4 py-2 rounded-md ${
-                    currentArticleIndex === articles.length - 1
-                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                      : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                  }`}
-                >
-                  {tabs.next}
-                </button>
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between gap-3">
+                  <button
+                    onClick={handlePrevArticle}
+                    disabled={currentArticleIndex === 0}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-semibold ${
+                      currentArticleIndex === 0
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "bg-[#689D71] text-white hover:bg-[#1D4851] hover:shadow-md"
+                    }`}
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>{tabs.previous}</span>
+                  </button>
+                  <span className="text-[#1D4851] font-semibold text-sm px-3">
+                    {currentArticleIndex + 1} / {totalPages}
+                  </span>
+                  <button
+                    onClick={handleNextArticle}
+                    disabled={currentArticleIndex === articles.length - 1}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-semibold ${
+                      currentArticleIndex === articles.length - 1
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "bg-[#689D71] text-white hover:bg-[#1D4851] hover:shadow-md"
+                    }`}
+                  >
+                    <span>{tabs.next}</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -553,34 +589,8 @@ const Page = () => {
                   ></iframe>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-4 px-4">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
-                  </div>
-                  <div className="px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
+                  <div className="px-4">
+                    <ContactForm />
                   </div>
                 </div>
               </div>

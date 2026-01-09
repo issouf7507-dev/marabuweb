@@ -1,6 +1,6 @@
 "use client";
 
-import { MoveRight } from "lucide-react";
+import { MoveRight, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -20,18 +20,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import ContactForm from "@/app/components/contact-form";
 
 import Load from "@/components/load";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [openContact, setOpenContact] = useState(false);
+
+  const params = useParams();
+  const locale = (params?.locale as string) || "fr";
 
   const t = useTranslations("apropos");
 
@@ -155,6 +157,26 @@ const Page = () => {
     messagePlaceholder: string;
     sendButton: string;
   };
+
+  const fetchProfilesbyMarabu = async () => {
+    try {
+      const res = await fetch(
+        locale == "fr"
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/profiles?lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/profiles?lang=en`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des articles :", error);
+      return [];
+    }
+  };
+
+  const queryProfilesbyMarabu = useQuery({
+    queryKey: ["profilesbyMarabu", locale],
+    queryFn: fetchProfilesbyMarabu,
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -484,60 +506,109 @@ const Page = () => {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-7">
-            {translatedTeam.teams.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { y: 45, opacity: 0 },
-                  reveal: { y: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
-                className="bg-white shadow-lg rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer hover:shadow-xl transition-shadow"
-              >
-                <Link href={`/equipes/${member.params}`} className="flex-1">
-                  <div className="relative aspect-[3/4] w-full">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover"
-                      loading="lazy"
-                      quality={85}
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <h3 className="text-white font-semibold text-lg line-clamp-1">
-                        {member.name}
-                      </h3>
-                      <p className="text-white/80 text-sm line-clamp-1">
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-                <div className="p-4 flex justify-center gap-4 mt-auto h-14">
-                  <a
-                    href={member.linkLinkedin}
-                    className="hover:opacity-80 transition-opacity"
-                    target="_blank"
-                    rel="noopener noreferrer"
+          {queryProfilesbyMarabu.isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#689D71]"></div>
+            </div>
+          ) : queryProfilesbyMarabu.data &&
+            Array.isArray(queryProfilesbyMarabu.data) &&
+            queryProfilesbyMarabu.data.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-7">
+              {queryProfilesbyMarabu.data
+                .filter((profile: any) => profile.isActive)
+                .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+                .map((profile: any, index: number) => (
+                  <motion.div
+                    key={profile.id}
+                    variants={{
+                      hidden: { y: 45, opacity: 0 },
+                      reveal: { y: 0, opacity: 1 },
+                    }}
+                    initial="hidden"
+                    whileInView="reveal"
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
+                    className="bg-white shadow-lg rounded-2xl overflow-hidden h-full flex flex-col cursor-pointer hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   >
-                    <Image
-                      src={member.social.linkedin}
-                      alt="LinkedIn"
-                      width={26}
-                      height={26}
-                      loading="lazy"
-                      quality={85}
-                    />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    <Link
+                      href={`/equipes/${profile.id}`}
+                      className="flex-1 group"
+                    >
+                      <div className="relative aspect-[3/4] w-full overflow-hidden">
+                        <Image
+                          src={profile.photo || "/placeholder.jpg"}
+                          alt={profile.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          loading="lazy"
+                          quality={85}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4">
+                          <h3 className="text-white font-semibold text-lg line-clamp-1">
+                            {profile.name}
+                          </h3>
+                          <p className="text-white/90 text-sm line-clamp-1">
+                            {profile.title || "Membre de l'équipe"}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="p-4 flex justify-center gap-4 mt-auto">
+                      {profile.email && (
+                        <a
+                          href={`mailto:${profile.email}`}
+                          className="p-2 rounded-full bg-[#689D71]/10 hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
+                          title={profile.email}
+                        >
+                          <Mail className="w-5 h-5" />
+                        </a>
+                      )}
+                      {profile.phone && (
+                        <a
+                          href={`tel:${profile.phone}`}
+                          className="p-2 rounded-full bg-[#1D4851]/10 hover:bg-[#1D4851]/20 text-[#1D4851] transition-all duration-300 hover:scale-110"
+                          title={profile.phone}
+                        >
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            />
+                          </svg>
+                        </a>
+                      )}
+                      {/* LinkedIn - si disponible dans les données futures */}
+                      {profile.linkedin && (
+                        <a
+                          href={profile.linkedin}
+                          className="p-2 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 transition-all duration-300 hover:scale-110"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="LinkedIn"
+                        >
+                          <Linkedin className="w-5 h-5" />
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg font-medium">
+                {locale === "fr"
+                  ? "Aucun membre d'équipe disponible pour le moment."
+                  : "No team members available at the moment."}
+              </p>
+            </div>
+          )}
         </div>
       </section>
       {/* POURQUOI NOUS CHOISIR  */}
@@ -1320,34 +1391,8 @@ const Page = () => {
                   ></iframe>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-4 lg:px-4  relative  z-30l">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
-                  </div>
-                  <div className="lg:px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
+                  <div className="lg:px-4 relative z-30">
+                    <ContactForm />
                   </div>
                 </div>
               </div>

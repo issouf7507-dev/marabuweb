@@ -21,11 +21,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl";
+import ContactForm from "./contact-form";
 
 const Header = () => {
   const pathname = usePathname();
@@ -79,6 +77,7 @@ const Header = () => {
     openingHours2: string;
     namePlaceholder: string;
     emailPlaceholder: string;
+    subjectPlaceholder?: string;
     messagePlaceholder: string;
     sendButton: string;
   };
@@ -442,34 +441,15 @@ const Header = () => {
                   ></iframe>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-4 lg:px-4 relative  z-30">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
+                  <div className="lg:px-4 relative z-30">
+                    <ContactForm
+                      onSuccess={() => {
+                        // Fermer le sheet après 2 secondes
+                        setTimeout(() => {
+                          setOpenContact(false);
+                        }, 2000);
+                      }}
                     />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.messagePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
-                  </div>
-                  <div className="lg:px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
                   </div>
                 </div>
               </div>

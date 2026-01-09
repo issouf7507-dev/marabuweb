@@ -19,9 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import ContactForm from "@/app/components/contact-form";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -949,34 +947,8 @@ const Page = () => {
                   ></iframe>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-4 px-4  relative  z-30">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
-                  </div>
-                  <div className="px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
+                  <div className="px-4 relative z-30">
+                    <ContactForm />
                   </div>
                 </div>
               </div>
