@@ -323,8 +323,8 @@ export default function Home() {
       // Vous pouvez rediriger vers une page dédiée ou ouvrir un formulaire
       // window.location.href = `/marabu-ai`;
       // Ou ouvrir un formulaire de contact avec un sujet spécifique
-
-      setOpenContact(true);
+      window.location.href = "https://ai.marabu.services/welcome";
+      // setOpenContact(true);
     }
   };
 
