@@ -2,7 +2,7 @@ name: Deploy to VPS
 
 on:
   push:
-    branches: [test-dev]
+    branches: [blog-feature]
   workflow_dispatch:
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
 
           script: |
             # Naviguer vers le répertoire du projet
-            cd /home/admin_marabu/apps/marabu_website_test
+            cd /home/admin_marabu/apps/marabu_website
 
             # Sauvegarder l'ancienne version
             if [ -d "current" ]; then
@@ -47,7 +47,7 @@ jobs:
             mkdir -p current
 
             # Cloner le code depuis GitHub
-            git clone -b test-dev https://github.com/${{ github.repository }}.git temp-deploy
+            git clone -b blog-feature https://github.com/${{ github.repository }}.git temp-deploy
 
             # Copier les fichiers nécessaires
             cp -r temp-deploy/* current/
@@ -72,20 +72,20 @@ jobs:
             fi
 
             # Arrêter le processus PM2 existant s'il existe
-            pm2 stop marabuwebtest 2>/dev/null || true
-            pm2 delete marabuwebtest 2>/dev/null || true
+            pm2 stop marabu-web 2>/dev/null || true
+            pm2 delete marabu-web 2>/dev/null || true
 
-            # Tuer tout processus utilisant le port 3001
-            lsof -ti:3001 | xargs kill -9 2>/dev/null || true
+            # Tuer tout processus utilisant le port 3000
+            lsof -ti:3000 | xargs kill -9 2>/dev/null || true
 
-            # Démarrer le service PM2 sur le port 3001
-            pm2 start npm --name "marabuwebtest" -- start -- -p 3001
+            # Démarrer le service PM2 sur le port 3000
+            pm2 start npm --name "marabu-web" -- start -- -p 3000
 
             # Sauvegarder la configuration PM2
             pm2 save
 
             # Nettoyer les anciennes sauvegardes (garder les 5 plus récentes)
-            cd /home/admin_marabu/apps/marabu_website_test
+            cd /home/admin_marabu/apps/marabu_website
             ls -t backup-* | tail -n +6 | xargs -r rm -rf
 
             echo "Déploiement terminé avec succès!"
