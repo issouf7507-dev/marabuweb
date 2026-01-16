@@ -38,6 +38,7 @@ const Page = () => {
     heading: string;
     subheading: string;
     cta: string;
+    // editorspicks: string;
   };
 
   const fetchArticlesbyMarabu = async (page: number = 1, category?: string) => {
