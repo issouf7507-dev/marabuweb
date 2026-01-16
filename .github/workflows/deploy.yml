@@ -38,7 +38,7 @@ jobs:
             # Naviguer vers le répertoire du projet
             cd /home/admin_marabu/apps/marabu_website_test
 
-            # Sauvegarder l'ancienne version
+            # Sauvegarder l'ancienne versions
             if [ -d "current" ]; then
               mv current backup-$(date +%Y%m%d-%H%M%S)
             fi
