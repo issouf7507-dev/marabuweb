@@ -1,6 +1,6 @@
 "use client";
 
-import { MoveRight, Linkedin, Mail } from "lucide-react";
+import { MoveRight, Linkedin, Mail, Facebook } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -557,7 +557,7 @@ const Page = () => {
                       {profile.email && (
                         <a
                           href={`mailto:${profile.email}`}
-                          className="p-2 rounded-full bg-[#689D71]/10 hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
+                          className="p-2 rounded-full hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
                           title={profile.email}
                         >
                           <Mail className="w-5 h-5" />
@@ -566,7 +566,7 @@ const Page = () => {
                       {profile.phone && (
                         <a
                           href={`tel:${profile.phone}`}
-                          className="p-2 rounded-full bg-[#1D4851]/10 hover:bg-[#1D4851]/20 text-[#1D4851] transition-all duration-300 hover:scale-110"
+                          className="p-2 rounded-full hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
                           title={profile.phone}
                         >
                           <svg
@@ -585,15 +585,26 @@ const Page = () => {
                         </a>
                       )}
                       {/* LinkedIn - si disponible dans les données futures */}
-                      {profile.linkedin && (
+                      {profile.linkedinUrl && (
                         <a
                           href={profile.linkedinUrl}
-                          className="p-2 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 transition-all duration-300 hover:scale-110"
+                          className="p-2 rounded-full hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
                           target="_blank"
                           rel="noopener noreferrer"
                           title="LinkedIn"
                         >
                           <Linkedin className="w-5 h-5" />
+                        </a>
+                      )}
+                      {profile.facebookUrl && (
+                        <a
+                          href={profile.facebookUrl}
+                          className="p-2 rounded-full hover:bg-[#689D71]/20 text-[#689D71] transition-all duration-300 hover:scale-110"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="LinkedIn"
+                        >
+                          <Facebook className="w-5 h-5" />
                         </a>
                       )}
                     </div>

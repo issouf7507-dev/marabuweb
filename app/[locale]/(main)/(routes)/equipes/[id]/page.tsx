@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@/components/load";
-import { Mail, Phone, Linkedin, ArrowLeft } from "lucide-react";
+import { Mail, Phone, Linkedin, ArrowLeft, Facebook } from "lucide-react";
 
 const TeamMemberPage = () => {
   const params = useParams();
@@ -206,21 +206,32 @@ const TeamMemberPage = () => {
                       {member.phone && (
                         <a
                           href={`tel:${member.phone}`}
-                          className="flex items-center gap-3 px-6 py-3 bg-[#1D4851]/10 hover:bg-[#1D4851]/20 text-[#1D4851] rounded-lg transition-all duration-300 hover:scale-105"
+                          className="flex items-center gap-3 px-6 py-3 bg-[#689D71]/10 hover:bg-[#689D71]/20 text-[#689D71] rounded-lg transition-all duration-300 hover:scale-105"
                         >
                           <Phone className="w-5 h-5" />
                           <span className="font-medium">{member.phone}</span>
                         </a>
                       )}
-                      {member.linkedin && (
+                      {member.linkedinUrl && (
                         <a
                           href={member.linkedinUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 rounded-lg transition-all duration-300 hover:scale-105"
+                          className="flex items-center gap-3 px-6 py-3 bg-[#689D71]/10 hover:bg-[#689D71]/20 text-[#689D71] rounded-lg transition-all duration-300 hover:scale-105"
                         >
                           <Linkedin className="w-5 h-5" />
                           <span className="font-medium">LinkedIn</span>
+                        </a>
+                      )}
+                      {member.facebookUrl && (
+                        <a
+                          href={member.facebookUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 px-6 py-3 bg-[#689D71]/10 hover:bg-[#689D71]/20 text-[#689D71] rounded-lg transition-all duration-300 hover:scale-105"
+                        >
+                          <Facebook className="w-5 h-5" />
+                          <span className="font-medium">Facebook</span>
                         </a>
                       )}
                     </div>
