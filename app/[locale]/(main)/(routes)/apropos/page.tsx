@@ -587,7 +587,7 @@ const Page = () => {
                       {/* LinkedIn - si disponible dans les données futures */}
                       {profile.linkedin && (
                         <a
-                          href={profile.linkedin}
+                          href={profile.linkedinUrl}
                           className="p-2 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 transition-all duration-300 hover:scale-110"
                           target="_blank"
                           rel="noopener noreferrer"

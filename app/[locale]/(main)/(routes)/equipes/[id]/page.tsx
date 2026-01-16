@@ -214,7 +214,7 @@ const TeamMemberPage = () => {
                       )}
                       {member.linkedin && (
                         <a
-                          href={member.linkedin}
+                          href={member.linkedinUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-3 px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 rounded-lg transition-all duration-300 hover:scale-105"
