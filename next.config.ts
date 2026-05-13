@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
         hostname: "adminer-test.marabu.services",
       },
     ],
-    unoptimized: true, // Bypass image optimization to allow private IP resolution
+    formats: ["image/avif", "image/webp"],
   },
 };
 

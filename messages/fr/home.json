@@ -3,27 +3,25 @@
     "links": [
       {
         "id": 1,
-        "tilte": "Accueil",
-        "herf": "/"
+        "title": "Accueil",
+        "href": "/"
       },
       {
         "id": 2,
-        "tilte": "Nos Solutions",
-        "herf": "/solutions"
+        "title": "Nos Solutions",
+        "href": "/solutions"
       },
-
       {
         "id": 3,
-        "tilte": "Qui sommes-nous",
-        "herf": "/apropos"
+        "title": "Qui sommes-nous",
+        "href": "/apropos"
       },
       {
         "id": 4,
-        "tilte": "Blog",
-        "herf": "/actualites"
+        "title": "Blog",
+        "href": "/actualites"
       }
     ],
-
     "cta": "Nous contacter"
   },
   "home": {
@@ -44,7 +42,6 @@
         "cta": "Nous contacter"
       }
     ],
-
     "solutions": {
       "headingup": "nos différents savoir-faire",
       "heading": "Nos Solutions",
@@ -54,22 +51,42 @@
         {
           "id": 1,
           "title": "Conseil",
-          "description": "Nos solutions de conseil sont conçues pour vous accompagner dans vos défis. Nous proposons des stratégies personnalisées et innovantes axées sur la transformation, l'optimisation des processus et la conduite du changement tout en intégrant des approches sur mesure pour moderniser les structures et renforcer les compétences, pour moderniser les structures et renforcer les compétences"
+          "tagline": "Stratégie · Transformation · Gouvernance",
+          "description": "Des stratégies sur mesure pour transformer vos organisations et piloter votre performance.",
+          "offerings": [
+            "Pilotage de la performance & tableaux de bord",
+            "Transformation digitale & conduite du changement",
+            "Gouvernance, SI et gestion des risques"
+          ],
+          "cta": "Voir les 6 offres"
         },
         {
           "id": 2,
           "title": "Services",
-          "description": "Nos solutions d'intermédiation visent à créer des synergies efficaces entre vous et vos partenaires clés. Nous facilitons les connexions, favorisons les collaborations fructueuses et accompagnons la mise en œuvre de vos projets innovants. Grâce à notre expertise, nous optimisons les échanges et assurons des partenariats durables pour maximiser votre impact."
+          "tagline": "Formation · Communication · Événements",
+          "description": "Des services opérationnels pour renforcer vos équipes, votre image et vos connexions.",
+          "offerings": [
+            "Formations dirigeants & techniques sur mesure",
+            "Communication 360° & gestion de l'e-réputation",
+            "Organisation d'événements stratégiques"
+          ],
+          "cta": "Voir les 6 offres"
         },
         {
           "id": 3,
           "title": "Intermédiation",
-          "description": "Nos services sont conçus pour faciliter vos projets et accélérer votre croissance. Nous vous accompagnons dans la mise en œuvre de solutions pragmatiques et efficaces. Grâce à des approches sur mesure, nous favorisons la gestion optimisée des opérations pour concrétiser vos ambitions."
+          "tagline": "Institutions · PTF · Influence",
+          "description": "Un réseau activé pour accéder aux bonnes portes et sécuriser vos projets.",
+          "offerings": [
+            "Relations gouvernementales & lobbying institutionnel",
+            "Diplomatie privée & accès aux décideurs",
+            "Mise en relation avec les PTF internationaux"
+          ],
+          "cta": "Voir les 4 offres"
         }
       ],
       "cta2": "Voir plus"
     },
-
     "partners": {
       "headingup": "NOS PARTENAIRES",
       "heading": "Ils nous ont ",
@@ -77,35 +94,25 @@
       "subheading1": "Ils nous ont fait confiance pour accompagner leur croissance",
       "subheading2": "et leurs projets stratégiques."
     },
-
     "us": {
       "headingup": "A PROPOS DE NOUS",
       "heading": "Qui sommes nous ?",
       "subheading1": "Depuis des siècles, les marabouts africains ont guidé les communautés avec sagesse et clairvoyance. Conseillers, médiateurs et gardiens de la connaissance, ils incarnaient une autorité éclairée, capable de transformer les défis en opportunités. Aujourd'hui, Marabu réinvente cet héritage.",
-
       "subheading2": "Fondé en 2023, Marabu s'impose comme un acteur stratégique en conseils, services et intermédiations, alliant tradition et technologie pour accompagner ses partenaires dans un monde en perpétuelle évolution.",
-
       "subheading3": "Nos Valeurs Fondamentales",
-
       "lititle": "Innovation Inspirée : ",
       "lidescription": "Unir les traditions aux technologies modernes.",
-
       "lititle2": "Impact Positif : ",
       "lidescription2": "Contribuer à un développement durable et inclusif.",
-
       "lititle3": "Engagement Client : ",
       "lidescription3": "Offrir des solutions personnalisées à vos besoins.",
-
       "textdownn": "Nous sommes les traducteurs contemporains de la sagesse africaine en action stratégique moderne.",
-
       "cta": "En savoir plus..."
     },
-
     "expertise": {
       "headingup": "NOTRE EXPERTISE",
       "heading": "Une approche stratégique et impactante",
       "subheading": "Marabu accompagne les entreprises et institutions dans leur croissance et leur transformation grâce à des stratégies adaptées et une méthodologie éprouvée. Nous apportons des solutions concrètes pour renforcer votre positionnement et votre impact.",
-
       "experience": [
         {
           "id": 1,
@@ -141,7 +148,6 @@
         }
       ]
     },
-
     "boost": {
       "heading": "Boostez votre croissance avec ",
       "heading2": "des solutions sur mesure !",
@@ -149,7 +155,6 @@
       "subheading2": " et renforcer votre réseaustratégique. Ensemble, donnons vie à vos ambitions.",
       "cta": "Contactez-nous"
     },
-
     "clients": {
       "headingup": "AVIS CLIENTS",
       "heading1": " Retours ",
@@ -231,7 +236,6 @@
           "position2": " AmCham Côte d'Ivoire"
         }
       ],
-
       "clients8": [
         {
           "id": 1,
@@ -244,17 +248,19 @@
         }
       ]
     },
-
     "growth": {
       "headingup": "nos STATISTIQUES",
       "heading": "Notre Croissance",
       "subheading": "Chez Marabu.Services, nous croyons en l'impact par les chiffres. Chaque collaboration, chaque stratégie, chaque accompagnement reflète notre engagement à transformer les ambitions en résultats concrets. Voici quelques indicateurs clés de notre croissance :",
+      "value1": "+20",
+      "value2": "+100",
+      "value3": "+30",
+      "value4": "+45",
       "statistics1": "PARTENAIRES D'AFFAIRES",
       "statistics2": "DIRIGEANTS FORMéS",
       "statistics3": "STRATéGIE éLABORéE",
       "statistics4": "CONSEIL ET COLLABORATION"
     },
-
     "magazine": {
       "headingup": "NOUS L'AVONS FAIT",
       "heading": "Magazine interactif",
@@ -262,82 +268,439 @@
       "cta": "Voir plus"
     }
   },
-
   "solutions": {
     "conseil": {
       "heading": "Conseil",
-      "subheading": "Chez ",
-      "subheading2": "MARABU ",
-      "subheading3": "conseil",
-      "subheading4": "sont pensés pour répondre concrètement à vos défis organisationnels et stratégiques. Nous vous accompagnons avec des approches personnalisées et innovantes afin de transformer durablement vos structures, optimiser vos processus et renforcer vos capacités internes.",
-
-      "heading2": "Transformation & Innovation",
-      "subheading5": " Nous aidons les organisations à anticiper les mutations de leur environnement et à se réinventer :",
-
-      "step1": "Élaboration de stratégies de développement ",
-      "step2": "Transformation digitale",
-      "step3": "Conduite du changement",
-      "step4": "Déploiement de démarches RSE",
-
-      "heading3": " Gouvernance & Gestion des risques",
-      "subheading6": "Nous assurons la robustesse de vos structures à travers une meilleure maîtrise des risques et de la conformité :",
-
-      "step5": "Mise en conformité réglementaire ",
-      "step6": "Évaluation et cartographie des risques",
-      "step7": "Définition de stratégies de cybersécurité",
-      "step8": "Réalisation d'audits internes",
-
-      "heading4": "Excellence opérationnelle",
-      "subheading7": "  Nous vous aidons à atteindre vos objectifs de performance grâce à une organisation agile et efficiente :",
-
-      "step9": "Optimisation des processus métier",
-      "step10": "Mise en place de systèmes de gestion de la performance",
-      "step11": "Développement de programmes de formation sur mesure"
+      "subheading": "Chez Marabu, les missions de conseil sont pensées pour répondre concrètement à vos défis organisationnels et stratégiques. Nous vous accompagnons avec des approches personnalisées et innovantes afin de transformer durablement vos structures, optimiser vos processus et renforcer vos capacités internes.",
+      "sections": [
+        {
+          "title": "Transformation & Innovation",
+          "products": [
+            {
+              "ref": "C — 01",
+              "badge": "Phare",
+              "badgeType": "green",
+              "name": "Pilotage de la performance",
+              "hook": "Pour les dirigeants qui veulent voir clair",
+              "desc": "Vous dirigez une organisation mais vos indicateurs ne vous disent pas ce qui se passe vraiment ? On met en place les bons KPIs, les revues de performance régulières et les tableaux de bord. Vous décidez sur des faits, pas sur des impressions.",
+              "items": [
+                "Élaboration de stratégies de développement",
+                "Mise en place de systèmes de gestion de la performance",
+                "Tableaux de bord et revues stratégiques"
+              ],
+              "proofs": [
+                "GUCE CI — Data Platform opérationnelle (45M FCFA)",
+                "CIE — optimisation et économétrie des factures (1,9M)",
+                "CADERAC — revue complète du SI (26M FCFA, 3 missions)"
+              ],
+              "price": "À partir de 8M FCFA / mission",
+              "targets": [
+                "EPNs",
+                "DG",
+                "Groupes"
+              ]
+            },
+            {
+              "ref": "C — 02",
+              "badge": "",
+              "badgeType": "",
+              "name": "Accompagnement stratégique",
+              "hook": "Pour les dirigeants à un tournant",
+              "desc": "Vous devez transformer votre organisation, lancer un nouveau cap ou répondre à une injonction de votre tutelle ? On vous accompagne de la réflexion au plan d'action — sans jargon, avec des livrables concrets que vous assumez.",
+              "items": [
+                "Élaboration et mise en œuvre du plan stratégique",
+                "Transformation digitale des organisations",
+                "Conduite du changement et réorganisation",
+                "Déploiement de démarches RSE"
+              ],
+              "proofs": [
+                "La Poste CI — pilotage de la transformation nationale",
+                "GUDE-PME — structuration écosystème entrepreneurial (13M)",
+                "VITIB — accompagnement stratégique compétitivité (13M)"
+              ],
+              "price": "15 – 70M FCFA / mission",
+              "targets": [
+                "Ministères",
+                "EPNs",
+                "DG"
+              ]
+            },
+            {
+              "ref": "C — 03",
+              "badge": "Nouveau",
+              "badgeType": "gold",
+              "name": "Retainer stratégique mensuel",
+              "hook": "Votre expert Marabu disponible tous les mois",
+              "desc": "Chaque mois, Marabu revoit vos priorités avec vous, suit les signaux du marché et prépare vos comités. Comme avoir un directeur stratégique sans le recruter à plein temps — 4 à 8 jours d'expertise dédiés, contrat 12 mois.",
+              "items": [
+                "Revue stratégique mensuelle et veille marché",
+                "Préparation des comités de direction",
+                "Accès direct à l'équipe dirigeante Marabu"
+              ],
+              "proofs": [],
+              "price": "2 – 5M FCFA / mois",
+              "targets": [
+                "DG",
+                "Boards",
+                "PME en croissance"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Gouvernance & Gestion des Risques",
+          "products": [
+            {
+              "ref": "C — 04",
+              "badge": "",
+              "badgeType": "",
+              "name": "Transformation & revue du système d'information",
+              "hook": "Pour savoir où vous en êtes — vraiment",
+              "desc": "Votre système informatique freine votre croissance ou vos données ne sont pas sécurisées ? On fait le point complet, on identifie les risques et on vous donne une feuille de route claire pour moderniser sans tout casser.",
+              "items": [
+                "Mise en conformité réglementaire des SI",
+                "Évaluation et cartographie des risques informatiques",
+                "Définition de stratégies de cybersécurité",
+                "Schémas directeurs et feuilles de route SI"
+              ],
+              "proofs": [
+                "CADERAC — revue SI + équipements (26M FCFA, 3 missions)",
+                "MSCI — 4 schémas directeurs (CRM, pointage, QR code, site)",
+                "DTP — interopérabilité des données de l'État CI (3,5M)"
+              ],
+              "price": "5 – 25M FCFA / mission",
+              "targets": [
+                "Banques",
+                "Assurances",
+                "EPNs"
+              ]
+            },
+            {
+              "ref": "C — 05",
+              "badge": "",
+              "badgeType": "",
+              "name": "Optimisation des processus",
+              "hook": "Pour faire mieux avec ce qu'on a déjà",
+              "desc": "Trop de temps perdu, des procédures floues, des tâches qui se répètent sans valeur ? On cartographie ce qui se passe vraiment dans votre organisation et on propose des solutions concrètes — y compris de l'automatisation là où c'est pertinent.",
+              "items": [
+                "Optimisation des processus métier",
+                "Développement de programmes de formation sur mesure",
+                "Mise en place de systèmes de gestion de la performance"
+              ],
+              "proofs": [
+                "GD Couverture — optimisation processus internes BTP",
+                "Ocean Transport — plateforme suivi de flotte carburant (1,77M)",
+                "MSCI — structuration institutionnelle complète (6M)"
+              ],
+              "price": "3 – 15M FCFA / mission",
+              "targets": [
+                "BTP",
+                "Transport",
+                "Commerce"
+              ]
+            },
+            {
+              "ref": "C — 06",
+              "badge": "",
+              "badgeType": "",
+              "name": "Études sectorielles & benchmarks",
+              "hook": "Pour décider avec des données, pas des suppositions",
+              "desc": "Vous voulez entrer sur un marché, comprendre vos concurrents ou documenter votre secteur pour lever des fonds ? On produit des études sérieuses, sourcées, présentables en comité ou devant des partenaires techniques et financiers.",
+              "items": [
+                "Études de marché et analyses concurrentielles",
+                "Veille réglementaire et géopolitique sectorielle",
+                "Réalisation de benchmarks à usage décisionnel"
+              ],
+              "proofs": [
+                "Secteur minier CI — étude de marché complète",
+                "Commerce extérieur CI — cartographie processus GUCE",
+                "Financements PME CI — data mining sectoriel"
+              ],
+              "price": "Sur devis",
+              "targets": [
+                "Investisseurs",
+                "Institutions",
+                "PTF"
+              ]
+            }
+          ]
+        }
+      ]
     },
-
     "services": {
       "heading": "Services",
-      "subheading": "Nos solutions de services sont conçues pour faciliter les connexions stratégiques, renforcer les collaborations et accompagner la réalisation de projets à fort impact. Grâce à notre expertise multidisciplinaire, nous agissons comme catalyseur de synergies durables entre vous et vos parties prenantes. Nous vous aidons à communiquer efficacement, vous positionner stratégiquement et valoriser vos initiatives.",
-
-      "heading2": "Communication stratégique",
-      "subheading3": "Nous développons une stratégie de communication alignée sur vos objectifs : ",
-
-      "step1": "Définition de stratégie de positionnement",
-      "step2": "Création de contenus à forte valeur ajoutée",
-      "step3": "Gestion de l'e-réputation & communication de crise",
-      "step4": "Mise en place de chaînes de communication efficaces",
-      "step5": "Gestion des relations publiques et médiatiques",
-
-      "heading3": "Organisation d'événements",
-      "subheading4": "Nous concevons et déployons des événements sur mesure, adaptés à vos objectifs et à vos publics cibles :",
-      "step6": "Conception, planification et gestion logistique d'événements",
-      "step7": " Coordination de campagnes et activations"
+      "subheading": "Nos solutions de services sont conçues pour faciliter les connexions stratégiques, renforcer les collaborations et accompagner la réalisation de projets à fort impact. Grâce à notre expertise multidisciplinaire, nous agissons comme catalyseur de synergies durables entre vous et vos parties prenantes.",
+      "sections": [
+        {
+          "title": "Formation",
+          "products": [
+            {
+              "ref": "S — 01",
+              "badge": "Signature",
+              "badgeType": "green",
+              "name": "Formation dirigeants",
+              "hook": "Pour les CA, comités de direction et top management",
+              "desc": "Un programme sur mesure pour que vos administrateurs et directeurs comprennent vraiment les enjeux du numérique, de la gouvernance et du leadership en Afrique. Pas de la théorie — des cas concrets, des débats, des outils qu'on repart avec.",
+              "items": [
+                "Formations Conseils d'Administration et Boards",
+                "Formations comités de direction et top management",
+                "Développement du leadership en contexte africain"
+              ],
+              "proofs": [
+                "ANSUT — formation Conseil d'Administration (60,9M FCFA)",
+                "GUCE CI — «Piloter le futur» (13,9M FCFA)",
+                "GUCE CI — Leadership Agile (2,9M FCFA)"
+              ],
+              "price": "10 – 65M FCFA / programme",
+              "targets": [
+                "CA / Boards",
+                "DG",
+                "Comités de direction"
+              ]
+            },
+            {
+              "ref": "S — 02",
+              "badge": "",
+              "badgeType": "",
+              "name": "Formation technique",
+              "hook": "Pour renforcer vos équipes sur le terrain",
+              "desc": "Vos équipes ont besoin de monter en compétences sur des sujets précis ? On qualifie le besoin réel en RDV, on adapte le contenu et on forme avec des instructeurs qui ont pratiqué le sujet. Pas de catalogue figé — du sur-mesure systématique.",
+              "items": [
+                "Le thème se qualifie en RDV selon votre besoin réel",
+                "Renforcement des capacités techniques sur mesure",
+                "Format 1 à 5 jours, en présentiel ou à distance"
+              ],
+              "proofs": [
+                "GUCE CI — Kubernetes (5M) · Microservices · UI/UX (38,7M)",
+                "GUCE CI — E-réputation & communication de crise (7,4M)",
+                "CPCS / Banque Mondiale — formation cadres PPP (2,8M)"
+              ],
+              "price": "3 – 15M FCFA / programme",
+              "targets": [
+                "Équipes tech",
+                "Communicants",
+                "Chefs de projet"
+              ]
+            },
+            {
+              "ref": "S — 03",
+              "badge": "Bientôt",
+              "badgeType": "muted",
+              "name": "Marabu Academy",
+              "hook": "Apprendre, à son rythme, en français",
+              "desc": "Des masterclasses courtes sur les sujets qui comptent pour les entrepreneurs et cadres en Côte d'Ivoire. Premier contenu gratuit : «Créer et structurer sa PME en CI de A à Z».",
+              "items": [
+                "1er module gratuit : «Créer sa PME en CI de A à Z»",
+                "Masterclasses thématiques en ligne, en français",
+                "Finançable par GUDE-PME"
+              ],
+              "proofs": [],
+              "price": "À venir",
+              "targets": [
+                "Entrepreneurs",
+                "PME",
+                "Jeunes cadres"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Communication Stratégique",
+          "products": [
+            {
+              "ref": "S — 04",
+              "badge": "",
+              "badgeType": "",
+              "name": "Communication 360°",
+              "hook": "Pour être vu, compris et mémorisé",
+              "desc": "Identité visuelle, site web, réseaux sociaux, e-réputation, communication de crise — un bloc unifié. Une équipe créative qui connaît les codes de la communication en Côte d'Ivoire.",
+              "items": [
+                "Définition de stratégie de positionnement",
+                "Création de contenus à forte valeur ajoutée",
+                "Gestion de l'e-réputation et communication de crise",
+                "Mise en place de chaînes de communication efficaces"
+              ],
+              "proofs": [
+                "AMT EMALL — stratégie 360° plateforme Taobao (18M)",
+                "MSCI — marque MAGIC : identité, visuels, stratégie (5,9M)",
+                "CPCS / Banque Mondiale — site internet PPP Guinée (6,5M)"
+              ],
+              "price": "500K – 18M FCFA / mission",
+              "targets": [
+                "Startups",
+                "FMCG",
+                "Institutions"
+              ]
+            },
+            {
+              "ref": "S — 05",
+              "badge": "",
+              "badgeType": "",
+              "name": "Tableaux de bord décisionnels",
+              "hook": "Pour décider avec des données, pas des intuitions",
+              "desc": "Vos données existent mais personne ne les utilise vraiment ? On met en place des tableaux de bord clairs, lisibles, mis à jour automatiquement. En un coup d'œil, vous voyez comment va votre activité.",
+              "items": [
+                "Conception et déploiement de tableaux de bord",
+                "Data mining et analyse décisionnelle",
+                "Formation à l'utilisation des outils"
+              ],
+              "proofs": [
+                "GUCE CI — Data Platform opérationnelle (45M FCFA)",
+                "CIE — optimisation UI/UX et économétrie des factures (1,9M)",
+                "Digital Transformation Platform — stratégie données (3,5M)"
+              ],
+              "price": "3 – 45M FCFA / déploiement",
+              "targets": [
+                "EPNs",
+                "Banques",
+                "PME"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Organisation d'Événements",
+          "products": [
+            {
+              "ref": "S — 06",
+              "badge": "",
+              "badgeType": "",
+              "name": "Événements stratégiques",
+              "hook": "Pour les moments qui font la différence",
+              "desc": "Petit-déjeuner décideurs, table ronde sectorielle, lancement de bureau, comité de direction en externe — Marabu conçoit, planifie et déploie. Vos invités repartent avec une image positive de vous et des connexions utiles.",
+              "items": [
+                "Conception, planification et gestion logistique",
+                "Coordination de campagnes et activations",
+                "Gestion des relations publiques et médiatiques"
+              ],
+              "proofs": [
+                "VITIB — Petit-déjeuner stratégique PTF (13M FCFA)",
+                "YANGO — Opening Event Abidjan (33,5M FCFA)",
+                "AOC — Table Ronde Mortgage · MAIRIE PLATEAU — Fashion Street (29M)"
+              ],
+              "price": "2 – 35M FCFA / événement",
+              "targets": [
+                "Institutions",
+                "Tech",
+                "Associations"
+              ]
+            }
+          ]
+        }
+      ]
     },
-
     "intermediation": {
       "heading": "Intermédiation",
-      "subheading": "Nous mettons à votre service notre expertise en intermédiation pour accélérer vos projets, renforcer vos positions et activer les leviers de croissance adaptés à vos ambitions. À travers des solutions pragmatiques et des approches personnalisées, nous facilitons la mise en relation stratégique, la négociation, la gestion des parties prenantes et la sécurisation de vos opérations.",
-
-      "heading2": "Diplomatie privée",
-      "subheading5": "Nous facilitons vos relations institutionnelles et internationales pour sécuriser vos projets :",
-
-      "step1": "Médiations et négociations à l'échelle internationale",
-      "step2": "Lobbying stratégique & gestion des relations institutionnelles",
-      "step3": "Identification de partenaires et facilitation des engagements",
-      "step4": "Mobilisation d'investisseurs & accompagnement post-financement",
-      "step5": "Relations avec les autorités publiques & gouvernements",
-
-      "heading3": "Intelligence économique",
-      "subheading6": "Nous vous aidons à anticiper, analyser et piloter votre environnement complexe pour prendre des décisions éclairées :",
-
-      "step6": "Cartographie des réseaux d'influence et des circuits de décision",
-
-      "step7": "Analyse proactive des risques politiques, économiques et sectoriels",
-      "step8": "Réalisation d'études stratégiques sectorielles ou géographiques",
-      "step9": "Veille concurrentielle, réglementaire et géopolitique"
+      "subheading": "Nous mettons à votre service notre expertise en intermédiation pour accélérer vos projets, renforcer vos positions et activer les leviers de croissance adaptés à vos ambitions. À travers des solutions pragmatiques et des approches personnalisées, nous facilitons la mise en relation stratégique, la négociation et la sécurisation de vos opérations.",
+      "notice": "Tout besoin d'intermédiation commence par un email décrivant votre demande précise. On vous répond avec une proposition claire : retainer + success fee selon la complexité.",
+      "sections": [
+        {
+          "title": "Diplomatie Privée",
+          "products": [
+            {
+              "ref": "I — 01",
+              "badge": "Cœur de métier",
+              "badgeType": "green",
+              "name": "Relations gouvernementales & influence institutionnelle",
+              "hook": "Pour naviguer les institutions ivoiriennes et WAEMU",
+              "desc": "Vous voulez déployer votre activité en Côte d'Ivoire, obtenir une licence, rencontrer les bons régulateurs ou débloquer un dossier qui stagne ? On vous accompagne dans les démarches institutionnelles avec méthode, discrétion et responsabilité.",
+              "items": [
+                "Lobbying stratégique et gestion des relations institutionnelles",
+                "Identification de partenaires et facilitation des engagements",
+                "Relations avec les autorités publiques et gouvernements"
+              ],
+              "proofs": [
+                "YANGO — 2 ans de missions RI (ouverture bureau, villes, régulateurs)",
+                "DGE — accompagnement recouvrement fiscal e-commerce CI",
+                "AMT / Taobao — déploiement CI avec parties prenantes institutionnelles"
+              ],
+              "price": "Retainer + success fee",
+              "targets": [
+                "Entreprises étrangères",
+                "Tech",
+                "Investisseurs"
+              ]
+            },
+            {
+              "ref": "I — 02",
+              "badge": "",
+              "badgeType": "",
+              "name": "Diplomatie privée",
+              "hook": "Pour les projets à fort enjeu institutionnel",
+              "desc": "Certains projets nécessitent d'accéder à des décideurs de haut niveau, de gérer des sensibilités politiques ou de débloquer des situations complexes. Marabu mobilise son réseau avec discrétion, méthode et responsabilité.",
+              "items": [
+                "Médiations et négociations à l'échelle internationale",
+                "Mobilisation d'investisseurs et accompagnement post-financement",
+                "Facilitation d'accès aux décideurs clés"
+              ],
+              "proofs": [
+                "Mission PPP Guinée — Banque Mondiale (8,4M FCFA)",
+                "Accès régulateurs télécoms (ARTCI, DGTTC) pour clients tech",
+                "Accompagnement projets miniers CI"
+              ],
+              "price": "Sur dossier qualifié",
+              "targets": [
+                "Sur recommandation",
+                "Grands projets"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Intelligence Économique",
+          "products": [
+            {
+              "ref": "I — 03",
+              "badge": "",
+              "badgeType": "",
+              "name": "Relations publiques & gestion d'image",
+              "hook": "Pour les marques qui agissent mais que personne ne voit",
+              "desc": "Vous opérez en Côte d'Ivoire, vous créez de l'impact réel, mais votre image ne le reflète pas ? On travaille votre visibilité médiatique et institutionnelle, on vous positionne dans les bons cercles et on construit une réputation crédible et durable.",
+              "items": [
+                "Cartographie des réseaux d'influence et circuits de décision",
+                "Gestion des relations médiatiques et institutionnelles",
+                "Analyse proactive des risques politiques et sectoriels"
+              ],
+              "proofs": [
+                "YANGO — campagnes PR, lancements, events (10+ missions, 28M)",
+                "VITIB — visites PTF et positionnement institutionnel (9,5M)",
+                "MAIRIE DU PLATEAU — Plateau Fashion Street (29M FCFA)"
+              ],
+              "price": "2 – 8M FCFA / mois",
+              "targets": [
+                "Marques en expansion",
+                "Entreprises minières"
+              ]
+            },
+            {
+              "ref": "I — 04",
+              "badge": "",
+              "badgeType": "",
+              "name": "Mise en relation avec les PTF",
+              "hook": "Pour accéder aux financements internationaux",
+              "desc": "Les PTF — Banque Mondiale, BAD, AFD, GIZ, Union Européenne — financent des projets en Côte d'Ivoire et en Afrique de l'Ouest. Y accéder demande de savoir qui contacter, comment se présenter et quels critères respecter. Marabu fait le lien.",
+              "items": [
+                "Identification et mise en relation avec les PTF pertinents",
+                "Préparation des dossiers et des argumentaires",
+                "Accompagnement pendant et après les négociations"
+              ],
+              "proofs": [
+                "VITIB — organisation visites PTF (9,5M FCFA)",
+                "Mission PPP Guinée — Banque Mondiale (8,4M FCFA)",
+                "Réseau AmCham CI et VITIB activé"
+              ],
+              "price": "5 – 20% du financement mobilisé",
+              "targets": [
+                "EPNs",
+                "Ministères",
+                "Associations"
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
-
   "apropos": {
     "about": {
       "headingup": "A PROPOS DE NOUS",
@@ -345,34 +708,25 @@
       "subheading": "Depuis des siècles, les marabouts africains ont guidé les communautés avec sagesse et clairvoyance. Conseillers, médiateurs et gardiens de la connaissance, ils incarnaient une autorité éclairée, capable de transformer les défis en opportunités. Aujourd'hui, Marabu réinvente cet héritage. ",
       "subheading2": "Fondé en 2023, Marabu s'impose comme un acteur stratégique en conseils, services et intermédiations, alliant tradition et technologie pour accompagner ses partenaires dans un monde en perpétuelle évolution. ",
       "heading2": "Nos Valeurs Fondamentales",
-
       "lititle": "Innovation Inspirée : ",
       "lidescription": "Unir les traditions aux technologies modernes.",
-
       "lititle2": "Impact Positif : ",
       "lidescription2": "Contribuer à un développement durable et inclusif.",
-
       "lititle3": "Engagement Client : ",
       "lidescription3": "Offrir des solutions personnalisées à vos besoins",
-
       "textdownn": "Nous sommes les traducteurs contemporains de la sagesse africaine en action stratégique moderne.",
-
       "cta": "Nous contacter"
     },
-
     "mission": {
       "headingup": "NOS MISSIONS",
       "heading": "Fonctions à accomplir",
       "subheading": "La mission de Marabu est d'incarner l'excellence et l'innovation à travers des solutions concrètes et stratégiques. Nous nous positionnons comme un catalyseur de transformation pour les entreprises et institutions, en les accompagnant dans leurs ambitions de croissance, de digitalisation et de performance durable. Notre approche repose sur une compréhension fine des enjeux actuels et futurs, ainsi qu'une capacité à anticiper les mutations économiques, sociales et technologiques.",
-
       "subheading2": "À travers nos services d'intermédiation, de conseil et d'accompagnement opérationnel, nous construisons des ponts entre les besoins locaux et les opportunités globales. Marabu s'engage à apporter des réponses sur mesure, à forte valeur ajoutée, tout en plaçant l'humain, l'innovation et la vision à long terme au cœur de chaque mission. Ensemble, nous façonnons les trajectoires de réussite, avec agilité, audace et impact."
     },
-
     "team": {
       "headingup": "NOTRE ÉQUIPE",
       "heading": "Rencontrez Notre Équipe",
       "subheading": "Une équipe passionnée et dévouée, prête à vous accompagner dans vos projets",
-
       "teams": [
         {
           "id": "1",
@@ -398,7 +752,6 @@
           },
           "linkLinkedin": "https://www.linkedin.com/in/thomas-dabadie-68b2345/?originalSubdomain=ci"
         },
-
         {
           "id": "22",
           "name": "Kandas Camara",
@@ -411,7 +764,6 @@
           },
           "linkLinkedin": "https://www.linkedin.com/in/kandasc/?originalSubdomain=ci"
         },
-
         {
           "id": "3",
           "name": "Gilles Dogbo",
@@ -436,7 +788,6 @@
           },
           "linkLinkedin": "https://www.linkedin.com/in/marcel-aka-921784133?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
         },
-
         {
           "id": "7",
           "name": "Hervé Touré",
@@ -486,7 +837,6 @@
           "linkLinkedin": "https://www.linkedin.com/in/nourgo-fantiele-coulibaly-%E2%9C%94-ab54aa339/"
         }
       ],
-
       "teamMembers": [
         {
           "id": 1,
@@ -662,7 +1012,6 @@
             "Promotion de l'inclusion sociale et professionnelle via son engagement associatif"
           ]
         },
-
         {
           "id": 4,
           "name": "Marcel AKA",
@@ -705,7 +1054,6 @@
             "Optimisation de la gestion de trésorerie pour des institutions financières"
           ]
         },
-
         {
           "id": 5,
           "name": "Bitcheresse Issouf Ouattara",
@@ -750,7 +1098,6 @@
             "Développement d'applications mobiles pour le compte de MARABU"
           ]
         },
-
         {
           "id": 98,
           "name": "Hervé Touré",
@@ -789,7 +1136,6 @@
             "Gestion efficace du courrier pendant plus de 7 ans à La Poste de Côte d'Ivoire"
           ]
         },
-
         {
           "id": 6,
           "name": "Thierry Tano",
@@ -872,26 +1218,20 @@
         }
       ]
     },
-
     "objectif": {
       "headingup": "Pourquoi nous ",
       "headingup2": "choisir ?",
-
       "subheading": "Choisir Marabu, c'est opter pour un partenaire engagé, agile et visionnaire. Nous mettons notre expertise au service de votre transformation, avec une approche personnalisée, centrée sur l'impact et la durabilité.",
-
       "step1": "Expertise stratégique, digitale et opérationnelle réunies",
       "step2": "Accompagnement sur mesure, adapté à chaque secteur et contexte",
       "step3": "Engagement fort pour des résultats concrets et durables",
       "cta": "Contactez-nous"
     },
-
     "visions": {
       "headingup": "NOS VISIONS",
       "heading": "Objectif clé",
       "subheading": "Chez Marabu, notre vision repose sur la conviction que la réussite durable des entreprises et des institutions passe par l'innovation, l'agilité et l'intelligence collective. Nous aspirons à devenir un acteur de référence dans l'accompagnement stratégique et digital, en créant des ponts entre les ambitions locales et les opportunités globales.",
-
       "subheading2": "Notre objectif clé : permettre à nos partenaires de prendre une longueur d'avance dans un monde en constante évolution. Nous mettons notre expertise au service de solutions concrètes, inclusives et durables, en intégrant l'humain, la technologie et la performance au cœur de chaque projet. Parce que penser globalement, agir localement et réussir mondialement, c'est plus qu'un slogan — c'est notre engagement.",
-
       "step1": "Ecoute 24/24",
       "step1value": "Disponibles à tout moment pour répondre à vos besoins.",
       "step2": "Guide",
@@ -900,7 +1240,6 @@
       "step3value": "Engagement, rigueur et performance au cœur de nos actions."
     }
   },
-
   "blog": {
     "mm": {
       "headingup": "Nous l'avons fait",
@@ -908,23 +1247,33 @@
       "subheading": "Nous combinons expertise et innovation pour créer des expériences interactives uniques. Grâce à notre magazine digital, nous engageons votre audience avec du contenu dynamique, captivant et conçu pour renforcer votre visibilité et votre impact.",
       "cta": "Voir plus..."
     },
-
     "tabsarticles": {
       "tabs": [
-        { "id": "tous", "label": "Tous les articles" },
-        { "id": "conseils", "label": "Conseils" },
-        { "id": "intermediations", "label": "Intermédiations" },
-        { "id": "services", "label": "Services" }
+        {
+          "id": "tous",
+          "label": "Tous les articles"
+        },
+        {
+          "id": "conseils",
+          "label": "Conseils"
+        },
+        {
+          "id": "intermediations",
+          "label": "Intermédiations"
+        },
+        {
+          "id": "services",
+          "label": "Services"
+        }
       ],
       "cta": "Voir plus...",
+      "readMore": "Lire la suite",
       "recent": "Articles récents",
       "next": "Suivant",
       "previous": "Précédent",
-
       "cta2": "Découvrir nos services"
     }
   },
-
   "contact": {
     "sheet": {
       "heading": "NOUS JOINDRE",
@@ -946,23 +1295,19 @@
       "sendButton": "Envoyer"
     }
   },
-
   "footer": {
     "navigation": {
       "heading": "CABINET MARABU",
       "subheading": "Conseil - Intermédiation - Services",
-
       "title1": "Navigation",
       "link1": "Accueil",
       "link2": "Nos Solutions",
       "link3": "Qui sommes-nous",
       "link4": "Blog",
-
       "title3": "Informations",
       "telNumber": "+225 07 20 77 70 00",
       "email": "contact@marabu.services",
       "location": "Cocody Danga, Carrefour rue Lepic",
-
       "title2": "Horaires d'ouverture",
       "link5": "Lun-Vend : 08h30-19h30",
       "link6": "Sam : Fermé",

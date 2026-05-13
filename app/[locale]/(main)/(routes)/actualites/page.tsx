@@ -31,6 +31,7 @@ const Page = () => {
   const tabs = t.raw("tabsarticles") as {
     tabs: { id: string; label: string }[];
     cta: string;
+    readMore?: string;
   };
 
   const translatedBlog = t.raw("mm") as {
@@ -381,7 +382,7 @@ const Page = () => {
                               </p>
                             )}
                             <div className="flex items-center gap-2 text-[#689D71] font-semibold text-sm uppercase tracking-wide group-hover:gap-4 transition-all">
-                              <span>Lire la suite</span>
+                              <span>{tabs.readMore ?? tabs.cta}</span>
                               <MoveRight className="w-4 h-4" />
                             </div>
                           </article>

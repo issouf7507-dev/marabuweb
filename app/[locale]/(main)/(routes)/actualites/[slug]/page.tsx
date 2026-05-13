@@ -3,35 +3,20 @@ import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { usePathname, useRouter, useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import DOMPurify from "isomorphic-dompurify";
+import ContactSheet from "@/app/components/contact-sheet";
 
 import Load from "@/components/load";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import ContactForm from "@/app/components/contact-form";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
 import { User, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Page = () => {
-  const pathname = usePathname();
-
   const router = useRouter();
   const params = useParams();
   const locale = (params?.locale as string) || "fr";
-  const id = pathname.split("/").pop();
+  const id = params?.slug as string | undefined;
   const [currentArticleIndex, setCurrentArticleIndex] = React.useState(0);
   const [openContact, setOpenContact] = useState(false);
 
@@ -41,7 +26,6 @@ const Page = () => {
   const t = useTranslations("blog");
 
   const t2 = useTranslations("home");
-  const t3 = useTranslations("contact");
 
   const tabs = t.raw("tabsarticles") as {
     tabs: { id: string; label: string }[];
@@ -58,26 +42,6 @@ const Page = () => {
     subheading1: string;
     subheading2: string;
     cta: string;
-  };
-
-  const translatedContact = t3.raw("sheet") as {
-    heading: string;
-    subheading: string;
-    telText: string;
-    telNumber: string;
-    emailText: string;
-    email: string;
-    locationText: string;
-    location1: string;
-    location2: string;
-    subjectPlaceholder: string;
-    openingHoursText: string;
-    openingHours1: string;
-    openingHours2: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
   };
 
   const fetchArticlesbyMarabuById = async (id: string) => {
@@ -99,8 +63,8 @@ const Page = () => {
     try {
       const res = await fetch(
         locale == "fr"
-          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=100&lang=fr`
-          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=100&lang=en`
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=20&lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=20&lang=en`
       );
       const data = await res.json();
       return data;
@@ -157,6 +121,27 @@ const Page = () => {
 
   if (queryArticlesbyMarabuById.isPending) {
     return <Load />;
+  }
+
+  if (queryArticlesbyMarabuById.isError || !queryArticlesbyMarabuById.data) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
+        <h1 className="text-4xl font-bold text-[#1D4851] mb-4">
+          {locale === "fr" ? "Article introuvable" : "Article not found"}
+        </h1>
+        <p className="text-gray-500 mb-8">
+          {locale === "fr"
+            ? "Cet article n'existe pas ou a été supprimé."
+            : "This article does not exist or has been deleted."}
+        </p>
+        <a
+          href={`/${locale}/actualites`}
+          className="px-6 py-3 bg-[#689D71] text-white font-semibold rounded-lg hover:bg-[#1D4851] transition-colors"
+        >
+          {locale === "fr" ? "Voir tous les articles" : "See all articles"}
+        </a>
+      </div>
+    );
   }
 
   return (
@@ -264,9 +249,9 @@ const Page = () => {
                   prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
                   prose-pre:bg-gray-900 prose-pre:text-gray-100"
                 dangerouslySetInnerHTML={{
-                  __html:
-                    queryArticlesbyMarabuById.data &&
-                    queryArticlesbyMarabuById.data?.content,
+                  __html: DOMPurify.sanitize(
+                    queryArticlesbyMarabuById.data?.content ?? ""
+                  ),
                 }}
               />
             </div>
@@ -450,178 +435,7 @@ const Page = () => {
         </div>
       </section>
 
-      <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-screen h-screen lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
-          <SheetHeader>
-            <SheetTitle className="text-center">
-              {translatedContact.heading}
-            </SheetTitle>
-            <SheetDescription className="text-center">
-              {translatedContact.subheading}
-            </SheetDescription>
-          </SheetHeader>
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 left-0"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 right-0 rotate-90"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={300}
-            height={300}
-            className="absolute top-0 right-[30%] -rotate-45 -translate-x-1/2"
-          />
-
-          <div className="mx-10">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/phoneicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.telText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    href="tel:+2250720777000"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.telNumber}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/sendicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.emailText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* <p className="text-center text-[14px]">
-                   */}
-                  <Link
-                    href="mailto:contact@marabu.services"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.email}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/localisationicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.locationText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                    href="https://www.google.ci/maps/place/Marabu/@5.3438891,-4.0126815,19z/data=!4m14!1m7!3m6!1s0xfc1eb0c78647443:0xb23bdc45be977419!2sPharmacie+du+Lyc%C3%A9e+Technique!8m2!3d5.3442276!4d-4.0114595!16s%2Fg%2F113fj5416!3m5!1s0xfc1eb65b2414379:0x1a1b717d3b74873f!8m2!3d5.3442708!4d-4.0120909!16s%2Fg%2F11y1xrw2cv?hl=fr&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                  >
-                    {translatedContact.location1} <br />
-                    {translatedContact.location2}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/horlogeicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.openingHoursText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours1}
-                  </p>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours2}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="w-full h-full mt-24">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4746952966943!2d-4.014665825016398!3d5.344270794634366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb65b2414379%3A0x1a1b717d3b74873f!2sMarabu!5e0!3m2!1sen!2sci!4v1744293171315!5m2!1sen!2sci"
-                    width="100%"
-                    height="450"
-                    style={{ border: "0" }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div>
-                  <div className="px-4">
-                    <ContactForm />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={300}
-              height={300}
-              className="absolute -bottom-10 right-[30%] -rotate-45 -translate-x-1/2"
-            />
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-10 right-0 "
-            />
-
-            <Image
-              src="/image/Ellipse.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-80 left-0 rotate-180"
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
+      <ContactSheet open={openContact} onOpenChange={setOpenContact} />
     </div>
   );
 };

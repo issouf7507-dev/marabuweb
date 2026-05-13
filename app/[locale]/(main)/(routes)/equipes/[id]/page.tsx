@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@/components/load";
 import { Mail, Phone, Linkedin, ArrowLeft, Facebook } from "lucide-react";
+import DOMPurify from "isomorphic-dompurify";
 
 const TeamMemberPage = () => {
   const params = useParams();
@@ -138,7 +139,9 @@ const TeamMemberPage = () => {
                           prose-ul:text-gray-600 prose-ul:ml-6
                           prose-ol:text-gray-600 prose-ol:ml-6"
                         dangerouslySetInnerHTML={{
-                          __html: decodeHtmlEntities(member.about),
+                          __html: DOMPurify.sanitize(
+                            decodeHtmlEntities(member.about)
+                          ),
                         }}
                       />
                     </div>

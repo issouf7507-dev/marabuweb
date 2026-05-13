@@ -23,12 +23,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Vérification de la clé API Brevo
-    const apiKey =
-      process.env.NEXT_PUBLIC_SMTP_KEY_BREVO || process.env.BREVO_API_KEY;
+    const apiKey = process.env.BREVO_API_KEY;
     if (!apiKey) {
-      console.error(
-        "BREVO_API_KEY ou NEXT_PUBLIC_SMTP_KEY_BREVO n'est pas définie"
-      );
+      console.error("BREVO_API_KEY n'est pas définie");
       return NextResponse.json(
         { error: "Configuration serveur manquante" },
         { status: 500 }

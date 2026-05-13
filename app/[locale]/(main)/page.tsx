@@ -6,6 +6,7 @@ import {
   Clock,
   Sparkles,
   CheckCircle,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
@@ -28,30 +29,14 @@ import {
 
 import splitStringUsing from "@/utils/splitStringRegex";
 import { useEffect, useState } from "react";
-import { experience, logosSlide, servicesData, slides } from "@/data/data";
+import { logosSlide, slides } from "@/data/data";
 import Link from "next/link";
-import Load from "@/components/load";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import ContactForm from "@/app/components/contact-form";
+import ContactSheet from "@/app/components/contact-sheet";
 
 export default function Home() {
   const t = useTranslations("home");
-  const t2 = useTranslations("contact");
 
   const params = useParams();
   const locale = (params?.locale as string) || "fr";
@@ -72,35 +57,21 @@ export default function Home() {
     cardservices: {
       id: number;
       title: string;
+      tagline: string;
       description: string;
+      offerings: string[];
+      cta: string;
     }[];
     cta2: string;
-  };
-
-  const translatedContact = t2.raw("sheet") as {
-    heading: string;
-    subheading: string;
-    telText: string;
-    telNumber: string;
-    emailText: string;
-    email: string;
-    locationText: string;
-    location1: string;
-    location2: string;
-    subjectPlaceholder: string;
-    openingHoursText: string;
-    openingHours1: string;
-    openingHours2: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
   };
 
   const translatedCardServices = t.raw("solutions.cardservices") as {
     id: number;
     title: string;
+    tagline: string;
     description: string;
+    offerings: string[];
+    cta: string;
   }[];
 
   const translatedPartners = t.raw("partners") as {
@@ -232,6 +203,10 @@ export default function Home() {
     headingup: string;
     heading: string;
     subheading: string;
+    value1: string;
+    value2: string;
+    value3: string;
+    value4: string;
     statistics1: string;
     statistics2: string;
     statistics3: string;
@@ -245,7 +220,6 @@ export default function Home() {
     cta: string;
   };
 
-  const [isLoading, setIsLoading] = useState(true);
   const [openContact, setOpenContact] = useState(false);
   const [openYoutube, setOpenYoutube] = useState(false);
   const [openMarabuAI, setOpenMarabuAI] = useState(false);
@@ -290,27 +264,17 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Afficher la modal Marabu AI après 5 secondes
   useEffect(() => {
+    const hasSeenMarabuAI = localStorage.getItem("marabuAI_seen");
+    if (hasSeenMarabuAI) return;
+
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+      setOpenMarabuAI(true);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
-
-  // Afficher la modal Marabu AI après 5 secondes
-  useEffect(() => {
-    // Vérifier si l'utilisateur a déjà répondu
-    const hasSeenMarabuAI = localStorage.getItem("marabuAI_seen");
-
-    if (!hasSeenMarabuAI && !isLoading) {
-      const timer = setTimeout(() => {
-        setOpenMarabuAI(true);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
 
   const handleMarabuAIResponse = (wantsToTest: boolean) => {
     // Sauvegarder le choix de l'utilisateur
@@ -328,14 +292,6 @@ export default function Home() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <Load />
-      </div>
-    );
-  }
-
   return (
     <div className="w-full font-light text-gray-500">
       {/* HERO SECTION */}
@@ -344,9 +300,10 @@ export default function Home() {
           <div className="absolute inset-0 w-full h-full">
             <Image
               src={slides[index].image}
-              alt={slides[index].alt}
+              alt=""
+              aria-hidden="true"
               fill
-              priority // très important pour la première image
+              priority
               sizes="100vw"
               style={{ objectFit: "cover" }}
             />
@@ -482,49 +439,71 @@ export default function Home() {
                 </motion.div> */}
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-9 w-full  place-items-center mt-16">
-                {translatedCardServices.map((el, index) => (
-                  <Link
-                    href={`/solutions#${
-                      el.id === 1
-                        ? "conseil"
-                        : el.id === 2
-                        ? "services"
-                        : "intermediation"
-                    }`}
-                    key={el.id}
-                  >
-                    <motion.div
-                      className={`shadow-xl rounded-xl py-12  w-[342px] h-[480px] ${
-                        el.id == 2 ? "bg-[#689D71]" : "bg-white"
-                      }`}
-                      variants={{
-                        hidden: { y: 45, opacity: 0 },
-                        reveal: { y: 0, opacity: 1 },
-                      }}
-                      transition={{ duration: 0.5, delay: index * 0.3 }}
-                      initial="hidden"
-                      whileInView="reveal"
-                    >
-                      <h1
-                        className={`text-center text-4xl font-bold mb-9 tracking-wider ${
-                          el.id == 2 ? "text-white" : "text-[#689D71]"
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-12">
+                {translatedCardServices.map((el, index) => {
+                  const anchor = el.id === 1 ? "conseil" : el.id === 2 ? "services" : "intermediation";
+                  const isHighlighted = el.id === 2;
+                  return (
+                    <Link href={`/solutions#${anchor}`} key={el.id} className="group">
+                      <motion.div
+                        className={`rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl ${
+                          isHighlighted
+                            ? "bg-[#689D71] shadow-xl"
+                            : "bg-white shadow-lg border border-gray-100"
                         }`}
+                        variants={{ hidden: { y: 40, opacity: 0 }, reveal: { y: 0, opacity: 1 } }}
+                        transition={{ duration: 0.45, delay: index * 0.15 }}
+                        initial="hidden"
+                        whileInView="reveal"
+                        viewport={{ once: true }}
                       >
-                        {el.title}
-                      </h1>
-                      <div className="px-7">
-                        <p
-                          className={`text-center ${
-                            el.id == 2 ? "text-white" : "text-[#689D71]"
-                          }`}
-                        >
-                          {el.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </Link>
-                ))}
+                        {/* Accent top */}
+                        <div className={`h-1 ${isHighlighted ? "bg-white/30" : "bg-[#689D71]"}`} />
+
+                        <div className="p-7 flex flex-col flex-1">
+                          {/* Numéro */}
+                          <span className={`text-xs font-bold tracking-widest uppercase mb-3 ${isHighlighted ? "text-white/60" : "text-gray-300"}`}>
+                            0{el.id}
+                          </span>
+
+                          {/* Titre */}
+                          <h3 className={`text-2xl font-bold tracking-wide mb-1 ${isHighlighted ? "text-white" : "text-[#1D4851]"}`}>
+                            {el.title}
+                          </h3>
+
+                          {/* Tagline */}
+                          <p className={`text-xs font-semibold uppercase tracking-widest mb-4 ${isHighlighted ? "text-white/70" : "text-[#689D71]"}`}>
+                            {el.tagline}
+                          </p>
+
+                          {/* Description */}
+                          <p className={`text-sm leading-relaxed mb-5 ${isHighlighted ? "text-white/90" : "text-gray-500"}`}>
+                            {el.description}
+                          </p>
+
+                          {/* Séparateur */}
+                          <div className={`w-10 h-px mb-5 ${isHighlighted ? "bg-white/30" : "bg-gray-200"}`} />
+
+                          {/* Offres clés */}
+                          <ul className="space-y-2 flex-1">
+                            {el.offerings.map((item, i) => (
+                              <li key={i} className={`flex items-start gap-2 text-sm ${isHighlighted ? "text-white/90" : "text-gray-600"}`}>
+                                <span className={`mt-0.5 text-xs flex-shrink-0 font-bold ${isHighlighted ? "text-white" : "text-[#689D71]"}`}>✓</span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* CTA */}
+                          <div className={`mt-6 flex items-center gap-2 text-sm font-semibold ${isHighlighted ? "text-white" : "text-[#1D4851]"}`}>
+                            <span>{el.cta}</span>
+                            <CircleChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Link>
+                  );
+                })}
               </div>
 
               <div className="flex items-center justify-center w-full mt-10 ">
@@ -618,7 +597,8 @@ export default function Home() {
                         className="basis-1/2 md:basis-1/3 lg:basis-1/4"
                       >
                         <div className="p-1">
-                          <Link href={el.href as string} target="_blank">
+                          <Link href={el.href as string} target="_blank"
+                    rel="noopener noreferrer">
                             <Image
                               src={el.logo}
                               alt=""
@@ -793,7 +773,7 @@ export default function Home() {
                   </motion.div>
                 </div>
                 <div className="mt-3">
-                  <h1> {translatedUs.textdownn}</h1>
+                  <p> {translatedUs.textdownn}</p>
                 </div>
                 <div className="mt-4">
                   <Link href="/apropos">
@@ -1063,7 +1043,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients1[0].image}
                                 alt={translatedClients.clients1[0].alt}
@@ -1073,12 +1052,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients1[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients1[0].position1}
                               <br />
@@ -1103,7 +1081,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients2[0].image}
                                 alt={translatedClients.clients2[0].alt}
@@ -1113,12 +1090,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients2[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients2[0].position1}
                               <br />
@@ -1142,7 +1118,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients3[0].image}
                                 alt={translatedClients.clients3[0].alt}
@@ -1152,12 +1127,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients3[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients3[0].position1}
                               <br />
@@ -1178,7 +1152,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients4[0].image}
                                 alt={translatedClients.clients4[0].alt}
@@ -1188,12 +1161,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients4[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients4[0].position1}
                               <br />
@@ -1215,7 +1187,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients5[0].image}
                                 alt={translatedClients.clients5[0].alt}
@@ -1225,12 +1196,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients5[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients5[0].position1}
                               <br />
@@ -1251,7 +1221,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients6[0].image}
                                 alt={translatedClients.clients6[0].alt}
@@ -1261,12 +1230,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients6[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients6[0].position1}
                               <br />
@@ -1286,7 +1254,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients7[0].image}
                                 alt={translatedClients.clients7[0].alt}
@@ -1296,12 +1263,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients7[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients7[0].position1}
                               <br />
@@ -1321,7 +1287,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients8[0].image}
                                 alt={translatedClients.clients8[0].alt}
@@ -1331,12 +1296,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients8[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients8[0].position1}
                               <br />
@@ -1362,36 +1326,10 @@ export default function Home() {
 
       {/* Notre Croissance  */}
       <section className="py-20 bg-[#1D4851] relative overflow-hidden">
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute left-0 -top-16 z-40"
-        />
-
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute right-0 -top-16 z-40"
-        />
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute right-72 -bottom-16 z-40 rotate-180"
-        />
-
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute -left-96 -bottom-16 z-40 -rotate-90"
-        />
+        <span aria-hidden="true" className="absolute left-0 -top-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat" />
+        <span aria-hidden="true" className="absolute right-0 -top-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat" />
+        <span aria-hidden="true" className="absolute right-72 -bottom-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat rotate-180" />
+        <span aria-hidden="true" className="absolute -left-96 -bottom-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat -rotate-90" />
         <div className=" px-10   lg:max-w-[1350px]  w-full mx-auto ">
           <div className="text-start ">
             <motion.h2
@@ -1445,7 +1383,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +20
+                {translatedGrowth.value1}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1471,7 +1409,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="text-white text-4xl lg:text-6xl font-bold "
               >
-                +100
+                {translatedGrowth.value2}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1497,7 +1435,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.9 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +30
+                {translatedGrowth.value3}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1523,7 +1461,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +45
+                {translatedGrowth.value4}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1778,12 +1716,12 @@ export default function Home() {
       <Dialog open={openMarabuAI} onOpenChange={setOpenMarabuAI}>
         <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-[#1D4851]  border-none">
           <div className="relative">
-            {/* Bouton fermer */}
             <button
               onClick={() => handleMarabuAIResponse(false)}
+              aria-label={locale === "fr" ? "Fermer" : "Close"}
               className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
             >
-              {/* <X className="w-5 h-5 text-white" /> */}
+              <X className="w-5 h-5 text-white" />
             </button>
 
             {/* Contenu de la modal */}
@@ -1902,186 +1840,22 @@ export default function Home() {
         </DialogContent>
       </Dialog>
 
-      <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-[100vw] h-[100vh] lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
-          <SheetHeader>
-            <SheetTitle className="text-center">
-              {translatedContact.heading}
-            </SheetTitle>
-            <SheetDescription className="text-center">
-              {translatedContact.subheading}
-            </SheetDescription>
-          </SheetHeader>
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 left-0"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 right-0 rotate-90"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={300}
-            height={300}
-            className="absolute top-0 right-[30%] -rotate-45 -translate-x-1/2"
-          />
-
-          <div className="mx-10">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/phoneicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.telText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    href="tel:+2250720777000"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.telNumber}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/sendicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.emailText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* <p className="text-center text-[14px]">
-                   */}
-                  <Link
-                    href="mailto:contact@marabu.services"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.email}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/localisationicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.locationText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                    href="https://www.google.ci/maps/place/Marabu/@5.3438891,-4.0126815,19z/data=!4m14!1m7!3m6!1s0xfc1eb0c78647443:0xb23bdc45be977419!2sPharmacie+du+Lyc%C3%A9e+Technique!8m2!3d5.3442276!4d-4.0114595!16s%2Fg%2F113fj5416!3m5!1s0xfc1eb65b2414379:0x1a1b717d3b74873f!8m2!3d5.3442708!4d-4.0120909!16s%2Fg%2F11y1xrw2cv?hl=fr&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                  >
-                    {translatedContact.location1} <br />
-                    {translatedContact.location2}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/horlogeicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.openingHoursText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours1}
-                  </p>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours2}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="w-full h-full mt-24">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4746952966943!2d-4.014665825016398!3d5.344270794634366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb65b2414379%3A0x1a1b717d3b74873f!2sMarabu!5e0!3m2!1sen!2sci!4v1744293171315!5m2!1sen!2sci"
-                    width="100%"
-                    height="450"
-                    style={{ border: "0" }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div>
-                  <div className="px-4 relative z-30">
-                    <ContactForm />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={300}
-              height={300}
-              className="absolute -bottom-10 right-[30%] -rotate-45 -translate-x-1/2"
-            />
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-10 right-0 "
-            />
-
-            <Image
-              src="/image/Ellipse.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-80 left-0 rotate-180"
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
+      <ContactSheet open={openContact} onOpenChange={setOpenContact} />
 
       {/* Bouton flottant Marabu AI */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
-        onClick={() => setOpenMarabuAI(true)}
-        className="fixed bottom-6 right-6 z-50 w-18 h-18 bg-[#1D4851] text-white rounded-full shadow-2xl flex items-center justify-center group transition-all duration-300 hover:scale-110  "
+        onClick={() => {
+          const wantsToTest = localStorage.getItem("marabuAI_wantsToTest") === "true";
+          if (wantsToTest) {
+            window.location.href = "https://ai.marabu.services/welcome";
+          } else {
+            setOpenMarabuAI(true);
+          }
+        }}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#1D4851] text-white rounded-full shadow-2xl flex items-center justify-center group transition-all duration-300 hover:scale-110"
         aria-label={locale === "fr" ? "Ouvrir Marabu AI" : "Open Marabu AI"}
       >
         <div className="relative">

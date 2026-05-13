@@ -37,9 +37,9 @@ const Footer = () => {
         <div className=" py-10">
           <div className="grid md:grid-cols-3 gap-10 lg:gap-20">
             <div>
-              <h1 className="text-white text-4xl font-bold">
+              <h2 className="text-white text-4xl font-bold">
                 {translatedFooter.heading}
-              </h1>
+              </h2>
               <p className="text-white mt-5 text-lg">
                 {translatedFooter.subheading}
               </p>
@@ -48,6 +48,7 @@ const Footer = () => {
                   <Link
                     href="https://www.facebook.com/marabuservices"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={24}
@@ -62,6 +63,7 @@ const Footer = () => {
                   <Link
                     href="https://www.linkedin.com/company/marabuservices"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={24}
@@ -75,6 +77,7 @@ const Footer = () => {
                   <Link
                     href="https://www.tiktok.com/@marabuservices?_t=ZM-8vpBeJRzm5e&_r=1"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={21}
@@ -88,6 +91,7 @@ const Footer = () => {
                   <Link
                     href="https://www.instagram.com/marabuservices/"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={24}
@@ -98,7 +102,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://x.com/marabuservices" target="_blank">
+                  <Link href="https://x.com/marabuservices" target="_blank"
+                    rel="noopener noreferrer">
                     <Image
                       width={21}
                       height={21}
@@ -111,6 +116,7 @@ const Footer = () => {
                   <Link
                     href="https://www.youtube.com/@Marabuservices"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Image
                       width={24}
@@ -125,9 +131,9 @@ const Footer = () => {
 
             <div className="col-span-2 grid md:grid-cols-3">
               <div className="mb-3">
-                <h1 className="text-white uppercase font-semibold">
+                <h3 className="text-white uppercase font-semibold">
                   {translatedFooter.title1}
-                </h1>
+                </h3>
                 <div className="mt-5">
                   <ul className="flex gap-5 flex-col">
                     <li>
@@ -167,9 +173,9 @@ const Footer = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <h1 className="text-white uppercase font-semibold">
+                <h3 className="text-white uppercase font-semibold">
                   {translatedFooter.title3}
-                </h1>
+                </h3>
                 <div className="mt-5">
                   <ul className="flex gap-5 flex-col">
                     <li>
@@ -200,34 +206,19 @@ const Footer = () => {
                 </div>
               </div>
               <div className="relative z-40">
-                <h1 className="text-white uppercase font-semibold">
+                <p className="text-white uppercase font-semibold">
                   {translatedFooter.title2}
-                </h1>
+                </p>
                 <div className="mt-5">
                   <ul className="flex gap-5 flex-col">
                     <li>
-                      <Link
-                        href={"/#"}
-                        className="text-white text-sm transition hover:text-[#dfe7b3]"
-                      >
-                        {translatedFooter.link5}
-                      </Link>
+                      <span className="text-white text-sm">{translatedFooter.link5}</span>
                     </li>
                     <li>
-                      <Link
-                        href={"/#"}
-                        className="text-white text-sm transition hover:text-[#dfe7b3]"
-                      >
-                        {translatedFooter.link6}
-                      </Link>
+                      <span className="text-white text-sm">{translatedFooter.link6}</span>
                     </li>
                     <li>
-                      <Link
-                        href={"/#"}
-                        className="text-white text-sm transition hover:text-[#dfe7b3]"
-                      >
-                        {translatedFooter.link7}
-                      </Link>
+                      <span className="text-white text-sm">{translatedFooter.link7}</span>
                     </li>
                   </ul>
                 </div>
@@ -237,7 +228,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-[#edf2d088] h-7  w-full flex flex-col items-center justify-center overflow-hidden relative z-40">
-        <h1 className="text-white text-sm">MARABU © 2025 designed by MARABU</h1>
+        <p className="text-white text-sm">MARABU © 2025 designed by MARABU</p>
       </div>
     </footer>
   );
