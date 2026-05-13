@@ -14,7 +14,7 @@ async function fetchArticleIds(locale: string): Promise<string[]> {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=200&lang=${locale}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(10000) }
     );
     if (!res.ok) return [];
     const data = await res.json();
@@ -28,7 +28,7 @@ async function fetchProfileIds(locale: string): Promise<string[]> {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/profiles?lang=${locale}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(10000) }
     );
     if (!res.ok) return [];
     const data = await res.json();

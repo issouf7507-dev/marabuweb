@@ -24,6 +24,8 @@ jobs:
 
       - name: Build application
         run: npm run build
+        env:
+          NEXT_PUBLIC_BACK_END_URL_API: ${{ secrets.NEXT_PUBLIC_BACK_END_URL_API }}
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
