@@ -1,1015 +1,342 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Load from "@/components/load";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import ContactSheet from "@/app/components/contact-sheet";
 
-const Page = () => {
-  const [isLoading, setIsLoading] = useState(true);
+type BadgeType = "green" | "gold" | "muted" | "";
+
+interface Product {
+  ref: string;
+  badge: string;
+  badgeType: BadgeType;
+  name: string;
+  hook: string;
+  desc: string;
+  items: string[];
+  proofs: string[];
+  price: string;
+  targets: string[];
+}
+
+interface Section {
+  title: string;
+  products: Product[];
+}
+
+interface Pole {
+  heading: string;
+  subheading: string;
+  notice?: string;
+  sections: Section[];
+}
+
+const POLES = [
+  { id: "conseil",        num: "01", image: "/persons/conseil_2_marabu.jpg" },
+  { id: "services",       num: "02", image: "/persons/servive_1_marabu.jpg" },
+  { id: "intermediation", num: "03", image: "/persons/intermediation_1_marabu.jpg" },
+] as const;
+
+function ProductCard({ product, index }: { product: Product; index: number }) {
+  return (
+    <motion.article
+      variants={{ hidden: { y: 24, opacity: 0 }, reveal: { y: 0, opacity: 1 } }}
+      initial="hidden"
+      whileInView="reveal"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.4, delay: 0.08 * index }}
+      className="group bg-white rounded-2xl border border-gray-100 hover:border-[#689D71]/40
+                 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden"
+    >
+      <div className="flex flex-1 flex-col p-6 gap-4">
+
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            {product.badge && (
+              <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded mb-2
+                ${product.badgeType === "green" ? "bg-[#689D71]/15 text-[#689D71]"
+                : product.badgeType === "gold"  ? "bg-amber-100 text-amber-700"
+                : "bg-gray-100 text-gray-500"}`}>
+                {product.badge}
+              </span>
+            )}
+            <h3 className="text-base font-bold text-[#1D4851] leading-snug">
+              {product.name}
+            </h3>
+            <p className="text-sm italic text-gray-400 mt-0.5">{product.hook}</p>
+          </div>
+        </div>
+
+        <p className="text-sm text-gray-500 leading-relaxed">{product.desc}</p>
+
+        <ul className="space-y-2">
+          {product.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#689D71] shrink-0 mt-0.5" />
+              <span className="text-sm text-gray-600">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        {product.proofs.length > 0 && (
+          <div className="rounded-xl bg-[#1D4851]/4 border-l-[3px] border-[#689D71] pl-4 pr-3 py-3">
+            <p className="text-[10px] font-bold text-[#689D71] uppercase tracking-widest mb-1.5">
+              Missions réalisées
+            </p>
+            <ul className="space-y-1">
+              {product.proofs.slice(0, 2).map((proof, i) => (
+                <li key={i} className="text-xs text-gray-500 flex items-start gap-1.5">
+                  <span className="mt-1.5 w-1 h-1 rounded-full bg-[#689D71] shrink-0" />
+                  {proof}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+          {product.targets.map((t, i) => (
+            <span key={i} className="text-[10px] font-semibold uppercase tracking-wide
+                                      bg-[#1D4851]/6 text-[#1D4851] px-2.5 py-1 rounded-full">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+export default function SolutionsPage() {
   const [openContact, setOpenContact] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("conseil");
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  const t = useTranslations("solutions");
+  const t  = useTranslations("solutions");
   const t2 = useTranslations("home");
-  const t3 = useTranslations("contact");
+  const locale = useLocale();
 
-  const conseilTranslation = t.raw("conseil") as {
-    heading: string;
-    subheading: string;
-    subheading2: string;
-    subheading3: string;
-    subheading4: string;
-    heading2: string;
-    subheading5: string;
-    step1: string;
-    step2: string;
-    step3: string;
-    step4: string;
-    heading3: string;
-    subheading6: string;
-    step5: string;
-    step6: string;
-    step7: string;
-    step8: string;
-    heading4: string;
-    subheading7: string;
-    step9: string;
-    step10: string;
-    step11: string;
-  };
-
-  const servicesTranslation = t.raw("services") as {
-    heading: string;
-    subheading: string;
-    heading2: string;
-    subheading3: string;
-    step1: string;
-    step2: string;
-    step3: string;
-    step4: string;
-    step5: string;
-    heading3: string;
-    subheading4: string;
-    step6: string;
-    step7: string;
-  };
-
-  const intermediationTranslation = t.raw("intermediation") as {
-    heading: string;
-    subheading: string;
-    heading2: string;
-    subheading5: string;
-    step1: string;
-    step2: string;
-    step3: string;
-    step4: string;
-    step5: string;
-    heading3: string;
-    subheading6: string;
-    step6: string;
-    step7: string;
-    step8: string;
-    step9: string;
+  const poles: Record<string, Pole> = {
+    conseil:        t.raw("conseil")        as Pole,
+    services:       t.raw("services")       as Pole,
+    intermediation: t.raw("intermediation") as Pole,
   };
 
   const translatedBoost = t2.raw("boost") as {
-    heading: string;
-    heading2: string;
-    subheading1: string;
-    subheading2: string;
-    cta: string;
-  };
-
-  const translatedContact = t3.raw("sheet") as {
-    heading: string;
-    subheading: string;
-    telText: string;
-    telNumber: string;
-    emailText: string;
-    email: string;
-    locationText: string;
-    location1: string;
-    location2: string;
-    openingHoursText: string;
-    openingHours1: string;
-    subjectPlaceholder: string;
-    openingHours2: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
+    heading: string; heading2: string;
+    subheading1: string; subheading2: string; cta: string;
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    const observers: IntersectionObserver[] = [];
+    POLES.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      sectionRefs.current[id] = el;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveTab(id); },
+        { threshold: 0.25 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  if (isLoading) {
-    return <Load />;
-  }
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
-    <div className="font-light text-gray-500 scroll-smooth">
-      {/* Section conseil */}
-      <section id="conseil">
-        <div className="px-10 lg:max-w-[1350px] w-full mx-auto mt-32 relative">
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={200}
-            height={200}
-            className="absolute top-0 left-0"
-            loading="lazy"
-            quality={85}
-          />
+    <div className="bg-white">
 
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-100 right-10"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-1 md:p-10">
-              <motion.h1
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="text-3xl font-bold mb-4 tracking-wider text-[#1D4851] uppercase"
+      {/* ── Sticky Tab Nav ── */}
+      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
+        <div className="max-w-[1350px] mx-auto px-6 md:px-10 flex gap-0">
+          {POLES.map(({ id, num }) => {
+            const pole = poles[id];
+            const isActive = activeTab === id;
+            return (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className={`relative flex items-center gap-2 px-5 py-4 text-sm font-semibold transition-colors duration-200
+                  ${isActive ? "text-[#1D4851]" : "text-gray-400 hover:text-gray-600"}`}
               >
-                {conseilTranslation.heading}
-              </motion.h1>
-
-              <motion.p
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.6 }}
-                className="text-justify font-medium italic text-gray-400"
-              >
-                {conseilTranslation.subheading}
-                <span className="font-bold text-[#1D4851]">
-                  {conseilTranslation.subheading2}
+                <span className={`text-xs font-bold ${isActive ? "text-[#689D71]" : "text-gray-300"}`}>
+                  {num}
                 </span>
-                {conseilTranslation.subheading3}{" "}
-                {conseilTranslation.subheading4}
-              </motion.p>
-
-              <div className="mt-4 mb-9">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {conseilTranslation.heading2}
-                </motion.h1>
-
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {conseilTranslation.subheading5}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{conseilTranslation.step1}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step2}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step3}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step4}</p>
-                  </li>
-                </motion.ul>
-              </div>
-
-              <Image
-                src={"/persons/conseil_1_marabu.jpg"}
-                alt=""
-                width={600}
-                height={400}
-                className="object-contain rounded-tl-4xl rounded-b-4xl hidden md:block "
-                loading="lazy"
-                quality={85}
-              />
-            </div>
-
-            <div className="p-1 md:p-10 flex flex-col gap-4">
-              <Image
-                src={"/persons/conseil_2_marabu.jpg"}
-                alt=""
-                width={600}
-                height={400}
-                className="object-contain rounded-b-4xl rounded-tr-4xl w-full"
-                loading="lazy"
-                quality={85}
-              />
-
-              <div className="mt-4">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {conseilTranslation.heading3}
-                </motion.h1>
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {conseilTranslation.subheading6}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{conseilTranslation.step5}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step6}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step7}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step8}</p>
-                  </li>
-                </motion.ul>
-              </div>
-              <div className="mt-4">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {conseilTranslation.heading4}
-                </motion.h1>
-
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justif font-medium italic text-gray-400"
-                >
-                  {conseilTranslation.subheading7}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{conseilTranslation.step9}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step10}</p>
-                  </li>
-                  <li>
-                    <p>{conseilTranslation.step11}</p>
-                  </li>
-                </motion.ul>
-              </div>
-
-              <Image
-                src={"/persons/conseil_1_marabu.jpg"}
-                alt=""
-                width={600}
-                height={400}
-                className="object-contain rounded-tl-4xl rounded-b-4xl  md:hidden w-full"
-                loading="lazy"
-                quality={85}
-              />
-            </div>
-          </div>
+                <span className="uppercase tracking-wider">{pole.heading}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="tab-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#689D71]"
+                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
-      </section>
-      {/* Section services */}
-      <section>
-        <div className="px-10 lg:max-w-[1350px] w-full mx-auto relative mt-10 md:mt-0">
-          <Image
-            src="/image/coris.png"
-            alt="Coris Marabu"
-            width={400}
-            height={400}
-            className="absolute top-0 -left-48"
-          />
+      </div>
 
-          <Image
-            src="/image/coris.png"
-            alt="Coris Marabu"
-            width={400}
-            height={400}
-            className="absolute top-0 -right-48"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-1 md:p-10">
-              <motion.h1
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="text-3xl font-bold mb-4 tracking-wider text-[#1D4851] uppercase"
-              >
-                {servicesTranslation.heading}
-              </motion.h1>
+      {/* ── Poles ── */}
+      {POLES.map(({ id, num, image }, poleIdx) => {
+        const pole = poles[id];
+        const totalProducts = pole.sections.reduce((s, sec) => s + sec.products.length, 0);
 
-              <motion.p
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="text-justify font-medium italic text-gray-400"
-              >
-                {servicesTranslation.subheading}
-              </motion.p>
+        return (
+          <section key={id} id={id} className="scroll-mt-32">
 
-              <div className="mt-4">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {servicesTranslation.heading2}
-                </motion.h1>
-
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {servicesTranslation.subheading3}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{servicesTranslation.step1}</p>
-                  </li>
-                  <li>
-                    <p>{servicesTranslation.step2}</p>
-                  </li>
-                  <li>
-                    <p>{servicesTranslation.step3}</p>
-                  </li>
-                  <li>
-                    <p>{servicesTranslation.step4}</p>
-                  </li>
-                  <li>
-                    <p>{servicesTranslation.step5}</p>
-                  </li>
-                </motion.ul>
-
-                <Image
-                  src={"/persons/servive_1_marabu.jpg"}
-                  alt="Services - Transformation & Innovation"
-                  width={600}
-                  height={400}
-                  className="object-contain rounded-tl-4xl rounded-b-4xl mt-4 md:hidden w-full"
-                  loading="lazy"
-                  quality={85}
-                />
-              </div>
-
-              <div className="mt-4">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {servicesTranslation.heading3}
-                </motion.h1>
-
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {servicesTranslation.subheading4}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{servicesTranslation.step6}</p>
-                  </li>
-                  <li>
-                    <p>{servicesTranslation.step7}</p>
-                  </li>
-                </motion.ul>
-
-                <iframe
-                  src="https://www.youtube.com/embed/sldHA6wmq_g?autoplay=1&mute=1&loop=1&playlist=sldHA6wmq_g&controls=0&showinfo=0&rel=0"
-                  width="100%"
-                  height="300"
-                  className="rounded-b-4xl rounded-tr-4xl  md:hidden mt-4 "
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-            <div className="p-1 md:p-10 flex flex-col gap-4">
+            {/* Pole hero */}
+            <div className="relative h-[360px] md:h-[420px] overflow-hidden">
               <Image
-                src={"/persons/servive_1_marabu.jpg"}
-                alt="Services - Transformation & Innovation"
-                width={600}
-                height={400}
-                className="object-contain rounded-b-4xl rounded-tr-4xl hidden md:block"
-                loading="lazy"
+                src={image}
+                alt={pole.heading}
+                fill
+                className="object-cover"
+                loading={poleIdx === 0 ? "eager" : "lazy"}
                 quality={85}
               />
+              <div className="absolute inset-0 bg-linear-to-r from-[#1D4851]/90 via-[#1D4851]/70 to-transparent" />
 
-              <iframe
-                src="https://www.youtube.com/embed/sldHA6wmq_g?autoplay=1&mute=1&loop=1&playlist=sldHA6wmq_g&controls=0&showinfo=0&rel=0"
-                width="100%"
-                height="300"
-                className="rounded-b-4xl rounded-tr-4xl hidden md:block"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Section intermediations */}
-      <section>
-        <div className="px-10 lg:max-w-[1350px] w-full mx-auto relative mt-10 md:mt-0">
-          <Image
-            src="/image/coris.png"
-            alt="Coris Marabu"
-            width={400}
-            height={400}
-            className="absolute top-0 -left-10 rotate-90"
-          />
-          <Image
-            src="/image/coris.png"
-            alt="Coris Marabu"
-            width={400}
-            height={400}
-            className="absolute top-72 -right-10 rotate-90"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-1 md:p-10 ">
-              <motion.h1
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.4 }}
-                // className="text-justify"
-                className="text-3xl font-bold mb-4 tracking-wider text-[#1D4851] uppercase"
-              >
-                {intermediationTranslation.heading}
-              </motion.h1>
-
-              <motion.p
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.3, delay: 0.4 }}
-                className="text-justify font-medium italic text-gray-400"
-              >
-                {intermediationTranslation.subheading}
-              </motion.p>
-
-              <div className="mt-4">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
+              <div className="absolute inset-0 flex items-end pb-10 px-6 md:px-10 max-w-[1350px] mx-auto w-full">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="max-w-2xl"
                 >
-                  {intermediationTranslation.heading2}
-                </motion.h1>
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {intermediationTranslation.subheading5}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{intermediationTranslation.step1}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step2}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step3}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step4}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step5}</p>
-                  </li>
-                </motion.ul>
-              </div>
-            </div>
-
-            <div className="p-1 md:p-10">
-              <Image
-                src={"/persons/intermediation_1_marabu.jpg"}
-                alt=""
-                width={1000}
-                height={1000}
-                className="object-contain rounded-b-4xl rounded-tr-4xl mt-4 md:mt-0"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-1 md:p-10">
-              <Image
-                src={"/persons/intermediation_2_marabu.jpg"}
-                alt=""
-                width={600}
-                height={400}
-                className="object-contain rounded-b-4xl rounded-tr-4xl hidden md:block"
-                loading="lazy"
-                quality={85}
-              />
-            </div>
-            <div className="p-1 md:p-10 ">
-              <div className="">
-                <motion.h1
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-xl font-bold mb-2 tracking-wider text-[#1D4851] uppercase"
-                >
-                  {intermediationTranslation.heading3}
-                </motion.h1>
-                <motion.p
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  className="text-justify font-medium italic text-gray-400"
-                >
-                  {intermediationTranslation.subheading6}
-                </motion.p>
-                <motion.ul
-                  variants={{
-                    hidden: { x: 45, opacity: 0 },
-                    reveal: { x: 0, opacity: 1 },
-                  }}
-                  initial="hidden"
-                  whileInView="reveal"
-                  transition={{ duration: 0.4, delay: 0.6 }}
-                  className="list-disc mt-1 ml-4 font-medium text-[#1D4851]"
-                >
-                  <li>
-                    <p>{intermediationTranslation.step6}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step7}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step8}</p>
-                  </li>
-                  <li>
-                    <p>{intermediationTranslation.step9}</p>
-                  </li>
-                </motion.ul>
-
-                <Image
-                  src={"/persons/intermediation_2_marabu.jpg"}
-                  alt=""
-                  width={600}
-                  height={400}
-                  className="object-contain rounded-b-4xl rounded-tr-4xl  md:hidden w-full mt-4"
-                  loading="lazy"
-                  quality={85}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="bg-[url(/image/booster_croissance_marabu.png)] w-full  bg-cover  relative py-16 overflow-hidden">
-          <div className="bg-[#0000006b] absolute w-full h-full top-0 left-0 z-10"></div>
-          <div className="px-10  lg:max-w-[1350px] w-full mx-auto z-40 relative ">
-            <motion.h1
-              variants={{
-                hidden: { x: 45, opacity: 0 },
-                reveal: { x: 0, opacity: 1 },
-              }}
-              initial="hidden"
-              whileInView="reveal"
-              transition={{ duration: 0.4, delay: 0.4 }}
-              className="text-white text-2xl md:text-[51px] tracking-wider font-bold"
-            >
-              {translatedBoost.heading}
-            </motion.h1>
-
-            <motion.p
-              variants={{
-                hidden: { x: 45, opacity: 0 },
-                reveal: { x: 0, opacity: 1 },
-              }}
-              initial="hidden"
-              whileInView="reveal"
-              transition={{ duration: 0.4, delay: 0.6 }}
-              className="mt-3 md:mt-9 text-white text-sm md:text-base"
-            >
-              {translatedBoost.subheading1}
-              {translatedBoost.subheading2}
-            </motion.p>
-
-            <div className="mt-4">
-              <motion.button
-                variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
-                }}
-                initial="hidden"
-                whileInView="reveal"
-                transition={{ duration: 0.4, delay: 0.6 }}
-                className="bg-white flex items-center gap-2 py-2 rounded-full px-2 font-semibold text-[#1D4851] cursor-pointer"
-                onClick={() => setOpenContact(true)}
-              >
-                {translatedBoost.cta}
-                <Image
-                  src="/pluscircle.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="object-contain "
-                />
-              </motion.button>
-            </div>
-          </div>
-          <Image
-            src="/boostvector.png"
-            alt=""
-            width={600}
-            height={600}
-            className="object-contain absolute right-20 top-0 z-40"
-          />
-        </div>
-      </section>
-
-      <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-[100vw] h-[100%] lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
-          <SheetHeader>
-            <SheetTitle className="text-center">
-              {translatedContact.heading}
-            </SheetTitle>
-            <SheetDescription className="text-center">
-              {translatedContact.subheading}
-            </SheetDescription>
-          </SheetHeader>
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 left-0"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 right-0 rotate-90"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={300}
-            height={300}
-            className="absolute top-0 right-[30%] -rotate-45 -translate-x-1/2"
-          />
-
-          <div className="mx-10">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/phoneicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.telText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    href="tel:+2250720777000"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.telNumber}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/sendicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.emailText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* <p className="text-center text-[14px]">
-                   */}
-                  <Link
-                    href="mailto:contact@marabu.services"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.email}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/localisationicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.locationText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                    href="https://www.google.ci/maps/place/Marabu/@5.3438891,-4.0126815,19z/data=!4m14!1m7!3m6!1s0xfc1eb0c78647443:0xb23bdc45be977419!2sPharmacie+du+Lyc%C3%A9e+Technique!8m2!3d5.3442276!4d-4.0114595!16s%2Fg%2F113fj5416!3m5!1s0xfc1eb65b2414379:0x1a1b717d3b74873f!8m2!3d5.3442708!4d-4.0120909!16s%2Fg%2F11y1xrw2cv?hl=fr&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                  >
-                    {translatedContact.location1}
-                    <br />
-                    {translatedContact.location2}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/horlogeicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.openingHoursText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours1}
-                  </p>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours2}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="w-full h-full mt-24">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4746952966943!2d-4.014665825016398!3d5.344270794634366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb65b2414379%3A0x1a1b717d3b74873f!2sMarabu!5e0!3m2!1sen!2sci!4v1744293171315!5m2!1sen!2sci"
-                    width="100%"
-                    height="450"
-                    style={{ border: "0" }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div>
-                  <div className="flex flex-col gap-4 px-4  relative  z-30">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[#689D71] text-sm font-bold uppercase tracking-widest">
+                      Pôle {num}
+                    </span>
+                    <span className="h-px w-8 bg-[#689D71]" />
+                    <span className="text-white/50 text-xs">
+                      {totalProducts} {locale === "fr" ? "offres" : "offerings"}
+                    </span>
                   </div>
-                  <div className="px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
+
+                  <h2 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-tight mb-4">
+                    {pole.heading}
+                  </h2>
+
+                  <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-lg">
+                    {pole.subheading}
+                  </p>
+
+                  {pole.notice && (
+                    <div className="mt-4 bg-[#689D71]/20 border border-[#689D71]/40 rounded-xl px-4 py-3 text-sm text-white/90 max-w-lg">
+                      {pole.notice}
+                    </div>
+                  )}
+                </motion.div>
+
+                {/* Big number watermark */}
+                <span className="absolute right-8 bottom-4 text-[120px] md:text-[160px] font-black text-white/4 leading-none select-none pointer-events-none">
+                  {num}
+                </span>
+              </div>
+            </div>
+
+            {/* Sections + cards */}
+            <div className="max-w-[1350px] mx-auto px-6 md:px-10 py-12 space-y-14">
+              {pole.sections.map((section, secIdx) => (
+                <div key={section.title}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                    className="flex items-center gap-4 mb-8"
+                  >
+                    <span className="text-2xl font-black text-gray-100 select-none">
+                      {String(secIdx + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-[#689D71]">
+                        {section.title}
+                      </h3>
+                      <div className="h-0.5 w-12 bg-[#689D71]/30 mt-1" />
+                    </div>
+                  </motion.div>
+
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {section.products.map((product, i) => (
+                      <ProductCard key={product.ref} product={product} index={i} />
+                    ))}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
 
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={300}
-              height={300}
-              className="absolute -bottom-10 right-[30%] -rotate-45 -translate-x-1/2"
-            />
+            {/* Inter-pole divider (sauf dernier) */}
+            {poleIdx < POLES.length - 1 && (
+              <div className="max-w-[1350px] mx-auto px-6 md:px-10">
+                <div className="h-px bg-linear-to-r from-transparent via-gray-200 to-transparent" />
+              </div>
+            )}
+          </section>
+        );
+      })}
 
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-10 right-0 "
-            />
+      {/* ── CTA Boost ── */}
+      <section className="mt-16">
+        <div className="bg-[url(/image/booster_croissance_marabu.png)] w-full bg-cover relative py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-[#1D4851]/75 z-10" />
+          <div className="relative z-20 max-w-[1350px] mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-[#689D71] text-sm font-bold uppercase tracking-widest mb-2"
+              >
+                {locale === "fr" ? "Un projet en tête ?" : "A project in mind?"}
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-4xl font-bold text-white tracking-tight"
+              >
+                {translatedBoost.heading}
+                <br />
+                <span className="text-[#689D71]">{translatedBoost.heading2}</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-white/60 text-sm mt-3 max-w-md"
+              >
+                {translatedBoost.subheading1}
+              </motion.p>
+            </div>
 
-            <Image
-              src="/image/Ellipse.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-80 left-0 rotate-180"
-            />
+            <motion.button
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.25 }}
+              onClick={() => setOpenContact(true)}
+              className="shrink-0 flex items-center gap-3 bg-white text-[#1D4851] font-bold
+                         px-6 py-4 rounded-xl hover:bg-[#689D71] hover:text-white transition-all duration-300 group"
+            >
+              {translatedBoost.cta}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </motion.button>
           </div>
-        </SheetContent>
-      </Sheet>
+        </div>
+      </section>
+
+      <ContactSheet open={openContact} onOpenChange={setOpenContact} />
     </div>
   );
-};
-
-export default Page;
+}

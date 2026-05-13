@@ -69,13 +69,13 @@ export const logosSlide: logosSlideTypes[] = [
   {
     id: 7,
     logo: "/logos/Logo_Ministère_de_l_emploi_marabu.png",
-    href: "/https://www.emploi.gouv.ci/",
+    href: "https://www.emploi.gouv.ci/",
   },
 
   {
     id: 8,
     logo: "/logos/ministere_de_la_transition_numerique_et_de_la_digitalisation_marabu.png",
-    href: "/https://telecom.gouv.ci/",
+    href: "https://telecom.gouv.ci/",
   },
 
   {
@@ -92,6 +92,16 @@ export const logosSlide: logosSlideTypes[] = [
     id: 11,
     logo: "/logos/logo_vitib_marabu.png",
     href: "https://www.vitib.ci/",
+  },
+  {
+    id: 12,
+    logo: "/logos/logo-ansut.webp",
+    href: "https://www.ansut.ci/",
+  },
+  {
+    id: 13,
+    logo: "/logos/LogoMSCI.png",
+    href: "#",
   },
   // {
   //   id: 9,

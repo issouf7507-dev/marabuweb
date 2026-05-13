@@ -1,12 +1,16 @@
 import { NextIntlClientProvider } from "next-intl";
 import type { Metadata } from "next";
-// import { notFound } from "next/navigation";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { Toaster } from "sonner";
+
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fr" }];
 }
 
-// Fonction pour générer les métadonnées selon la langue
 export async function generateMetadata({
   params,
 }: {
@@ -17,8 +21,7 @@ export async function generateMetadata({
   let metadata;
   try {
     metadata = (await import(`../../messages/${locale}/metadata.json`)).default;
-  } catch (error) {
-    // Fallback vers le français si la traduction n'existe pas
+  } catch {
     metadata = (await import(`../../messages/fr/metadata.json`)).default;
   }
 
@@ -62,13 +65,66 @@ export default async function LocaleLayout({
   let messages;
   try {
     messages = (await import(`../../messages/${locale}/home.json`)).default;
-  } catch (error) {
-    // notFound();
+  } catch {
+    messages = (await import(`../../messages/fr/home.json`)).default;
   }
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Marabu Services",
+    url: "https://marabu.services",
+    logo: "https://marabu.services/logo.png",
+    description:
+      locale === "fr"
+        ? "Cabinet de conseil stratégique et d'intermédiation spécialisé dans l'accompagnement des entreprises en Afrique de l'Ouest."
+        : "Strategic consulting and intermediation firm specializing in supporting businesses in West Africa.",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "CI",
+      addressLocality: "Abidjan",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+2250720777000",
+      contactType: "customer service",
+      email: "contact@marabu.services",
+    },
+    sameAs: [
+      "https://www.facebook.com/marabuservices",
+      "https://www.linkedin.com/company/marabuservices",
+      "https://www.instagram.com/marabuservices/",
+      "https://x.com/marabuservices",
+      "https://www.youtube.com/@Marabuservices",
+    ],
+  };
+
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JZ18NLYGRV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JZ18NLYGRV');
+          `}
+        </Script>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+        <Toaster richColors position="top-right" />
+      </body>
+    </html>
   );
 }

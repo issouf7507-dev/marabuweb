@@ -1,15 +1,7 @@
 # www.robotstxt.org
 
-# Allow all crawlers
 User-agent: *
 Allow: /
-
-# Disallow API and thank you page
 Disallow: /api/
-Disallow: /thank-you/
 
-# Sitemap location
 Sitemap: https://marabu.services/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 10

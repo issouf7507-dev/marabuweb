@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://localhost:3000", // Change avec ton URL de prod
-  generateRobotsTxt: true, // Génère aussi robots.txt
+  siteUrl: "https://marabu.services",
+  generateRobotsTxt: false, // robots.txt géré manuellement dans /public
   sitemapSize: 5000,
 };

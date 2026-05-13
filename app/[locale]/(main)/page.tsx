@@ -1,5 +1,13 @@
 "use client";
-import { CircleChevronRight, MoveRight } from "lucide-react";
+import {
+  CircleChevronRight,
+  MoveRight,
+  User,
+  Clock,
+  Sparkles,
+  CheckCircle,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
@@ -21,31 +29,18 @@ import {
 
 import splitStringUsing from "@/utils/splitStringRegex";
 import { useEffect, useState } from "react";
-import { experience, logosSlide, servicesData, slides } from "@/data/data";
+import { logosSlide, slides } from "@/data/data";
 import Link from "next/link";
-import Load from "@/components/load";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import ContactSheet from "@/app/components/contact-sheet";
 
 export default function Home() {
   const t = useTranslations("home");
-  const t2 = useTranslations("contact");
+
+  const params = useParams();
+  const locale = (params?.locale as string) || "fr";
+  const currentLocaleData = locale === "fr" ? "fr-FR" : "en-US";
 
   // Récupérer toutes les slides traduites
   const translatedSlides = t.raw("slider") as {
@@ -62,35 +57,21 @@ export default function Home() {
     cardservices: {
       id: number;
       title: string;
+      tagline: string;
       description: string;
+      offerings: string[];
+      cta: string;
     }[];
     cta2: string;
-  };
-
-  const translatedContact = t2.raw("sheet") as {
-    heading: string;
-    subheading: string;
-    telText: string;
-    telNumber: string;
-    emailText: string;
-    email: string;
-    locationText: string;
-    location1: string;
-    location2: string;
-    subjectPlaceholder: string;
-    openingHoursText: string;
-    openingHours1: string;
-    openingHours2: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
   };
 
   const translatedCardServices = t.raw("solutions.cardservices") as {
     id: number;
     title: string;
+    tagline: string;
     description: string;
+    offerings: string[];
+    cta: string;
   }[];
 
   const translatedPartners = t.raw("partners") as {
@@ -222,6 +203,10 @@ export default function Home() {
     headingup: string;
     heading: string;
     subheading: string;
+    value1: string;
+    value2: string;
+    value3: string;
+    value4: string;
     statistics1: string;
     statistics2: string;
     statistics3: string;
@@ -235,9 +220,9 @@ export default function Home() {
     cta: string;
   };
 
-  const [isLoading, setIsLoading] = useState(true);
   const [openContact, setOpenContact] = useState(false);
   const [openYoutube, setOpenYoutube] = useState(false);
+  const [openMarabuAI, setOpenMarabuAI] = useState(false);
   const [index, setIndex] = useState(0);
 
   const currentSlide = translatedSlides[index];
@@ -245,14 +230,14 @@ export default function Home() {
   const subheadingAnimed = splitStringUsing(currentSlide?.subheading);
   const cta = currentSlide?.cta;
 
-  const fetchArticles = async () => {
+  const fetchArticlesbyMarabu = async () => {
     try {
-      // c est
       const res = await fetch(
-        "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt"
+        locale == "fr"
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?lang=en`
       );
-      const data = await res.json(); // Lire la réponse brute
-
+      const data = await res.json();
       return data;
     } catch (error) {
       console.error("Erreur lors de la récupération des articles :", error);
@@ -260,9 +245,9 @@ export default function Home() {
     }
   };
 
-  const queryArticles = useQuery({
-    queryKey: ["articles21"],
-    queryFn: fetchArticles,
+  const queryArticlesbyMarabu = useQuery({
+    queryKey: ["articlesbyMarabu", locale],
+    queryFn: fetchArticlesbyMarabu,
   });
 
   function decodeHtmlEntities(text: string) {
@@ -279,21 +264,33 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  // Afficher la modal Marabu AI après 5 secondes
   useEffect(() => {
+    const hasSeenMarabuAI = localStorage.getItem("marabuAI_seen");
+    if (hasSeenMarabuAI) return;
+
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+      setOpenMarabuAI(true);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  if (isLoading) {
-    return (
-      <div>
-        <Load />
-      </div>
-    );
-  }
+  const handleMarabuAIResponse = (wantsToTest: boolean) => {
+    // Sauvegarder le choix de l'utilisateur
+    localStorage.setItem("marabuAI_seen", "true");
+    localStorage.setItem("marabuAI_wantsToTest", wantsToTest.toString());
+    setOpenMarabuAI(false);
+
+    // Si l'utilisateur veut tester, rediriger vers la page Marabu AI
+    if (wantsToTest) {
+      // Vous pouvez rediriger vers une page dédiée ou ouvrir un formulaire
+      // window.location.href = `/marabu-ai`;
+      // Ou ouvrir un formulaire de contact avec un sujet spécifique
+      window.location.href = "https://ai.marabu.services/welcome";
+      // setOpenContact(true);
+    }
+  };
 
   return (
     <div className="w-full font-light text-gray-500">
@@ -303,9 +300,10 @@ export default function Home() {
           <div className="absolute inset-0 w-full h-full">
             <Image
               src={slides[index].image}
-              alt={slides[index].alt}
+              alt=""
+              aria-hidden="true"
               fill
-              priority // très important pour la première image
+              priority
               sizes="100vw"
               style={{ objectFit: "cover" }}
             />
@@ -441,49 +439,71 @@ export default function Home() {
                 </motion.div> */}
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-9 w-full  place-items-center mt-16">
-                {translatedCardServices.map((el, index) => (
-                  <Link
-                    href={`/solutions#${
-                      el.id === 1
-                        ? "conseil"
-                        : el.id === 2
-                        ? "services"
-                        : "intermediation"
-                    }`}
-                    key={el.id}
-                  >
-                    <motion.div
-                      className={`shadow-xl rounded-xl py-12  w-[342px] h-[480px] ${
-                        el.id == 2 ? "bg-[#689D71]" : "bg-white"
-                      }`}
-                      variants={{
-                        hidden: { y: 45, opacity: 0 },
-                        reveal: { y: 0, opacity: 1 },
-                      }}
-                      transition={{ duration: 0.5, delay: index * 0.3 }}
-                      initial="hidden"
-                      whileInView="reveal"
-                    >
-                      <h1
-                        className={`text-center text-4xl font-bold mb-9 tracking-wider ${
-                          el.id == 2 ? "text-white" : "text-[#689D71]"
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-12">
+                {translatedCardServices.map((el, index) => {
+                  const anchor = el.id === 1 ? "conseil" : el.id === 2 ? "services" : "intermediation";
+                  const isHighlighted = el.id === 2;
+                  return (
+                    <Link href={`/solutions#${anchor}`} key={el.id} className="group">
+                      <motion.div
+                        className={`rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl ${
+                          isHighlighted
+                            ? "bg-[#689D71] shadow-xl"
+                            : "bg-white shadow-lg border border-gray-100"
                         }`}
+                        variants={{ hidden: { y: 40, opacity: 0 }, reveal: { y: 0, opacity: 1 } }}
+                        transition={{ duration: 0.45, delay: index * 0.15 }}
+                        initial="hidden"
+                        whileInView="reveal"
+                        viewport={{ once: true }}
                       >
-                        {el.title}
-                      </h1>
-                      <div className="px-7">
-                        <p
-                          className={`text-center ${
-                            el.id == 2 ? "text-white" : "text-[#689D71]"
-                          }`}
-                        >
-                          {el.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </Link>
-                ))}
+                        {/* Accent top */}
+                        <div className={`h-1 ${isHighlighted ? "bg-white/30" : "bg-[#689D71]"}`} />
+
+                        <div className="p-7 flex flex-col flex-1">
+                          {/* Numéro */}
+                          <span className={`text-xs font-bold tracking-widest uppercase mb-3 ${isHighlighted ? "text-white/60" : "text-gray-300"}`}>
+                            0{el.id}
+                          </span>
+
+                          {/* Titre */}
+                          <h3 className={`text-2xl font-bold tracking-wide mb-1 ${isHighlighted ? "text-white" : "text-[#1D4851]"}`}>
+                            {el.title}
+                          </h3>
+
+                          {/* Tagline */}
+                          <p className={`text-xs font-semibold uppercase tracking-widest mb-4 ${isHighlighted ? "text-white/70" : "text-[#689D71]"}`}>
+                            {el.tagline}
+                          </p>
+
+                          {/* Description */}
+                          <p className={`text-sm leading-relaxed mb-5 ${isHighlighted ? "text-white/90" : "text-gray-500"}`}>
+                            {el.description}
+                          </p>
+
+                          {/* Séparateur */}
+                          <div className={`w-10 h-px mb-5 ${isHighlighted ? "bg-white/30" : "bg-gray-200"}`} />
+
+                          {/* Offres clés */}
+                          <ul className="space-y-2 flex-1">
+                            {el.offerings.map((item, i) => (
+                              <li key={i} className={`flex items-start gap-2 text-sm ${isHighlighted ? "text-white/90" : "text-gray-600"}`}>
+                                <span className={`mt-0.5 text-xs flex-shrink-0 font-bold ${isHighlighted ? "text-white" : "text-[#689D71]"}`}>✓</span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* CTA */}
+                          <div className={`mt-6 flex items-center gap-2 text-sm font-semibold ${isHighlighted ? "text-white" : "text-[#1D4851]"}`}>
+                            <span>{el.cta}</span>
+                            <CircleChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    </Link>
+                  );
+                })}
               </div>
 
               <div className="flex items-center justify-center w-full mt-10 ">
@@ -577,7 +597,8 @@ export default function Home() {
                         className="basis-1/2 md:basis-1/3 lg:basis-1/4"
                       >
                         <div className="p-1">
-                          <Link href={el.href as string} target="_blank">
+                          <Link href={el.href as string} target="_blank"
+                    rel="noopener noreferrer">
                             <Image
                               src={el.logo}
                               alt=""
@@ -752,7 +773,7 @@ export default function Home() {
                   </motion.div>
                 </div>
                 <div className="mt-3">
-                  <h1> {translatedUs.textdownn}</h1>
+                  <p> {translatedUs.textdownn}</p>
                 </div>
                 <div className="mt-4">
                   <Link href="/apropos">
@@ -1022,7 +1043,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients1[0].image}
                                 alt={translatedClients.clients1[0].alt}
@@ -1032,12 +1052,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients1[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients1[0].position1}
                               <br />
@@ -1062,7 +1081,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients2[0].image}
                                 alt={translatedClients.clients2[0].alt}
@@ -1072,12 +1090,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients2[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients2[0].position1}
                               <br />
@@ -1101,7 +1118,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients3[0].image}
                                 alt={translatedClients.clients3[0].alt}
@@ -1111,12 +1127,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients3[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients3[0].position1}
                               <br />
@@ -1137,7 +1152,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients4[0].image}
                                 alt={translatedClients.clients4[0].alt}
@@ -1147,12 +1161,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients4[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients4[0].position1}
                               <br />
@@ -1174,7 +1187,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients5[0].image}
                                 alt={translatedClients.clients5[0].alt}
@@ -1184,12 +1196,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients5[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients5[0].position1}
                               <br />
@@ -1210,7 +1221,6 @@ export default function Home() {
                           </div>
 
                           <div className="text-center">
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients6[0].image}
                                 alt={translatedClients.clients6[0].alt}
@@ -1220,12 +1230,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients6[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients6[0].position1}
                               <br />
@@ -1245,7 +1254,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients7[0].image}
                                 alt={translatedClients.clients7[0].alt}
@@ -1255,12 +1263,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients7[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients7[0].position1}
                               <br />
@@ -1280,7 +1287,6 @@ export default function Home() {
 
                           <div className="text-center">
                             {/* <span className="w-10 h-10 bg-amber-100 rounded-full block"></span> */}
-                            <Link href="/">
                               <Image
                                 src={translatedClients.clients8[0].image}
                                 alt={translatedClients.clients8[0].alt}
@@ -1290,12 +1296,11 @@ export default function Home() {
                                 loading="lazy"
                                 quality={85}
                               />
-                            </Link>
                           </div>
                           <div className="text-center">
-                            <h1 className="font-bold ">
+                            <p className="font-bold">
                               {translatedClients.clients8[0].name}
-                            </h1>
+                            </p>
                             <p className="text-xs">
                               {translatedClients.clients8[0].position1}
                               <br />
@@ -1321,36 +1326,10 @@ export default function Home() {
 
       {/* Notre Croissance  */}
       <section className="py-20 bg-[#1D4851] relative overflow-hidden">
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute left-0 -top-16 z-40"
-        />
-
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute right-0 -top-16 z-40"
-        />
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute right-72 -bottom-16 z-40 rotate-180"
-        />
-
-        <Image
-          src="/icons/line1.svg"
-          alt="line1"
-          width={1000}
-          height={1000}
-          className="object-contain absolute -left-96 -bottom-16 z-40 -rotate-90"
-        />
+        <span aria-hidden="true" className="absolute left-0 -top-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat" />
+        <span aria-hidden="true" className="absolute right-0 -top-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat" />
+        <span aria-hidden="true" className="absolute right-72 -bottom-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat rotate-180" />
+        <span aria-hidden="true" className="absolute -left-96 -bottom-16 z-40 w-[1000px] h-[1000px] bg-[url('/icons/line1.svg')] bg-contain bg-no-repeat -rotate-90" />
         <div className=" px-10   lg:max-w-[1350px]  w-full mx-auto ">
           <div className="text-start ">
             <motion.h2
@@ -1404,7 +1383,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +20
+                {translatedGrowth.value1}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1430,7 +1409,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="text-white text-4xl lg:text-6xl font-bold "
               >
-                +100
+                {translatedGrowth.value2}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1456,7 +1435,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.9 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +30
+                {translatedGrowth.value3}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1482,7 +1461,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="text-white text-4xl lg:text-6xl font-bold"
               >
-                +45
+                {translatedGrowth.value4}
               </motion.h1>
               <motion.p
                 variants={{
@@ -1501,10 +1480,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MAGAZINE SECTION   */}
+      {/* MAGAZINE SECTION - Style Moderne */}
       <section className="py-20">
-        <div className=" px-10 lg:max-w-[1350px]  w-full mx-auto ">
-          <div className="text-center">
+        <div className="px-6 md:px-10 lg:max-w-[1350px] w-full mx-auto">
+          <div className="text-center mb-16">
             <motion.h2
               variants={{
                 hidden: { y: 45, opacity: 0 },
@@ -1513,7 +1492,7 @@ export default function Home() {
               initial="hidden"
               whileInView="reveal"
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="uppercase"
+              className="uppercase text-sm tracking-widest text-gray-500 mb-4"
             >
               {translatedMagazine.headingup}
             </motion.h2>
@@ -1525,7 +1504,7 @@ export default function Home() {
               initial="hidden"
               whileInView="reveal"
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-3xl font-semibold text-[#1D4851] tracking-wider"
+              className="text-4xl md:text-5xl font-bold text-[#1D4851] tracking-tight mb-6"
             >
               {translatedMagazine.heading}
             </motion.h1>
@@ -1538,282 +1517,360 @@ export default function Home() {
               initial="hidden"
               whileInView="reveal"
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="mt-5 font-medium italic text-gray-400"
+              className="max-w-2xl mx-auto text-lg font-light text-gray-500 leading-relaxed"
             >
               {translatedMagazine.subheading}
             </motion.p>
           </div>
 
-          <div className="mt-10">
-            <div
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-16 
-            "
-            >
-              {queryArticles?.data &&
-                queryArticles?.data.slice(0, 3)?.map((el: any, idx: number) => (
-                  <div className="bg-white shadow " key={idx}>
-                    <Link
-                      href={`/actualites/${el?.id}`}
-                      className="cursor-pointer"
-                    >
-                      <div className="flex flex-col h-full">
-                        <div className="h-[380px] relative">
-                          <Image
-                            src={el?.acf?.large_image}
-                            alt=""
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+          {queryArticlesbyMarabu?.data &&
+          queryArticlesbyMarabu?.data?.articles &&
+          queryArticlesbyMarabu?.data?.articles.length > 0 ? (
+            <div className="mt-10">
+              {/* Section Hero - Grand article + 2 petits */}
+              <div className="grid lg:grid-cols-3 gap-6 mb-12">
+                {/* Grand article à gauche */}
+                {queryArticlesbyMarabu.data.articles[0] && (
+                  <Link
+                    href={`/actualites/${queryArticlesbyMarabu.data.articles[0]?.id}`}
+                    className="lg:col-span-2 group"
+                  >
+                    <article className="relative h-[600px] rounded-lg overflow-hidden">
+                      <Image
+                        src={
+                          queryArticlesbyMarabu.data.articles[0]?.featuredImage
+                        }
+                        alt={
+                          decodeHtmlEntities(
+                            queryArticlesbyMarabu.data.articles[0]?.title
+                          ) || "Article image"
+                        }
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      {/* Overlay sombre */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
-                        <div className="flex-1  flex flex-col justify-between">
-                          <div className="px-4 mt-4 pb-3.5">
-                            <h2 className="text-xs">
-                              {new Date(el?.date).toLocaleDateString("fr-FR", {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric",
-                              })}
-                            </h2>
-                            <h1 className="text-[#689D71] font-semibold">
-                              {/* {el?.title?.rendered} */}
-                              {decodeHtmlEntities(el?.title?.rendered)}
-                            </h1>
-                            <p className="text-sm">{el.desc}</p>
-                          </div>
-                          <div className="bg-[#689D71] px-4 flex items-center justify-between">
-                            <span className="text-sm text-white block">
-                              EN SAVOIR PLUS
-                            </span>
-                            <div>
-                              <MoveRight className="text-white" />
-                            </div>
-                          </div>
+                      {/* Badge jaune */}
+                      <div className="absolute top-4 left-4 w-3 h-3 bg-[#ffffff] rounded-sm" />
+
+                      {/* Contenu */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8">
+                        <div className="flex items-center gap-3 mb-4 text-white/90 text-xs uppercase tracking-wider">
+                          <User className="w-4 h-4" />
+                          <span>MARABU</span>
+                          <span>•</span>
+                          <span>
+                            {new Date(
+                              queryArticlesbyMarabu.data.articles[0]
+                                ?.publishedAt ||
+                                queryArticlesbyMarabu.data.articles[0]
+                                  ?.createdAt
+                            ).toLocaleDateString(currentLocaleData, {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            })}
+                          </span>
                         </div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 line-clamp-3 group-hover:text-[#FFD700] transition-colors">
+                          {decodeHtmlEntities(
+                            queryArticlesbyMarabu.data.articles[0]?.title
+                          )}
+                        </h2>
                       </div>
-                    </Link>
-                  </div>
-                ))}
-            </div>
-          </div>
+                    </article>
+                  </Link>
+                )}
 
-          <div className="mt-4 flex items-center justify-center">
+                {/* 2 petits articles à droite */}
+                <div className="space-y-6">
+                  {queryArticlesbyMarabu.data.articles
+                    .slice(1, 3)
+                    .map((el: any, idx: number) => (
+                      <Link
+                        href={`/actualites/${el?.id}`}
+                        key={el?.id || idx}
+                        className="group block"
+                      >
+                        <article className="relative h-[290px] rounded-lg overflow-hidden">
+                          <Image
+                            src={el?.featuredImage}
+                            alt={
+                              decodeHtmlEntities(el?.title) || "Article image"
+                            }
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                          {/* Overlay sombre */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+
+                          {/* Contenu */}
+                          <div className="absolute bottom-0 left-0 right-0 p-6">
+                            <div className="flex items-center gap-2 mb-3 text-white/90 text-xs uppercase tracking-wider">
+                              <User className="w-3 h-3" />
+                              <span>MARABU</span>
+                              <span>•</span>
+                              <span>
+                                {new Date(
+                                  el.publishedAt || el.createdAt
+                                ).toLocaleDateString(currentLocaleData, {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                })}
+                              </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white line-clamp-2 group-hover:text-[#FFD700] transition-colors">
+                              {decodeHtmlEntities(el?.title)}
+                            </h3>
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+
+              {/* Grille d'articles secondaires (si plus de 3 articles) */}
+              {queryArticlesbyMarabu.data.articles.length > 3 && (
+                <div className="grid md:grid-cols-3 gap-6">
+                  {queryArticlesbyMarabu.data.articles
+                    .slice(3, 6)
+                    .map((el: any, idx: number) => (
+                      <Link
+                        href={`/actualites/${el?.id}`}
+                        key={el?.id || idx}
+                        className="group"
+                      >
+                        <article className="relative h-[350px] rounded-lg overflow-hidden">
+                          <Image
+                            src={el?.featuredImage}
+                            alt={
+                              decodeHtmlEntities(el?.title) || "Article image"
+                            }
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700 grayscale group-hover:grayscale-0"
+                          />
+                          {/* Overlay sombre */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+
+                          {/* Badge jaune */}
+                          <div className="absolute top-4 left-4 w-3 h-3 bg-[#FFD700] rounded-sm" />
+
+                          {/* Contenu */}
+                          <div className="absolute bottom-0 left-0 right-0 p-6">
+                            <div className="flex items-center gap-2 mb-3 text-white/90 text-xs uppercase tracking-wider">
+                              <User className="w-3 h-3" />
+                              <span>MARABU</span>
+                              <span>•</span>
+                              <span>
+                                {new Date(
+                                  el.publishedAt || el.createdAt
+                                ).toLocaleDateString(currentLocaleData, {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                })}
+                              </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white line-clamp-2 group-hover:text-[#FFD700] transition-colors">
+                              {decodeHtmlEntities(el?.title)}
+                            </h3>
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg font-medium">
+                Aucun article disponible pour le moment.
+              </p>
+            </div>
+          )}
+
+          {/* CTA Button modernisé */}
+          <div className="mt-12 flex items-center justify-center">
             <Link href="/actualites">
-              <motion.span
+              <motion.button
                 variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
+                  hidden: { y: 20, opacity: 0 },
+                  reveal: { y: 0, opacity: 1 },
                 }}
                 initial="hidden"
                 whileInView="reveal"
                 transition={{ duration: 0.5 }}
-                className="inline-block py-2 px-4 bg-[#689D71] mt-4 font-semibold relative z-30 cursor-pointer text-white"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#689D71] hover:bg-[#1D4851] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                {translatedMagazine.cta}
-              </motion.span>
+                <span>{translatedMagazine.cta}</span>
+                <MoveRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             </Link>
           </div>
         </div>
       </section>
 
-      <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-[100vw] h-[100vh] lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
-          <SheetHeader>
-            <SheetTitle className="text-center">
-              {translatedContact.heading}
-            </SheetTitle>
-            <SheetDescription className="text-center">
-              {translatedContact.subheading}
-            </SheetDescription>
-          </SheetHeader>
+      {/* Modal Marabu AI */}
+      <Dialog open={openMarabuAI} onOpenChange={setOpenMarabuAI}>
+        <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-[#1D4851]  border-none">
+          <div className="relative">
+            <button
+              onClick={() => handleMarabuAIResponse(false)}
+              aria-label={locale === "fr" ? "Fermer" : "Close"}
+              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
 
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 left-0"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 right-0 rotate-90"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={300}
-            height={300}
-            className="absolute top-0 right-[30%] -rotate-45 -translate-x-1/2"
-          />
-
-          <div className="mx-10">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/phoneicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.telText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    href="tel:+2250720777000"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.telNumber}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/sendicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.emailText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* <p className="text-center text-[14px]">
-                   */}
-                  <Link
-                    href="mailto:contact@marabu.services"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.email}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/localisationicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.locationText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                    href="https://www.google.ci/maps/place/Marabu/@5.3438891,-4.0126815,19z/data=!4m14!1m7!3m6!1s0xfc1eb0c78647443:0xb23bdc45be977419!2sPharmacie+du+Lyc%C3%A9e+Technique!8m2!3d5.3442276!4d-4.0114595!16s%2Fg%2F113fj5416!3m5!1s0xfc1eb65b2414379:0x1a1b717d3b74873f!8m2!3d5.3442708!4d-4.0120909!16s%2Fg%2F11y1xrw2cv?hl=fr&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                  >
-                    {translatedContact.location1} <br />
-                    {translatedContact.location2}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/horlogeicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.openingHoursText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours1}
-                  </p>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours2}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="w-full h-full mt-24">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4746952966943!2d-4.014665825016398!3d5.344270794634366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb65b2414379%3A0x1a1b717d3b74873f!2sMarabu!5e0!3m2!1sen!2sci!4v1744293171315!5m2!1sen!2sci"
-                    width="100%"
-                    height="450"
-                    style={{ border: "0" }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div>
-                  <div className="flex flex-col gap-4 px-4  relative  z-30 ">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
+            {/* Contenu de la modal */}
+            <div className="p-8 md:p-12 text-white">
+              {/* Icône AI avec animation */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.5, type: "spring" }}
+                className="flex justify-center mb-6"
+              >
+                <div className="relative">
+                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <Sparkles className="w-10 h-10 text-white" />
                   </div>
-                  <div className="px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#ffffff] rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold text-[#1D4851]">AI</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Titre */}
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-3xl md:text-4xl font-bold text-center mb-4"
+              >
+                {locale === "fr" ? "Découvrez Marabu AI" : "Discover Marabu AI"}
+              </motion.h2>
+
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-center text-white/90 mb-6 leading-relaxed"
+              >
+                {locale === "fr"
+                  ? "Notre intelligence artificielle révolutionnaire qui rédige des rapports détaillés et professionnels sur n'importe quel sujet que vous souhaitez aborder."
+                  : "Our revolutionary artificial intelligence that writes detailed and professional reports on any topic you want to address."}
+              </motion.p>
+
+              {/* Fonctionnalités */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="space-y-3 mb-8"
+              >
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#ffffff] flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-white/90">
+                    {locale === "fr"
+                      ? "Rapports détaillés et structurés"
+                      : "Detailed and structured reports"}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#ffffff] flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-white/90">
+                    {locale === "fr"
+                      ? "Analyse approfondie de votre sujet"
+                      : "In-depth analysis of your topic"}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#ffffff] flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-white/90">
+                    {locale === "fr"
+                      ? "Rédaction professionnelle et précise"
+                      : "Professional and precise writing"}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Boutons d'action */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <button
+                  onClick={() => handleMarabuAIResponse(true)}
+                  className="flex-1 bg-white text-[#1D4851] font-semibold py-3 px-6 rounded-lg hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  {locale === "fr"
+                    ? "Oui, je veux tester"
+                    : "Yes, I want to try"}
+                </button>
+                <button
+                  onClick={() => handleMarabuAIResponse(false)}
+                  className="flex-1 bg-white/10 backdrop-blur-sm text-white font-semibold py-3 px-6 rounded-lg hover:bg-white/20 transition-all duration-300 border border-white/30"
+                >
+                  {locale === "fr" ? "Peut-être plus tard" : "Maybe later"}
+                </button>
+              </motion.div>
+
+              {/* Note discrète */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="text-xs text-white/60 text-center mt-6"
+              >
+                {locale === "fr"
+                  ? "Vous pourrez toujours y accéder plus tard"
+                  : "You can always access it later"}
+              </motion.p>
             </div>
 
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={300}
-              height={300}
-              className="absolute -bottom-10 right-[30%] -rotate-45 -translate-x-1/2"
-            />
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-10 right-0 "
-            />
-
-            <Image
-              src="/image/Ellipse.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-80 left-0 rotate-180"
-            />
+            {/* Décoration en bas */}
+            <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#1D4851]"></div>
           </div>
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
+
+      <ContactSheet open={openContact} onOpenChange={setOpenContact} />
+
+      {/* Bouton flottant Marabu AI */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1, type: "spring", stiffness: 200 }}
+        onClick={() => {
+          const wantsToTest = localStorage.getItem("marabuAI_wantsToTest") === "true";
+          if (wantsToTest) {
+            window.location.href = "https://ai.marabu.services/welcome";
+          } else {
+            setOpenMarabuAI(true);
+          }
+        }}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#1D4851] text-white rounded-full shadow-2xl flex items-center justify-center group transition-all duration-300 hover:scale-110"
+        aria-label={locale === "fr" ? "Ouvrir Marabu AI" : "Open Marabu AI"}
+      >
+        <div className="relative">
+          <Sparkles className="w-7 h-7 group-hover:rotate-12 transition-transform duration-300" />
+          <div className="absolute -top-3 -right-3 w-4 h-4 bg-[#fffff] rounded-full flex items-center justify-center">
+            <span className="text-[8px] font-bold text-[#1D4851]">AI</span>
+          </div>
+        </div>
+
+        {/* Tooltip */}
+        <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-[#1D4851] text-white text-sm px-4 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+          {locale === "fr" ? "Marabu AI" : "Marabu AI"}
+          <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#1D4851]"></div>
+        </div>
+      </motion.button>
     </div>
   );
 }

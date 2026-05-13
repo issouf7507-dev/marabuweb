@@ -1,43 +1,31 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import DOMPurify from "isomorphic-dompurify";
+import ContactSheet from "@/app/components/contact-sheet";
 
 import Load from "@/components/load";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
+import { User, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Page = () => {
-  const pathname = usePathname();
   const router = useRouter();
-  const id = pathname.split("/").pop();
+  const params = useParams();
+  const locale = (params?.locale as string) || "fr";
+  const id = params?.slug as string | undefined;
   const [currentArticleIndex, setCurrentArticleIndex] = React.useState(0);
   const [openContact, setOpenContact] = useState(false);
-  const articlesPerPage = 3;
+
+  const currentLocaleData = locale === "fr" ? "fr-FR" : "en-US";
+  // const currentLocale = params?.locale ?? "fr"; // fallback au français
 
   const t = useTranslations("blog");
 
   const t2 = useTranslations("home");
-  const t3 = useTranslations("contact");
 
   const tabs = t.raw("tabsarticles") as {
     tabs: { id: string; label: string }[];
@@ -56,304 +44,331 @@ const Page = () => {
     cta: string;
   };
 
-  const translatedContact = t3.raw("sheet") as {
-    heading: string;
-    subheading: string;
-    telText: string;
-    telNumber: string;
-    emailText: string;
-    email: string;
-    locationText: string;
-    location1: string;
-    location2: string;
-    subjectPlaceholder: string;
-    openingHoursText: string;
-    openingHours1: string;
-    openingHours2: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
-  };
-
-  const fetchArticles = async () => {
+  const fetchArticlesbyMarabuById = async (id: string) => {
     try {
       const res = await fetch(
-        "https://main.marabu.services/wp-json/wp/v2/articles?acf_format=standard&_fields=id,title,acf,date,date_gmt"
+        locale == "fr"
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles/${id}?lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles/${id}?lang=en`
       );
-      const data = await res.json(); // Lire la réponse brute
-
+      const data = await res.json();
       return data;
     } catch (error) {
       console.error("Erreur lors de la récupération des articles :", error);
-      return [];
+      return null;
     }
   };
 
-  const fetchArticlesById = async (id: number) => {
+  const fetchArticlesbyMarabu = async () => {
     try {
       const res = await fetch(
-        `https://main.marabu.services/wp-json/wp/v2/articles/${id}?acf_format=standard&_fields=id,title,acf,date,date_gmt`
+        locale == "fr"
+          ? `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=20&lang=fr`
+          : `${process.env.NEXT_PUBLIC_BACK_END_URL_API}/api/articles?page=1&limit=20&lang=en`
       );
-      const data = await res.json(); // Lire la réponse brute
-
+      const data = await res.json();
       return data;
     } catch (error) {
       console.error("Erreur lors de la récupération des articles :", error);
-      return [];
+      return { articles: [], pagination: null };
     }
   };
 
   function decodeHtmlEntities(text: string) {
+    if (typeof window === "undefined") return text;
     const textarea = document.createElement("textarea");
     textarea.innerHTML = text;
     return textarea.value;
   }
 
-  const queryArticlesById = useQuery({
-    queryKey: ["articlesbyid"],
-    queryFn: () => fetchArticlesById(parseInt(id ?? "0") as number),
+  const queryArticlesbyMarabuById = useQuery({
+    queryKey: ["articlesbyidmarabu", id, locale],
+    queryFn: () => fetchArticlesbyMarabuById(id ?? ""),
+    enabled: !!id,
   });
 
   const queryArticles = useQuery({
-    queryKey: ["articles2"],
-    queryFn: fetchArticles,
+    queryKey: ["articlesbyMarabuList", locale],
+    queryFn: fetchArticlesbyMarabu,
   });
 
-  const totalPages = Math.ceil(
-    (queryArticles.data?.length || 0) / articlesPerPage
-  );
+  const articles = queryArticles.data?.articles || [];
+  const totalPages = articles.length;
 
   const handleNextArticle = () => {
-    if (
-      queryArticles.data &&
-      currentArticleIndex < queryArticles.data.length - 1
-    ) {
-      const nextArticle = queryArticles.data[currentArticleIndex + 1];
-      router.push(`/actualites/${nextArticle.id}`);
+    if (articles && currentArticleIndex < articles.length - 1) {
+      const nextArticle = articles[currentArticleIndex + 1];
+      router.push(`/${locale}/actualites/${nextArticle.id}`);
     }
   };
 
   const handlePrevArticle = () => {
-    if (queryArticles.data && currentArticleIndex > 0) {
-      const prevArticle = queryArticles.data[currentArticleIndex - 1];
-      router.push(`/actualites/${prevArticle.id}`);
+    if (articles && currentArticleIndex > 0) {
+      const prevArticle = articles[currentArticleIndex - 1];
+      router.push(`/${locale}/actualites/${prevArticle.id}`);
     }
   };
 
   // Trouver l'index de l'article courant dans la liste complète
-  React.useEffect(() => {
-    if (queryArticles.data && id) {
-      const index = queryArticles.data.findIndex(
-        (article: any) => article.id === parseInt(id)
-      );
+  useEffect(() => {
+    if (articles && id) {
+      const index = articles.findIndex((article: any) => article.id === id);
       if (index !== -1) {
         setCurrentArticleIndex(index);
       }
     }
-  }, [queryArticles.data, id]);
+  }, [articles, id, locale]);
 
-  if (queryArticlesById.isPending) {
+  if (queryArticlesbyMarabuById.isPending) {
     return <Load />;
+  }
+
+  if (queryArticlesbyMarabuById.isError || !queryArticlesbyMarabuById.data) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
+        <h1 className="text-4xl font-bold text-[#1D4851] mb-4">
+          {locale === "fr" ? "Article introuvable" : "Article not found"}
+        </h1>
+        <p className="text-gray-500 mb-8">
+          {locale === "fr"
+            ? "Cet article n'existe pas ou a été supprimé."
+            : "This article does not exist or has been deleted."}
+        </p>
+        <a
+          href={`/${locale}/actualites`}
+          className="px-6 py-3 bg-[#689D71] text-white font-semibold rounded-lg hover:bg-[#1D4851] transition-colors"
+        >
+          {locale === "fr" ? "Voir tous les articles" : "See all articles"}
+        </a>
+      </div>
+    );
   }
 
   return (
     <div className="font-light text-gray-500">
       {/* <div className="h-40 bg-[#D9D9D9]"></div> */}
-      <section className="w-full ">
+      <section className="w-full relative">
         <motion.div
-          className="w-full h-screen bg-no-repeat bg-cover bg-center flex items-center relative overflow-hidden"
+          className="w-full h-screen bg-no-repeat bg-cover bg-center flex items-end relative overflow-hidden"
           style={{
-            backgroundImage: `url(${queryArticlesById.data?.acf?.large_image})`,
+            backgroundImage: `url(${queryArticlesbyMarabuById.data?.featuredImage})`,
           }}
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-[#00000080] z-10"></div>
-          <div className="px-10  lg:max-w-[1450px] w-full mx-auto flex justify-between items-center">
-            <div>
-              <motion.h1 className="text-4xl md:text-7xl text-[#EDF2D0] font-bold tracking-wider relative z-30">
+          {/* Overlay gradient moderne */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 z-10"></div>
+
+          {/* Badge jaune style magazine */}
+          <div className="absolute top-8 left-8 w-4 h-4 bg-[#FFD700] rounded-sm z-30"></div>
+
+          <div className="px-6 md:px-10 lg:max-w-[1450px] w-full mx-auto pb-16 relative z-30">
+            <div className="max-w-4xl">
+              {/* Métadonnées style magazine */}
+              <div className="flex items-center gap-3 mb-6 text-white/90 text-sm uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  <span>MARABU</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>
+                    {new Date(
+                      queryArticlesbyMarabuById.data?.publishedAt ||
+                        queryArticlesbyMarabuById.data?.createdAt
+                    ).toLocaleDateString(currentLocaleData, {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+              </div>
+
+              {/* Titre */}
+              <motion.h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold tracking-tight mb-8 leading-tight">
                 <motion.span>
-                  {decodeHtmlEntities(queryArticlesById.data?.title?.rendered)}
+                  {decodeHtmlEntities(queryArticlesbyMarabuById.data?.title)}
                 </motion.span>
               </motion.h1>
 
-              <p className="text-lg font-bold text-[#EDF2D0]  mt-4 relative z-30">
-                {new Date(queryArticlesById.data?.date).toLocaleDateString(
-                  "fr-FR",
-                  {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
+              {/* Navigation Controls modernisée */}
+              <div className="flex items-center gap-4 mt-8">
+                <button
+                  onClick={handlePrevArticle}
+                  disabled={currentArticleIndex === 0 || articles.length === 0}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 ${
+                    currentArticleIndex === 0 || articles.length === 0
+                      ? "bg-white/20 text-white/50 cursor-not-allowed"
+                      : "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 border border-white/20"
+                  }`}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                  <span className="font-semibold">{tabs.previous}</span>
+                </button>
+                <span className="text-white/80 text-sm font-medium px-4">
+                  {currentArticleIndex + 1} / {totalPages}
+                </span>
+                <button
+                  onClick={handleNextArticle}
+                  disabled={
+                    currentArticleIndex === articles.length - 1 ||
+                    articles.length === 0
                   }
-                )}
-              </p>
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="flex gap-4 z-30">
-              <button
-                onClick={handlePrevArticle}
-                disabled={currentArticleIndex === 0}
-                className={`p-4 rounded-full ${
-                  currentArticleIndex === 0
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 ${
+                    currentArticleIndex === articles.length - 1 ||
+                    articles.length === 0
+                      ? "bg-white/20 text-white/50 cursor-not-allowed"
+                      : "bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 border border-white/20"
+                  }`}
                 >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                onClick={handleNextArticle}
-                disabled={
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                }
-                className={`p-4 rounded-full ${
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
+                  <span className="font-semibold">{tabs.next}</span>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
       </section>
 
-      <section className="grid lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto z-40 relative py-10">
-        <div className="lg:col-span-3 ">
-          <div className="px-4 lg:px-10  w-full mx-auto z-40 relative py-10 border border-[#1b8398] ">
-            <div
-              className="text-lg text-[#1D4851] h-svh overflow-auto"
-              dangerouslySetInnerHTML={{
-                __html:
-                  queryArticlesById.data &&
-                  queryArticlesById.data?.acf?.sammury,
-              }}
-            />
-          </div>
-          <div className="mt-4 flex items-center justify-center">
+      <section className="grid lg:grid-cols-4 lg:max-w-[1400px] w-full mx-auto z-40 relative py-12 px-6 md:px-10">
+        <div className="lg:col-span-3">
+          <article className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="px-6 md:px-12 py-10 md:py-16">
+              <div
+                className="prose prose-lg max-w-none text-[#1D4851] leading-relaxed
+                  prose-headings:text-[#1D4851] prose-headings:font-bold
+                  prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                  prose-p:text-lg prose-p:leading-8 prose-p:mb-6
+                  prose-a:text-[#689D71] prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-[#1D4851] prose-strong:font-semibold
+                  prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-6
+                  prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-6
+                  prose-li:mb-2 prose-li:text-lg
+                  prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
+                  prose-blockquote:border-l-4 prose-blockquote:border-[#689D71] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
+                  prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                  prose-pre:bg-gray-900 prose-pre:text-gray-100"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(
+                    queryArticlesbyMarabuById.data?.content ?? ""
+                  ),
+                }}
+              />
+            </div>
+          </article>
+
+          {/* CTA Button modernisé */}
+          <div className="mt-8 flex items-center justify-center">
             <Link href="/solutions">
-              <motion.span
+              <motion.button
                 variants={{
-                  hidden: { x: 45, opacity: 0 },
-                  reveal: { x: 0, opacity: 1 },
+                  hidden: { y: 20, opacity: 0 },
+                  reveal: { y: 0, opacity: 1 },
                 }}
                 initial="hidden"
                 whileInView="reveal"
                 transition={{ duration: 0.5 }}
-                className="inline-block py-2 px-10 bg-[#689D71] mt-4 font-semibold relative z-30 cursor-pointer text-white"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#689D71] hover:bg-[#1D4851] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                {tabs.cta2}
-              </motion.span>
+                <span>{tabs.cta2}</span>
+                <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+              </motion.button>
             </Link>
           </div>
         </div>
 
-        <div className="mt-10 lg:mt-0 lg:col-span-1 px-4  w-full">
+        <div className="mt-10 lg:mt-0 lg:col-span-1 px-4 w-full">
           <div className="sticky top-24 w-full">
-            <h2 className="text-xl font-semibold text-[#1D4851] mb-6">
-              {tabs.recent}
-            </h2>
-            <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
-              {/* {currentArticles?.map((article: any) => ( */}
-              {queryArticles.data?.slice(0, 3).map((article: any) => (
-                <Link
-                  href={`/actualites/${article.id}`}
-                  key={article.id}
-                  className="block group w-full"
-                >
-                  <div className="relative h-40 mb-2 overflow-hidden rounded-lg w-full">
-                    <Image
-                      src={article.acf?.large_image || "/placeholder.jpg"}
-                      alt={article.title?.rendered}
-                      className="object-cover  transition-transform duration-300 group-hover:scale-110"
-                      fill
-                    />
-                  </div>
-                  <h3 className="text-[#1D4851] font-medium group-hover:text-[#689D71] transition-colors">
-                    {decodeHtmlEntities(article.title?.rendered)}
-                  </h3>
-                  <p className="text-sm text-gray-950 mt-1">
-                    {new Date(article.date).toLocaleDateString("fr-FR", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </p>
-                </Link>
-              ))}
+            {/* Header de la sidebar */}
+            <div className="mb-8 pb-4 border-b-2 border-[#689D71]">
+              <h2 className="text-2xl font-bold text-[#1D4851] uppercase tracking-wider">
+                {tabs.recent}
+              </h2>
             </div>
 
-            {/* Pagination Controls */}
-            <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
-              <button
-                onClick={handlePrevArticle}
-                disabled={currentArticleIndex === 0}
-                className={`px-4 py-2 rounded-md ${
-                  currentArticleIndex === 0
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                {tabs.previous}
-              </button>
-              <span className="text-[#1D4851]">
-                Page {currentArticleIndex + 1} sur {totalPages}
-              </span>
-              <button
-                onClick={handleNextArticle}
-                disabled={
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                }
-                className={`px-4 py-2 rounded-md ${
-                  currentArticleIndex === (queryArticles.data?.length || 0) - 1
-                    ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    : "bg-[#689D71] text-white hover:bg-[#1D4851]"
-                }`}
-              >
-                {tabs.next}
-              </button>
+            {/* Articles récents modernisés */}
+            <div className="space-y-6 max-h-[calc(100vh-300px)] overflow-y-auto pr-2">
+              {articles
+                .filter((article: any) => article.id !== id)
+                .slice(0, 3)
+                .map((article: any, idx: number) => (
+                  <Link
+                    href={`/actualites/${article.id}`}
+                    key={article.id}
+                    className="block group w-full"
+                  >
+                    <article className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-[#689D71]/50 hover:shadow-lg transition-all duration-300">
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={article.featuredImage || "/placeholder.jpg"}
+                          alt={decodeHtmlEntities(article.title)}
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          fill
+                        />
+                        {/* Overlay au survol */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {/* Badge jaune sur le premier */}
+                        {idx === 0 && (
+                          <div className="absolute top-3 left-3 w-3 h-3 bg-[#FFD700] rounded-sm z-10" />
+                        )}
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-base font-bold text-[#1D4851] mb-2 group-hover:text-[#689D71] transition-colors line-clamp-2">
+                          {decodeHtmlEntities(article.title)}
+                        </h3>
+                        <div className="flex items-center gap-2 text-xs text-gray-500 uppercase tracking-wider">
+                          <Clock className="w-3 h-3" />
+                          <span>
+                            {new Date(
+                              article.publishedAt || article.createdAt
+                            ).toLocaleDateString("fr-FR", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                ))}
             </div>
+
+            {/* Navigation Controls modernisée */}
+            {articles.length > 0 && (
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between gap-3">
+                  <button
+                    onClick={handlePrevArticle}
+                    disabled={currentArticleIndex === 0}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-semibold ${
+                      currentArticleIndex === 0
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "bg-[#689D71] text-white hover:bg-[#1D4851] hover:shadow-md"
+                    }`}
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>{tabs.previous}</span>
+                  </button>
+                  <span className="text-[#1D4851] font-semibold text-sm px-3">
+                    {currentArticleIndex + 1} / {totalPages}
+                  </span>
+                  <button
+                    onClick={handleNextArticle}
+                    disabled={currentArticleIndex === articles.length - 1}
+                    className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all duration-300 text-sm font-semibold ${
+                      currentArticleIndex === articles.length - 1
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "bg-[#689D71] text-white hover:bg-[#1D4851] hover:shadow-md"
+                    }`}
+                  >
+                    <span>{tabs.next}</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
-
-      <section className="px-10  w-full mx-auto z-40 relative  py-10">
-        <div className="grid grid-cols-2 gap-10">
-          <div
-            className="text-sm text-[#1D4851]"
-            dangerouslySetInnerHTML={{
-              __html:
-                // decodeHtmlEntities(
-                queryArticlesById.data &&
-                queryArticlesById.data?.acf?.sammury_1,
-              // ),
-            }}
-          />
         </div>
       </section>
 
@@ -420,206 +435,10 @@ const Page = () => {
         </div>
       </section>
 
-      <Sheet open={openContact} onOpenChange={setOpenContact}>
-        <SheetContent className="w-[100vw] h-[100vh] lg:w-3/4 py-8 overflow-y-auto overflow-x-hidden">
-          <SheetHeader>
-            <SheetTitle className="text-center">
-              {translatedContact.heading}
-            </SheetTitle>
-            <SheetDescription className="text-center">
-              {translatedContact.subheading}
-            </SheetDescription>
-          </SheetHeader>
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 left-0"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={400}
-            height={400}
-            className="absolute top-0 right-0 rotate-90"
-          />
-
-          <Image
-            src="/image/coris.png"
-            alt=""
-            width={300}
-            height={300}
-            className="absolute top-0 right-[30%] -rotate-45 -translate-x-1/2"
-          />
-
-          <div className="mx-10">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 ">
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/phoneicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.telText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    href="tel:+2250720777000"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.telNumber}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image width={24} height={24} src="/sendicon.png" alt="" />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.emailText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {/* <p className="text-center text-[14px]">
-                   */}
-                  <Link
-                    href="mailto:contact@marabu.services"
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                  >
-                    {translatedContact.email}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card className="relative z-30">
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/localisationicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.locationText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link
-                    className="text-center text-[14px] block hover:text-[#1D4851] transition-colors cursor-pointer font-semibold"
-                    href="https://www.google.ci/maps/place/Marabu/@5.3438891,-4.0126815,19z/data=!4m14!1m7!3m6!1s0xfc1eb0c78647443:0xb23bdc45be977419!2sPharmacie+du+Lyc%C3%A9e+Technique!8m2!3d5.3442276!4d-4.0114595!16s%2Fg%2F113fj5416!3m5!1s0xfc1eb65b2414379:0x1a1b717d3b74873f!8m2!3d5.3442708!4d-4.0120909!16s%2Fg%2F11y1xrw2cv?hl=fr&entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                  >
-                    {translatedContact.location1} <br />
-                    {translatedContact.location2}
-                  </Link>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex items-center justify-center flex-col">
-                  <CardTitle className="h-10">
-                    <Image
-                      width={24}
-                      height={24}
-                      src="/horlogeicon.png"
-                      alt=""
-                    />
-                  </CardTitle>
-                  <CardDescription className="text-center text-[16px] font-bold text-[#1D4851]">
-                    {translatedContact.openingHoursText}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours1}
-                  </p>
-                  <p className="text-center text-[14px]">
-                    {translatedContact.openingHours2}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="w-full h-full mt-24">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4746952966943!2d-4.014665825016398!3d5.344270794634366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb65b2414379%3A0x1a1b717d3b74873f!2sMarabu!5e0!3m2!1sen!2sci!4v1744293171315!5m2!1sen!2sci"
-                    width="100%"
-                    height="450"
-                    style={{ border: "0" }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
-                <div>
-                  <div className="flex flex-col gap-4 px-4">
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.namePlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="email"
-                      placeholder={translatedContact.emailPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={translatedContact.subjectPlaceholder}
-                      className="w-full h-12"
-                    />
-                    <Textarea
-                      placeholder={translatedContact.messagePlaceholder}
-                      // rows={9}
-                      className="resize-none h-48"
-
-                      // maxLength={1000}
-                    />
-                  </div>
-                  <div className="px-4 mt-8 flex items-end ">
-                    <Button className=" h-8 rounded-full hover:bg-[#1D4851] hover:text-white cursor-pointer bg-[#EDF2D0] text-[#1D4851]">
-                      {translatedContact.sendButton}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={300}
-              height={300}
-              className="absolute -bottom-10 right-[30%] -rotate-45 -translate-x-1/2"
-            />
-
-            <Image
-              src="/image/coris.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-10 right-0 "
-            />
-
-            <Image
-              src="/image/Ellipse.png"
-              alt=""
-              width={400}
-              height={400}
-              className="absolute -bottom-80 left-0 rotate-180"
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
+      <ContactSheet open={openContact} onOpenChange={setOpenContact} />
     </div>
   );
 };
 
 export default Page;
+// a

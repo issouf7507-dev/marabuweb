@@ -1,12 +1,11 @@
 import { getRequestConfig } from "next-intl/server";
+import { routing } from "../../app/i18n/routing";
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!locale) {
-    return {
-      locale: "fr",
-      messages: (await import(`../../messages/fr/home.json`)).default,
-      timeZone: "Africa/Abidjan",
-    };
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale;
+
+  if (!locale || !routing.locales.includes(locale as "fr" | "en")) {
+    locale = routing.defaultLocale;
   }
 
   return {
