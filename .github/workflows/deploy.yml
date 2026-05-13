@@ -39,7 +39,7 @@ jobs:
 
           script: |
             # Naviguer vers le répertoire du projet
-            cd /home/admin_marabu/apps/marabu_website_test
+            cd /home/admin_marabu/apps/marabu_website
 
             # Sauvegarder l'ancienne versions
             if [ -d "current" ]; then
@@ -88,7 +88,7 @@ jobs:
             pm2 save
 
             # Nettoyer les anciennes sauvegardes (garder les 5 plus récentes)
-            cd /home/admin_marabu/apps/marabu_website_test
+            cd /home/admin_marabu/apps/marabu_website
             ls -t backup-* | tail -n +6 | xargs -r rm -rf
 
             echo "Déploiement terminé avec succès!"
