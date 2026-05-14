@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+
 import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import ContactSheet from "@/app/components/contact-sheet";
