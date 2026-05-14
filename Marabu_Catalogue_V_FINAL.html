@@ -1,1095 +1,1709 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nos Solutions — Marabu Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-:root {
-  --green: #1A5C3A;
-  --green-dark: #0F3B25;
-  --green-mid: #2A7A50;
-  --green-pale: #EAF2ED;
-  --green-border: rgba(26,92,58,.15);
-  --gold: #C8892A;
-  --gold-pale: #FBF3E5;
-  --white: #FFFFFF;
-  --off-white: #F8F6F2;
-  --ink: #1A1A18;
-  --muted: #5A6B62;
-  --light: #8A9E93;
-  --border: rgba(26,92,58,.12);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--white);
-  color: var(--ink);
-  line-height: 1.6;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nos Solutions — Marabu Services</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --green: #1a5c3a;
+        --green-dark: #0f3b25;
+        --green-mid: #2a7a50;
+        --green-pale: #eaf2ed;
+        --green-border: rgba(26, 92, 58, 0.15);
+        --gold: #c8892a;
+        --gold-pale: #fbf3e5;
+        --white: #ffffff;
+        --off-white: #f8f6f2;
+        --ink: #1a1a18;
+        --muted: #5a6b62;
+        --light: #8a9e93;
+        --border: rgba(26, 92, 58, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: var(--white);
+        color: var(--ink);
+        line-height: 1.6;
+      }
 
-/* ── NAV (matches site) ── */
-.nav {
-  background: var(--ink);
-  padding: .9rem 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo {
-  font-size: 1.15rem;
-  font-weight: 900;
-  color: var(--white);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-.nav-links {
-  display: flex;
-  gap: .2rem;
-  align-items: center;
-}
-.nav-tab {
-  background: none;
-  border: none;
-  font-family: 'Montserrat', sans-serif;
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.45);
-  padding: .55rem 1.1rem;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: color .2s, background .2s;
-}
-.nav-tab:hover { color: rgba(255,255,255,.8); }
-.nav-tab.active { color: var(--white); background: rgba(255,255,255,.1); }
-.nav-cta {
-  font-family: 'Montserrat', sans-serif;
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  background: var(--green);
-  color: var(--white);
-  border: none;
-  padding: .55rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-}
+      /* ── NAV (matches site) ── */
+      .nav {
+        background: var(--ink);
+        padding: 0.9rem 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-logo {
+        font-size: 1.15rem;
+        font-weight: 900;
+        color: var(--white);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .nav-links {
+        display: flex;
+        gap: 0.2rem;
+        align-items: center;
+      }
+      .nav-tab {
+        background: none;
+        border: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        padding: 0.55rem 1.1rem;
+        cursor: pointer;
+        border-radius: 6px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .nav-tab:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .nav-tab.active {
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .nav-cta {
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: var(--green);
+        color: var(--white);
+        border: none;
+        padding: 0.55rem 1.2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        text-decoration: none;
+      }
 
-/* ── HERO ── */
-.hero {
-  background: var(--green-dark);
-  padding: 4rem 2.5rem 3.5rem;
-  position: relative;
-  overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  right: -80px; top: -80px;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  border: 60px solid rgba(255,255,255,.03);
-  pointer-events: none;
-}
-.hero-eyebrow {
-  font-size: .62rem;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-.hero-title {
-  font-size: clamp(1.9rem, 4vw, 3.2rem);
-  font-weight: 900;
-  color: var(--white);
-  line-height: 1.1;
-  text-transform: uppercase;
-  letter-spacing: .01em;
-  max-width: 600px;
-  margin-bottom: 1rem;
-}
-.hero-title em { color: var(--gold); font-style: normal; }
-.hero-sub {
-  font-size: .88rem;
-  color: rgba(255,255,255,.5);
-  font-style: italic;
-  font-family: 'Lora', serif;
-  max-width: 480px;
-  margin-bottom: 2.5rem;
-}
-.kpis {
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-}
-.kpi-val {
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--gold);
-  line-height: 1;
-  display: block;
-}
-.kpi-lbl {
-  font-size: .6rem;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: rgba(255,255,255,.35);
-  margin-top: 4px;
-  font-weight: 600;
-}
+      /* ── HERO ── */
+      .hero {
+        background: var(--green-dark);
+        padding: 4rem 2.5rem 3.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: -80px;
+        top: -80px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 60px solid rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      .hero-title {
+        font-size: clamp(1.9rem, 4vw, 3.2rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1.1;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        max-width: 600px;
+        margin-bottom: 1rem;
+      }
+      .hero-title em {
+        color: var(--gold);
+        font-style: normal;
+      }
+      .hero-sub {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-style: italic;
+        font-family: "Lora", serif;
+        max-width: 480px;
+        margin-bottom: 2.5rem;
+      }
+      .kpis {
+        display: flex;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+      }
+      .kpi-val {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--gold);
+        line-height: 1;
+        display: block;
+      }
+      .kpi-lbl {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 4px;
+        font-weight: 600;
+      }
 
-/* ── TABS BAR ── */
-.tabs-bar {
-  background: var(--green);
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 0 2.5rem;
-}
-.tabs-bar::-webkit-scrollbar { display: none; }
-.tab-btn {
-  background: none;
-  border: none;
-  font-family: 'Montserrat', sans-serif;
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.5);
-  padding: .9rem 1.6rem;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  white-space: nowrap;
-  transition: color .2s, border-color .2s;
-}
-.tab-btn:hover { color: rgba(255,255,255,.8); }
-.tab-btn.on { color: var(--white); border-bottom-color: var(--gold); }
+      /* ── TABS BAR ── */
+      .tabs-bar {
+        background: var(--green);
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 2.5rem;
+      }
+      .tabs-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-btn {
+        background: none;
+        border: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 0.9rem 1.6rem;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .tab-btn:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .tab-btn.on {
+        color: var(--white);
+        border-bottom-color: var(--gold);
+      }
 
-/* ── PANELS ── */
-.panel { display: none; }
-.panel.on { display: block; }
+      /* ── PANELS ── */
+      .panel {
+        display: none;
+      }
+      .panel.on {
+        display: block;
+      }
 
-/* ── POLE HEADER (matches site style) ── */
-.pole-header {
-  background: var(--off-white);
-  border-bottom: 1px solid var(--border);
-  padding: 3rem 2.5rem 2.5rem;
-}
-.pole-label {
-  font-size: .62rem;
-  font-weight: 700;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: .8rem;
-}
-.pole-title {
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--ink);
-  letter-spacing: .02em;
-  line-height: 1.1;
-  margin-bottom: .8rem;
-}
-.pole-desc {
-  font-size: .9rem;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  color: var(--muted);
-  max-width: 640px;
-  line-height: 1.7;
-}
+      /* ── POLE HEADER (matches site style) ── */
+      .pole-header {
+        background: var(--off-white);
+        border-bottom: 1px solid var(--border);
+        padding: 3rem 2.5rem 2.5rem;
+      }
+      .pole-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 0.8rem;
+      }
+      .pole-title {
+        font-size: clamp(1.6rem, 3vw, 2.5rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        color: var(--ink);
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
+      }
+      .pole-desc {
+        font-size: 0.9rem;
+        font-family: "Lora", serif;
+        font-style: italic;
+        color: var(--muted);
+        max-width: 640px;
+        line-height: 1.7;
+      }
 
-/* ── SECTION ── */
-.section {
-  padding: 2.5rem 2.5rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.section-title {
-  font-size: .65rem;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 1.2rem;
-  padding-bottom: .6rem;
-  border-bottom: 2px solid var(--green);
-  display: inline-block;
-}
+      /* ── SECTION ── */
+      .section {
+        padding: 2.5rem 2.5rem 0;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .section-title {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid var(--green);
+        display: inline-block;
+      }
 
-/* ── PRODUCT GRID ── */
-.prod-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  margin-bottom: 2.5rem;
-}
+      /* ── PRODUCT GRID ── */
+      .prod-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 16px;
+        margin-bottom: 2.5rem;
+      }
 
-/* ── PRODUCT CARD ── */
-.prod {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform .18s, box-shadow .18s;
-  position: relative;
-}
-.prod:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(26,92,58,.1);
-}
-.prod-accent {
-  height: 4px;
-  background: var(--green);
-}
-.prod-accent.gold { background: var(--gold); }
-.prod-accent.mid { background: var(--green-mid); }
+      /* ── PRODUCT CARD ── */
+      .prod {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+        position: relative;
+      }
+      .prod:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(26, 92, 58, 0.1);
+      }
+      .prod-accent {
+        height: 4px;
+        background: var(--green);
+      }
+      .prod-accent.gold {
+        background: var(--gold);
+      }
+      .prod-accent.mid {
+        background: var(--green-mid);
+      }
 
-.prod-body {
-  padding: 1.4rem 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.prod-ref {
-  font-size: .58rem;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--light);
-}
-.prod-name {
-  font-size: 1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: var(--green);
-  line-height: 1.2;
-}
-.prod-hook {
-  font-size: .78rem;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  color: var(--muted);
-  margin-top: -2px;
-}
-.prod-desc {
-  font-size: .84rem;
-  color: #3A4A3E;
-  line-height: 1.65;
-  font-weight: 400;
-}
+      .prod-body {
+        padding: 1.4rem 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .prod-ref {
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--light);
+      }
+      .prod-name {
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--green);
+        line-height: 1.2;
+      }
+      .prod-hook {
+        font-size: 0.78rem;
+        font-family: "Lora", serif;
+        font-style: italic;
+        color: var(--muted);
+        margin-top: -2px;
+      }
+      .prod-desc {
+        font-size: 0.84rem;
+        color: #3a4a3e;
+        line-height: 1.65;
+        font-weight: 400;
+      }
 
-/* Sub-items (like site's bullet lists) */
-.prod-subs {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-top: 2px;
-}
-.sub-item {
-  font-size: .78rem;
-  color: var(--ink);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-weight: 500;
-}
-.sub-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-  margin-top: 5px;
-}
+      /* Sub-items (like site's bullet lists) */
+      .prod-subs {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 2px;
+      }
+      .sub-item {
+        font-size: 0.78rem;
+        color: var(--ink);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-weight: 500;
+      }
+      .sub-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
 
-/* Proof block */
-.proof-block {
-  background: var(--green-pale);
-  border-left: 3px solid var(--green);
-  border-radius: 0 6px 6px 0;
-  padding: 8px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin-top: 2px;
-}
-.proof-title {
-  font-size: .6rem;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 3px;
-}
-.proof-line {
-  font-size: .74rem;
-  color: var(--muted);
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  line-height: 1.4;
-}
-.proof-dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-  margin-top: 5px;
-}
+      /* Proof block */
+      .proof-block {
+        background: var(--green-pale);
+        border-left: 3px solid var(--green);
+        border-radius: 0 6px 6px 0;
+        padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 2px;
+      }
+      .proof-title {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 3px;
+      }
+      .proof-line {
+        font-size: 0.74rem;
+        color: var(--muted);
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        line-height: 1.4;
+      }
+      .proof-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--green);
+        flex-shrink: 0;
+        margin-top: 5px;
+      }
 
-.prod-foot {
-  padding: .9rem 1.5rem 1.2rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-  background: var(--off-white);
-}
-.prod-price {
-  font-size: .78rem;
-  font-weight: 700;
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-.prod-price small { font-weight: 400; color: var(--muted); text-transform: none; }
-.prod-targets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.pt {
-  font-size: .6rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 4px;
-  background: var(--green-pale);
-  color: var(--green);
-}
+      .prod-foot {
+        padding: 0.9rem 1.5rem 1.2rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        background: var(--off-white);
+      }
+      .prod-price {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--green);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      .prod-price small {
+        font-weight: 400;
+        color: var(--muted);
+        text-transform: none;
+      }
+      .prod-targets {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .pt {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--green-pale);
+        color: var(--green);
+      }
 
-/* Badges */
-.badge {
-  position: absolute;
-  top: 14px; right: 14px;
-  font-size: .55rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-.badge-green { background: var(--green); color: #fff; }
-.badge-gold { background: var(--gold); color: #fff; }
-.badge-muted { background: #E0DDD6; color: var(--muted); }
+      /* Badges */
+      .badge {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+      .badge-green {
+        background: var(--green);
+        color: #fff;
+      }
+      .badge-gold {
+        background: var(--gold);
+        color: #fff;
+      }
+      .badge-muted {
+        background: #e0ddd6;
+        color: var(--muted);
+      }
 
-/* ── NOTICE BOX ── */
-.notice {
-  border-radius: 8px;
-  padding: 1.1rem 1.4rem;
-  font-size: .84rem;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-.notice-green {
-  background: var(--green-pale);
-  border: 1px solid var(--green-border);
-  color: var(--green-dark);
-}
-.notice strong { font-weight: 700; }
+      /* ── NOTICE BOX ── */
+      .notice {
+        border-radius: 8px;
+        padding: 1.1rem 1.4rem;
+        font-size: 0.84rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+      .notice-green {
+        background: var(--green-pale);
+        border: 1px solid var(--green-border);
+        color: var(--green-dark);
+      }
+      .notice strong {
+        font-weight: 700;
+      }
 
-/* ── WIDE 2-COL (matches site layout) ── */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 2.5rem;
-}
+      /* ── WIDE 2-COL (matches site layout) ── */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 2.5rem;
+      }
 
-/* ── CTA ── */
-.cta-wrap {
-  background: var(--green);
-  padding: 3rem 2.5rem;
-  text-align: center;
-  margin-top: 0;
-}
-.cta-title {
-  font-size: 1.8rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: var(--white);
-  margin-bottom: .6rem;
-}
-.cta-sub {
-  font-size: .88rem;
-  font-family: 'Lora', serif;
-  font-style: italic;
-  color: rgba(255,255,255,.6);
-  margin-bottom: 1.5rem;
-}
-.cta-btns {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn-white {
-  background: var(--white);
-  color: var(--green);
-  font-family: 'Montserrat', sans-serif;
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 12px 28px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-}
-.btn-outline {
-  background: transparent;
-  color: rgba(255,255,255,.7);
-  font-family: 'Montserrat', sans-serif;
-  font-size: .75rem;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 12px 28px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,.3);
-  cursor: pointer;
-  text-decoration: none;
-}
+      /* ── CTA ── */
+      .cta-wrap {
+        background: var(--green);
+        padding: 3rem 2.5rem;
+        text-align: center;
+        margin-top: 0;
+      }
+      .cta-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--white);
+        margin-bottom: 0.6rem;
+      }
+      .cta-sub {
+        font-size: 0.88rem;
+        font-family: "Lora", serif;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 1.5rem;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        background: var(--white);
+        color: var(--green);
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 12px 28px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-outline {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 12px 28px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        text-decoration: none;
+      }
 
-/* ── BOTTOM SPACER ── */
-.spacer { height: 3rem; }
+      /* ── BOTTOM SPACER ── */
+      .spacer {
+        height: 3rem;
+      }
 
-@media(max-width: 640px) {
-  .nav, .hero, .pole-header, .section, .cta-wrap { padding-left: 1.2rem; padding-right: 1.2rem; }
-  .tabs-bar { padding: 0 1.2rem; }
-  .prod-grid { grid-template-columns: 1fr; }
-  .two-col { grid-template-columns: 1fr; }
-  .hero-title { font-size: 1.7rem; }
-  .kpis { gap: 1.5rem; }
-}
-</style>
-</head>
-<body>
+      @media (max-width: 640px) {
+        .nav,
+        .hero,
+        .pole-header,
+        .section,
+        .cta-wrap {
+          padding-left: 1.2rem;
+          padding-right: 1.2rem;
+        }
+        .tabs-bar {
+          padding: 0 1.2rem;
+        }
+        .prod-grid {
+          grid-template-columns: 1fr;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+        .hero-title {
+          font-size: 1.7rem;
+        }
+        .kpis {
+          gap: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-logo">Marabu</div>
+      <div class="nav-links">
+        <button class="nav-tab">Accueil</button>
+        <button class="nav-tab on">Nos Solutions</button>
+        <button class="nav-tab">Qui sommes-nous</button>
+        <button class="nav-tab">Blog</button>
+      </div>
+      <a href="mailto:contact@marabu.services" class="nav-cta"
+        >Nous contacter →</a
+      >
+    </nav>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo">Marabu</div>
-  <div class="nav-links">
-    <button class="nav-tab">Accueil</button>
-    <button class="nav-tab on">Nos Solutions</button>
-    <button class="nav-tab">Qui sommes-nous</button>
-    <button class="nav-tab">Blog</button>
-  </div>
-  <a href="mailto:contact@marabu.services" class="nav-cta">Nous contacter →</a>
-</nav>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        Cabinet ivoirien · Conseil · Services · Intermédiation
+      </div>
+      <h1 class="hero-title">
+        Ce qu'on vous promet,<br />on l'a déjà <em>fait</em>.
+      </h1>
+      <p class="hero-sub">
+        Toutes nos offres s'appuient sur des missions réelles, déjà livrées en
+        Côte d'Ivoire et en Afrique de l'Ouest.
+      </p>
+      <div class="kpis">
+        <div>
+          <span class="kpi-val">50+</span>
+          <div class="kpi-lbl">Missions réalisées</div>
+        </div>
+        <div>
+          <span class="kpi-val">300M+</span>
+          <div class="kpi-lbl">FCFA de valeur créée</div>
+        </div>
+        <div>
+          <span class="kpi-val">15+</span>
+          <div class="kpi-lbl">Clients institutionnels</div>
+        </div>
+        <div>
+          <span class="kpi-val">3+</span>
+          <div class="kpi-lbl">Ans d'expertise CI</div>
+        </div>
+      </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">Cabinet ivoirien · Conseil · Services · Intermédiation</div>
-  <h1 class="hero-title">Ce qu'on vous promet,<br>on l'a déjà <em>fait</em>.</h1>
-  <p class="hero-sub">Toutes nos offres s'appuient sur des missions réelles, déjà livrées en Côte d'Ivoire et en Afrique de l'Ouest.</p>
-  <div class="kpis">
-    <div><span class="kpi-val">50+</span><div class="kpi-lbl">Missions réalisées</div></div>
-    <div><span class="kpi-val">300M+</span><div class="kpi-lbl">FCFA de valeur créée</div></div>
-    <div><span class="kpi-val">15+</span><div class="kpi-lbl">Clients institutionnels</div></div>
-    <div><span class="kpi-val">3+</span><div class="kpi-lbl">Ans d'expertise CI</div></div>
-  </div>
-</section>
+    <!-- TABS -->
+    <div class="tabs-bar">
+      <button class="tab-btn on" onclick="show('conseil', this)">
+        Conseil
+      </button>
+      <button class="tab-btn" onclick="show('services', this)">Services</button>
+      <button class="tab-btn" onclick="show('inter', this)">
+        Intermédiation
+      </button>
+    </div>
 
-<!-- TABS -->
-<div class="tabs-bar">
-  <button class="tab-btn on" onclick="show('conseil',this)">Conseil</button>
-  <button class="tab-btn" onclick="show('services',this)">Services</button>
-  <button class="tab-btn" onclick="show('inter',this)">Intermédiation</button>
-</div>
-
-
-<!-- ══════════════════════════════
+    <!-- ══════════════════════════════
      CONSEIL
 ══════════════════════════════ -->
-<div id="conseil" class="panel on">
-
-  <div class="pole-header">
-    <div class="pole-label">Pôle Conseil</div>
-    <h2 class="pole-title">Conseil</h2>
-    <p class="pole-desc">Chez Marabu, les missions de conseil sont pensées pour répondre concrètement à vos défis organisationnels et stratégiques. Nous vous accompagnons avec des approches personnalisées et innovantes afin de transformer durablement vos structures, optimiser vos processus et renforcer vos capacités internes.</p>
-  </div>
-
-  <div class="section">
-
-    <div class="section-title">Transformation & Innovation</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <span class="badge badge-green">Phare</span>
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 01</div>
-          <div class="prod-name">Pilotage de la performance</div>
-          <div class="prod-hook">Pour les dirigeants qui veulent voir clair</div>
-          <p class="prod-desc">Vous dirigez une organisation mais vos indicateurs ne vous disent pas ce qui se passe vraiment ? On met en place les bons KPIs, les revues de performance régulières et les tableaux de bord. Vous décidez sur des faits, pas sur des impressions.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Élaboration de stratégies de développement</div>
-            <div class="sub-item"><span class="sub-dot"></span>Mise en place de systèmes de gestion de la performance</div>
-            <div class="sub-item"><span class="sub-dot"></span>Tableaux de bord et revues stratégiques</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — Data Platform opérationnelle (45M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>CIE — optimisation et économétrie des factures (1,9M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>CADERAC — revue complète du SI (26M FCFA, 3 missions)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">À partir de 8M FCFA <small>/ mission</small></div>
-          <div class="prod-targets"><span class="pt">EPNs</span><span class="pt">DG</span><span class="pt">Groupes</span></div>
-        </div>
+    <div id="conseil" class="panel on">
+      <div class="pole-header">
+        <div class="pole-label">Pôle Conseil</div>
+        <h2 class="pole-title">Conseil</h2>
+        <p class="pole-desc">
+          Chez Marabu, les missions de conseil sont pensées pour répondre
+          concrètement à vos défis organisationnels et stratégiques. Nous vous
+          accompagnons avec des approches personnalisées et innovantes afin de
+          transformer durablement vos structures, optimiser vos processus et
+          renforcer vos capacités internes.
+        </p>
       </div>
 
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 02</div>
-          <div class="prod-name">Accompagnement stratégique</div>
-          <div class="prod-hook">Pour les dirigeants à un tournant</div>
-          <p class="prod-desc">Vous devez transformer votre organisation, lancer un nouveau cap ou répondre à une injonction de votre tutelle ? On vous accompagne de la réflexion au plan d'action — sans jargon, avec des livrables concrets que vous assumez.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Élaboration et mise en œuvre du plan stratégique</div>
-            <div class="sub-item"><span class="sub-dot"></span>Transformation digitale des organisations</div>
-            <div class="sub-item"><span class="sub-dot"></span>Conduite du changement et réorganisation</div>
-            <div class="sub-item"><span class="sub-dot"></span>Déploiement de démarches RSE</div>
+      <div class="section">
+        <div class="section-title">Transformation & Innovation</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <span class="badge badge-green">Phare</span>
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 01</div>
+              <div class="prod-name">Pilotage de la performance</div>
+              <div class="prod-hook">
+                Pour les dirigeants qui veulent voir clair
+              </div>
+              <p class="prod-desc">
+                Vous dirigez une organisation mais vos indicateurs ne vous
+                disent pas ce qui se passe vraiment ? On met en place les bons
+                KPIs, les revues de performance régulières et les tableaux de
+                bord. Vous décidez sur des faits, pas sur des impressions.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Élaboration de stratégies de
+                  développement
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mise en place de systèmes de
+                  gestion de la performance
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Tableaux de bord et revues
+                  stratégiques
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — Data Platform
+                  opérationnelle (45M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CIE — optimisation et
+                  économétrie des factures (1,9M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CADERAC — revue complète du SI
+                  (26M FCFA, 3 missions)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                À partir de 8M FCFA <small>/ mission</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">EPNs</span><span class="pt">DG</span
+                ><span class="pt">Groupes</span>
+              </div>
+            </div>
           </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>La Poste CI — pilotage de la transformation nationale</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUDE-PME — structuration écosystème entrepreneurial (13M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>VITIB — accompagnement stratégique compétitivité (13M)</div>
+
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 02</div>
+              <div class="prod-name">Accompagnement stratégique</div>
+              <div class="prod-hook">Pour les dirigeants à un tournant</div>
+              <p class="prod-desc">
+                Vous devez transformer votre organisation, lancer un nouveau cap
+                ou répondre à une injonction de votre tutelle ? On vous
+                accompagne de la réflexion au plan d'action — sans jargon, avec
+                des livrables concrets que vous assumez.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Élaboration et mise en œuvre du
+                  plan stratégique
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Transformation digitale des
+                  organisations
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Conduite du changement et
+                  réorganisation
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Déploiement de démarches RSE
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>La Poste CI — pilotage de la
+                  transformation nationale
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUDE-PME — structuration
+                  écosystème entrepreneurial (13M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>VITIB — accompagnement
+                  stratégique compétitivité (13M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                15 – 70M FCFA <small>/ mission</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">Ministères</span><span class="pt">EPNs</span
+                ><span class="pt">DG</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <span class="badge badge-gold">Nouveau</span>
+            <div class="prod-accent gold"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 03</div>
+              <div class="prod-name">Retainer stratégique mensuel</div>
+              <div class="prod-hook">
+                Votre expert Marabu disponible tous les mois
+              </div>
+              <p class="prod-desc">
+                Chaque mois, Marabu revoit vos priorités avec vous, suit les
+                signaux du marché et prépare vos comités. Comme avoir un
+                directeur stratégique sans le recruter à plein temps — 4 à 8
+                jours d'expertise dédiés, contrat 12 mois.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Revue stratégique mensuelle et
+                  veille marché
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Préparation des comités de
+                  direction
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Accès direct à l'équipe
+                  dirigeante Marabu
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">2 – 5M FCFA <small>/ mois</small></div>
+              <div class="prod-targets">
+                <span class="pt">DG</span><span class="pt">Boards</span
+                ><span class="pt">PME en croissance</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="prod-foot">
-          <div class="prod-price">15 – 70M FCFA <small>/ mission</small></div>
-          <div class="prod-targets"><span class="pt">Ministères</span><span class="pt">EPNs</span><span class="pt">DG</span></div>
+
+        <div class="section-title">Gouvernance & Gestion des Risques</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <div class="prod-accent mid"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 04</div>
+              <div class="prod-name">
+                Transformation & revue du système d'information
+              </div>
+              <div class="prod-hook">
+                Pour savoir où vous en êtes — vraiment
+              </div>
+              <p class="prod-desc">
+                Votre système informatique freine votre croissance ou vos
+                données ne sont pas sécurisées ? On fait le point complet, on
+                identifie les risques et on vous donne une feuille de route
+                claire pour moderniser sans tout casser.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mise en conformité réglementaire
+                  des SI
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Évaluation et cartographie des
+                  risques informatiques
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Définition de stratégies de
+                  cybersécurité
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Schémas directeurs et feuilles de
+                  route SI
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CADERAC — revue SI +
+                  équipements (26M FCFA, 3 missions)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>MSCI — 4 schémas directeurs
+                  (CRM, pointage, QR code, site)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>DTP — interopérabilité des
+                  données de l'État CI (3,5M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                5 – 25M FCFA <small>/ mission</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">Banques</span><span class="pt">Assurances</span
+                ><span class="pt">EPNs</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <div class="prod-accent mid"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 05</div>
+              <div class="prod-name">Optimisation des processus</div>
+              <div class="prod-hook">Pour faire mieux avec ce qu'on a déjà</div>
+              <p class="prod-desc">
+                Trop de temps perdu, des procédures floues, des tâches qui se
+                répètent sans valeur ? On cartographie ce qui se passe vraiment
+                dans votre organisation et on propose des solutions concrètes —
+                y compris de l'automatisation là où c'est pertinent.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Optimisation des processus métier
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Développement de programmes de
+                  formation sur mesure
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mise en place de systèmes de
+                  gestion de la performance
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GD Couverture — optimisation
+                  processus internes BTP
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Ocean Transport — plateforme
+                  suivi de flotte carburant (1,77M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>MSCI — structuration
+                  institutionnelle complète (6M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                3 – 15M FCFA <small>/ mission</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">BTP</span><span class="pt">Transport</span
+                ><span class="pt">Commerce</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <div class="prod-accent mid"></div>
+            <div class="prod-body">
+              <div class="prod-ref">C — 06</div>
+              <div class="prod-name">Études sectorielles & benchmarks</div>
+              <div class="prod-hook">
+                Pour décider avec des données, pas des suppositions
+              </div>
+              <p class="prod-desc">
+                Vous voulez entrer sur un marché, comprendre vos concurrents ou
+                documenter votre secteur pour lever des fonds ? On produit des
+                études sérieuses, sourcées, présentables en comité ou devant des
+                partenaires techniques et financiers.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Études de marché et analyses
+                  concurrentielles
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Veille réglementaire et
+                  géopolitique sectorielle
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Réalisation de benchmarks à usage
+                  décisionnel
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Secteur minier CI — étude de
+                  marché complète
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Commerce extérieur CI —
+                  cartographie processus GUCE
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Financements PME CI — data
+                  mining sectoriel
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">Sur devis</div>
+              <div class="prod-targets">
+                <span class="pt">Investisseurs</span
+                ><span class="pt">Institutions</span><span class="pt">PTF</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="prod">
-        <span class="badge badge-gold">Nouveau</span>
-        <div class="prod-accent gold"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 03</div>
-          <div class="prod-name">Retainer stratégique mensuel</div>
-          <div class="prod-hook">Votre expert Marabu disponible tous les mois</div>
-          <p class="prod-desc">Chaque mois, Marabu revoit vos priorités avec vous, suit les signaux du marché et prépare vos comités. Comme avoir un directeur stratégique sans le recruter à plein temps — 4 à 8 jours d'expertise dédiés, contrat 12 mois.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Revue stratégique mensuelle et veille marché</div>
-            <div class="sub-item"><span class="sub-dot"></span>Préparation des comités de direction</div>
-            <div class="sub-item"><span class="sub-dot"></span>Accès direct à l'équipe dirigeante Marabu</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">2 – 5M FCFA <small>/ mois</small></div>
-          <div class="prod-targets"><span class="pt">DG</span><span class="pt">Boards</span><span class="pt">PME en croissance</span></div>
-        </div>
-      </div>
-
+      <div class="spacer"></div>
     </div>
 
-    <div class="section-title">Gouvernance & Gestion des Risques</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <div class="prod-accent mid"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 04</div>
-          <div class="prod-name">Transformation & revue du système d'information</div>
-          <div class="prod-hook">Pour savoir où vous en êtes — vraiment</div>
-          <p class="prod-desc">Votre système informatique freine votre croissance ou vos données ne sont pas sécurisées ? On fait le point complet, on identifie les risques et on vous donne une feuille de route claire pour moderniser sans tout casser.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Mise en conformité réglementaire des SI</div>
-            <div class="sub-item"><span class="sub-dot"></span>Évaluation et cartographie des risques informatiques</div>
-            <div class="sub-item"><span class="sub-dot"></span>Définition de stratégies de cybersécurité</div>
-            <div class="sub-item"><span class="sub-dot"></span>Schémas directeurs et feuilles de route SI</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>CADERAC — revue SI + équipements (26M FCFA, 3 missions)</div>
-            <div class="proof-line"><span class="proof-dot"></span>MSCI — 4 schémas directeurs (CRM, pointage, QR code, site)</div>
-            <div class="proof-line"><span class="proof-dot"></span>DTP — interopérabilité des données de l'État CI (3,5M)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">5 – 25M FCFA <small>/ mission</small></div>
-          <div class="prod-targets"><span class="pt">Banques</span><span class="pt">Assurances</span><span class="pt">EPNs</span></div>
-        </div>
-      </div>
-
-      <div class="prod">
-        <div class="prod-accent mid"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 05</div>
-          <div class="prod-name">Optimisation des processus</div>
-          <div class="prod-hook">Pour faire mieux avec ce qu'on a déjà</div>
-          <p class="prod-desc">Trop de temps perdu, des procédures floues, des tâches qui se répètent sans valeur ? On cartographie ce qui se passe vraiment dans votre organisation et on propose des solutions concrètes — y compris de l'automatisation là où c'est pertinent.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Optimisation des processus métier</div>
-            <div class="sub-item"><span class="sub-dot"></span>Développement de programmes de formation sur mesure</div>
-            <div class="sub-item"><span class="sub-dot"></span>Mise en place de systèmes de gestion de la performance</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>GD Couverture — optimisation processus internes BTP</div>
-            <div class="proof-line"><span class="proof-dot"></span>Ocean Transport — plateforme suivi de flotte carburant (1,77M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>MSCI — structuration institutionnelle complète (6M)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">3 – 15M FCFA <small>/ mission</small></div>
-          <div class="prod-targets"><span class="pt">BTP</span><span class="pt">Transport</span><span class="pt">Commerce</span></div>
-        </div>
-      </div>
-
-      <div class="prod">
-        <div class="prod-accent mid"></div>
-        <div class="prod-body">
-          <div class="prod-ref">C — 06</div>
-          <div class="prod-name">Études sectorielles & benchmarks</div>
-          <div class="prod-hook">Pour décider avec des données, pas des suppositions</div>
-          <p class="prod-desc">Vous voulez entrer sur un marché, comprendre vos concurrents ou documenter votre secteur pour lever des fonds ? On produit des études sérieuses, sourcées, présentables en comité ou devant des partenaires techniques et financiers.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Études de marché et analyses concurrentielles</div>
-            <div class="sub-item"><span class="sub-dot"></span>Veille réglementaire et géopolitique sectorielle</div>
-            <div class="sub-item"><span class="sub-dot"></span>Réalisation de benchmarks à usage décisionnel</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>Secteur minier CI — étude de marché complète</div>
-            <div class="proof-line"><span class="proof-dot"></span>Commerce extérieur CI — cartographie processus GUCE</div>
-            <div class="proof-line"><span class="proof-dot"></span>Financements PME CI — data mining sectoriel</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">Sur devis</div>
-          <div class="prod-targets"><span class="pt">Investisseurs</span><span class="pt">Institutions</span><span class="pt">PTF</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-
-<!-- ══════════════════════════════
+    <!-- ══════════════════════════════
      SERVICES
 ══════════════════════════════ -->
-<div id="services" class="panel">
-
-  <div class="pole-header">
-    <div class="pole-label">Pôle Services</div>
-    <h2 class="pole-title">Services</h2>
-    <p class="pole-desc">Nos solutions de services sont conçues pour faciliter les connexions stratégiques, renforcer les collaborations et accompagner la réalisation de projets à fort impact. Grâce à notre expertise multidisciplinaire, nous agissons comme catalyseur de synergies durables entre vous et vos parties prenantes.</p>
-  </div>
-
-  <div class="section">
-
-    <div class="section-title">Formation</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <span class="badge badge-green">Signature</span>
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 01</div>
-          <div class="prod-name">Formation dirigeants</div>
-          <div class="prod-hook">Pour les CA, comités de direction et top management</div>
-          <p class="prod-desc">Un programme sur mesure pour que vos administrateurs et directeurs comprennent vraiment les enjeux du numérique, de la gouvernance et du leadership en Afrique. Pas de la théorie — des cas concrets, des débats, des outils qu'on repart avec. Les thèmes se construisent avec vous en RDV.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Formations Conseils d'Administration et Boards</div>
-            <div class="sub-item"><span class="sub-dot"></span>Formations comités de direction et top management</div>
-            <div class="sub-item"><span class="sub-dot"></span>Développement du leadership en contexte africain</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>ANSUT — formation Conseil d'Administration (60,9M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — "Piloter le futur" (13,9M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — Leadership Agile (2,9M FCFA)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">10 – 65M FCFA <small>/ programme</small></div>
-          <div class="prod-targets"><span class="pt">CA / Boards</span><span class="pt">DG</span><span class="pt">Comités de direction</span></div>
-        </div>
+    <div id="services" class="panel">
+      <div class="pole-header">
+        <div class="pole-label">Pôle Services</div>
+        <h2 class="pole-title">Services</h2>
+        <p class="pole-desc">
+          Nos solutions de services sont conçues pour faciliter les connexions
+          stratégiques, renforcer les collaborations et accompagner la
+          réalisation de projets à fort impact. Grâce à notre expertise
+          multidisciplinaire, nous agissons comme catalyseur de synergies
+          durables entre vous et vos parties prenantes.
+        </p>
       </div>
 
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 02</div>
-          <div class="prod-name">Formation technique</div>
-          <div class="prod-hook">Pour renforcer vos équipes sur le terrain</div>
-          <p class="prod-desc">Vos équipes ont besoin de monter en compétences sur des sujets précis ? On qualifie le besoin réel en RDV, on adapte le contenu et on forme avec des instructeurs qui ont pratiqué le sujet. Pas de catalogue figé — du sur-mesure systématique.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Le thème se qualifie en RDV selon votre besoin réel</div>
-            <div class="sub-item"><span class="sub-dot"></span>Renforcement des capacités techniques sur mesure</div>
-            <div class="sub-item"><span class="sub-dot"></span>Format 1 à 5 jours, en présentiel ou à distance</div>
+      <div class="section">
+        <div class="section-title">Formation</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <span class="badge badge-green">Signature</span>
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 01</div>
+              <div class="prod-name">Formation dirigeants</div>
+              <div class="prod-hook">
+                Pour les CA, comités de direction et top management
+              </div>
+              <p class="prod-desc">
+                Un programme sur mesure pour que vos administrateurs et
+                directeurs comprennent vraiment les enjeux du numérique, de la
+                gouvernance et du leadership en Afrique. Pas de la théorie — des
+                cas concrets, des débats, des outils qu'on repart avec. Les
+                thèmes se construisent avec vous en RDV.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Formations Conseils
+                  d'Administration et Boards
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Formations comités de direction
+                  et top management
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Développement du leadership en
+                  contexte africain
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>ANSUT — formation Conseil
+                  d'Administration (60,9M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — "Piloter le futur"
+                  (13,9M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — Leadership Agile
+                  (2,9M FCFA)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                10 – 65M FCFA <small>/ programme</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">CA / Boards</span><span class="pt">DG</span
+                ><span class="pt">Comités de direction</span>
+              </div>
+            </div>
           </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — Kubernetes (5M) · Microservices · UI/UX (38,7M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — E-réputation & communication de crise (7,4M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>CPCS / Banque Mondiale — formation cadres PPP (2,8M)</div>
+
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 02</div>
+              <div class="prod-name">Formation technique</div>
+              <div class="prod-hook">
+                Pour renforcer vos équipes sur le terrain
+              </div>
+              <p class="prod-desc">
+                Vos équipes ont besoin de monter en compétences sur des sujets
+                précis ? On qualifie le besoin réel en RDV, on adapte le contenu
+                et on forme avec des instructeurs qui ont pratiqué le sujet. Pas
+                de catalogue figé — du sur-mesure systématique.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Le thème se qualifie en RDV selon
+                  votre besoin réel
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Renforcement des capacités
+                  techniques sur mesure
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Format 1 à 5 jours, en présentiel
+                  ou à distance
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — Kubernetes (5M) ·
+                  Microservices · UI/UX (38,7M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — E-réputation &
+                  communication de crise (7,4M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CPCS / Banque Mondiale —
+                  formation cadres PPP (2,8M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                3 – 15M FCFA <small>/ programme</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">Équipes tech</span
+                ><span class="pt">Communicants</span
+                ><span class="pt">Chefs de projet</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <span class="badge badge-muted">En développement</span>
+            <div class="prod-accent gold"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 03</div>
+              <div class="prod-name">Marabu Academy</div>
+              <div class="prod-hook">Apprendre, à son rythme, en français</div>
+              <p class="prod-desc">
+                Des masterclasses courtes sur les sujets qui comptent pour les
+                entrepreneurs et cadres en Côte d'Ivoire. Premier contenu
+                gratuit : "Créer et structurer sa PME en CI de A à Z" — pour
+                générer du trafic, de la légitimité et du pipeline commercial.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span
+                  ><strong>1er module gratuit :</strong> "Créer sa PME en CI de
+                  A à Z" — génère du trafic et de la légitimité
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Masterclasses thématiques en
+                  ligne, en français
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Finançable par GUDE-PME
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">À venir</div>
+              <div class="prod-targets">
+                <span class="pt">Entrepreneurs</span><span class="pt">PME</span
+                ><span class="pt">Jeunes cadres</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="prod-foot">
-          <div class="prod-price">3 – 15M FCFA <small>/ programme</small></div>
-          <div class="prod-targets"><span class="pt">Équipes tech</span><span class="pt">Communicants</span><span class="pt">Chefs de projet</span></div>
+
+        <div class="section-title">Communication Stratégique</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 04</div>
+              <div class="prod-name">Communication 360°</div>
+              <div class="prod-hook">Pour être vu, compris et mémorisé</div>
+              <p class="prod-desc">
+                Identité visuelle, site web, réseaux sociaux, e-réputation,
+                communication de crise — un bloc unifié. Une équipe créative qui
+                connaît les codes de la communication en Côte d'Ivoire. On
+                construit ce dont vous avez vraiment besoin, pas un pack
+                standard.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Définition de stratégie de
+                  positionnement
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Création de contenus à forte
+                  valeur ajoutée
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Gestion de l'e-réputation et
+                  communication de crise
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mise en place de chaînes de
+                  communication efficaces
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>AMT EMALL — stratégie 360°
+                  plateforme Taobao (18M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>MSCI — marque MAGIC : identité,
+                  visuels, stratégie (5,9M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CPCS / Banque Mondiale — site
+                  internet PPP Guinée (6,5M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                500K – 18M FCFA <small>/ mission</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">Startups</span><span class="pt">FMCG</span
+                ><span class="pt">Institutions</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 05</div>
+              <div class="prod-name">Tableaux de bord décisionnels</div>
+              <div class="prod-hook">
+                Pour décider avec des données, pas des intuitions
+              </div>
+              <p class="prod-desc">
+                Vos données existent mais personne ne les utilise vraiment ? On
+                met en place des tableaux de bord clairs, lisibles, mis à jour
+                automatiquement. En un coup d'œil, vous voyez comment va votre
+                activité et où agir en priorité.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Conception et déploiement de
+                  tableaux de bord
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Data mining et analyse
+                  décisionnelle
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Formation à l'utilisation des
+                  outils
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>GUCE CI — Data Platform
+                  opérationnelle (45M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>CIE — optimisation UI/UX et
+                  économétrie des factures (1,9M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Digital Transformation Platform
+                  — stratégie données (3,5M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                3 – 45M FCFA <small>/ déploiement</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">EPNs</span><span class="pt">Banques</span
+                ><span class="pt">PME</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Organisation d'Événements</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">S — 06</div>
+              <div class="prod-name">Événements stratégiques</div>
+              <div class="prod-hook">
+                Pour les moments qui font la différence
+              </div>
+              <p class="prod-desc">
+                Petit-déjeuner décideurs, table ronde sectorielle, lancement de
+                bureau, comité de direction en externe — Marabu conçoit,
+                planifie et déploie. Vos invités repartent avec une image
+                positive de vous et des connexions utiles.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Conception, planification et
+                  gestion logistique
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Coordination de campagnes et
+                  activations
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Gestion des relations publiques
+                  et médiatiques
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>VITIB — Petit-déjeuner
+                  stratégique PTF (13M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>YANGO — Opening Event Abidjan
+                  (33,5M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>AOC — Table Ronde Mortgage ·
+                  MAIRIE PLATEAU — Fashion Street (29M)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                2 – 35M FCFA <small>/ événement</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">Institutions</span><span class="pt">Tech</span
+                ><span class="pt">Associations</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="prod">
-        <span class="badge badge-muted">En développement</span>
-        <div class="prod-accent gold"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 03</div>
-          <div class="prod-name">Marabu Academy</div>
-          <div class="prod-hook">Apprendre, à son rythme, en français</div>
-          <p class="prod-desc">Des masterclasses courtes sur les sujets qui comptent pour les entrepreneurs et cadres en Côte d'Ivoire. Premier contenu gratuit : "Créer et structurer sa PME en CI de A à Z" — pour générer du trafic, de la légitimité et du pipeline commercial.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span><strong>1er module gratuit :</strong> "Créer sa PME en CI de A à Z" — génère du trafic et de la légitimité</div>
-            <div class="sub-item"><span class="sub-dot"></span>Masterclasses thématiques en ligne, en français</div>
-            <div class="sub-item"><span class="sub-dot"></span>Finançable par GUDE-PME</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">À venir</div>
-          <div class="prod-targets"><span class="pt">Entrepreneurs</span><span class="pt">PME</span><span class="pt">Jeunes cadres</span></div>
-        </div>
-      </div>
-
+      <div class="spacer"></div>
     </div>
 
-    <div class="section-title">Communication Stratégique</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 04</div>
-          <div class="prod-name">Communication 360°</div>
-          <div class="prod-hook">Pour être vu, compris et mémorisé</div>
-          <p class="prod-desc">Identité visuelle, site web, réseaux sociaux, e-réputation, communication de crise — un bloc unifié. Une équipe créative qui connaît les codes de la communication en Côte d'Ivoire. On construit ce dont vous avez vraiment besoin, pas un pack standard.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Définition de stratégie de positionnement</div>
-            <div class="sub-item"><span class="sub-dot"></span>Création de contenus à forte valeur ajoutée</div>
-            <div class="sub-item"><span class="sub-dot"></span>Gestion de l'e-réputation et communication de crise</div>
-            <div class="sub-item"><span class="sub-dot"></span>Mise en place de chaînes de communication efficaces</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>AMT EMALL — stratégie 360° plateforme Taobao (18M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>MSCI — marque MAGIC : identité, visuels, stratégie (5,9M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>CPCS / Banque Mondiale — site internet PPP Guinée (6,5M)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">500K – 18M FCFA <small>/ mission</small></div>
-          <div class="prod-targets"><span class="pt">Startups</span><span class="pt">FMCG</span><span class="pt">Institutions</span></div>
-        </div>
-      </div>
-
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 05</div>
-          <div class="prod-name">Tableaux de bord décisionnels</div>
-          <div class="prod-hook">Pour décider avec des données, pas des intuitions</div>
-          <p class="prod-desc">Vos données existent mais personne ne les utilise vraiment ? On met en place des tableaux de bord clairs, lisibles, mis à jour automatiquement. En un coup d'œil, vous voyez comment va votre activité et où agir en priorité.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Conception et déploiement de tableaux de bord</div>
-            <div class="sub-item"><span class="sub-dot"></span>Data mining et analyse décisionnelle</div>
-            <div class="sub-item"><span class="sub-dot"></span>Formation à l'utilisation des outils</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>GUCE CI — Data Platform opérationnelle (45M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>CIE — optimisation UI/UX et économétrie des factures (1,9M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>Digital Transformation Platform — stratégie données (3,5M)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">3 – 45M FCFA <small>/ déploiement</small></div>
-          <div class="prod-targets"><span class="pt">EPNs</span><span class="pt">Banques</span><span class="pt">PME</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-title">Organisation d'Événements</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">S — 06</div>
-          <div class="prod-name">Événements stratégiques</div>
-          <div class="prod-hook">Pour les moments qui font la différence</div>
-          <p class="prod-desc">Petit-déjeuner décideurs, table ronde sectorielle, lancement de bureau, comité de direction en externe — Marabu conçoit, planifie et déploie. Vos invités repartent avec une image positive de vous et des connexions utiles.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Conception, planification et gestion logistique</div>
-            <div class="sub-item"><span class="sub-dot"></span>Coordination de campagnes et activations</div>
-            <div class="sub-item"><span class="sub-dot"></span>Gestion des relations publiques et médiatiques</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>VITIB — Petit-déjeuner stratégique PTF (13M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>YANGO — Opening Event Abidjan (33,5M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>AOC — Table Ronde Mortgage · MAIRIE PLATEAU — Fashion Street (29M)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">2 – 35M FCFA <small>/ événement</small></div>
-          <div class="prod-targets"><span class="pt">Institutions</span><span class="pt">Tech</span><span class="pt">Associations</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-
-<!-- ══════════════════════════════
+    <!-- ══════════════════════════════
      INTERMEDIATION
 ══════════════════════════════ -->
-<div id="inter" class="panel">
-
-  <div class="pole-header">
-    <div class="pole-label">Pôle Intermédiation</div>
-    <h2 class="pole-title">Intermédiation</h2>
-    <p class="pole-desc">Nous mettons à votre service notre expertise en intermédiation pour accélérer vos projets, renforcer vos positions et activer les leviers de croissance adaptés à vos ambitions. À travers des solutions pragmatiques et des approches personnalisées, nous facilitons la mise en relation stratégique, la négociation et la sécurisation de vos opérations.</p>
-  </div>
-
-  <div class="section">
-
-    <div class="notice notice-green">
-      <strong>Comment ça fonctionne :</strong> tout besoin d'intermédiation commence par un <strong>email</strong> décrivant votre demande précise. On vous répond avec une proposition claire : retainer + success fee selon la complexité. Pas d'oral. Pas de gratuit. C'est la règle pour tout le monde.
-    </div>
-
-    <div class="section-title">Diplomatie Privée</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <span class="badge badge-green">Cœur de métier</span>
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">I — 01</div>
-          <div class="prod-name">Relations gouvernementales & influence institutionnelle</div>
-          <div class="prod-hook">Pour naviguer les institutions ivoiriennes et WAEMU</div>
-          <p class="prod-desc">Vous voulez déployer votre activité en Côte d'Ivoire, obtenir une licence, rencontrer les bons régulateurs ou débloquer un dossier qui stagne ? On vous accompagne dans les démarches institutionnelles avec méthode, discrétion et responsabilité.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Lobbying stratégique et gestion des relations institutionnelles</div>
-            <div class="sub-item"><span class="sub-dot"></span>Identification de partenaires et facilitation des engagements</div>
-            <div class="sub-item"><span class="sub-dot"></span>Relations avec les autorités publiques et gouvernements</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>YANGO — 2 ans de missions RI (ouverture bureau, villes, régulateurs)</div>
-            <div class="proof-line"><span class="proof-dot"></span>DGE — accompagnement recouvrement fiscal e-commerce CI</div>
-            <div class="proof-line"><span class="proof-dot"></span>AMT / Taobao — déploiement CI avec parties prenantes institutionnelles</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">Retainer + success fee</div>
-          <div class="prod-targets"><span class="pt">Entreprises étrangères</span><span class="pt">Tech</span><span class="pt">Investisseurs</span></div>
-        </div>
+    <div id="inter" class="panel">
+      <div class="pole-header">
+        <div class="pole-label">Pôle Intermédiation</div>
+        <h2 class="pole-title">Intermédiation</h2>
+        <p class="pole-desc">
+          Nous mettons à votre service notre expertise en intermédiation pour
+          accélérer vos projets, renforcer vos positions et activer les leviers
+          de croissance adaptés à vos ambitions. À travers des solutions
+          pragmatiques et des approches personnalisées, nous facilitons la mise
+          en relation stratégique, la négociation et la sécurisation de vos
+          opérations.
+        </p>
       </div>
 
-      <div class="prod">
-        <div class="prod-accent"></div>
-        <div class="prod-body">
-          <div class="prod-ref">I — 02</div>
-          <div class="prod-name">Diplomatie privée</div>
-          <div class="prod-hook">Pour les projets à fort enjeu institutionnel</div>
-          <p class="prod-desc">Certains projets nécessitent d'accéder à des décideurs de haut niveau, de gérer des sensibilités politiques ou de débloquer des situations complexes. Marabu mobilise son réseau avec discrétion, méthode et responsabilité. On ne promet que ce qu'on peut tenir.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Médiations et négociations à l'échelle internationale</div>
-            <div class="sub-item"><span class="sub-dot"></span>Mobilisation d'investisseurs et accompagnement post-financement</div>
-            <div class="sub-item"><span class="sub-dot"></span>Facilitation d'accès aux décideurs clés</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>Mission PPP Guinée — Banque Mondiale (8,4M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>Accès régulateurs télécoms (ARTCI, DGTTC) pour clients tech</div>
-            <div class="proof-line"><span class="proof-dot"></span>Accompagnement projets miniers CI</div>
-          </div>
+      <div class="section">
+        <div class="notice notice-green">
+          <strong>Comment ça fonctionne :</strong> tout besoin d'intermédiation
+          commence par un <strong>email</strong> décrivant votre demande
+          précise. On vous répond avec une proposition claire : retainer +
+          success fee selon la complexité. Pas d'oral. Pas de gratuit. C'est la
+          règle pour tout le monde.
         </div>
-        <div class="prod-foot">
-          <div class="prod-price">Sur dossier qualifié</div>
-          <div class="prod-targets"><span class="pt">Sur recommandation</span><span class="pt">Grands projets</span></div>
-        </div>
-      </div>
 
-    </div>
-
-    <div class="section-title">Intelligence Économique</div>
-    <div class="prod-grid">
-
-      <div class="prod">
-        <div class="prod-accent mid"></div>
-        <div class="prod-body">
-          <div class="prod-ref">I — 03</div>
-          <div class="prod-name">Relations publiques & gestion d'image</div>
-          <div class="prod-hook">Pour les marques qui agissent mais que personne ne voit</div>
-          <p class="prod-desc">Vous opérez en Côte d'Ivoire, vous créez de l'impact réel, mais votre image ne le reflète pas ? On travaille votre visibilité médiatique et institutionnelle, on vous positionne dans les bons cercles et on construit une réputation crédible et durable.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Cartographie des réseaux d'influence et circuits de décision</div>
-            <div class="sub-item"><span class="sub-dot"></span>Gestion des relations médiatiques et institutionnelles</div>
-            <div class="sub-item"><span class="sub-dot"></span>Analyse proactive des risques politiques et sectoriels</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>YANGO — campagnes PR, lancements, events (10+ missions, 28M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>VITIB — visites PTF et positionnement institutionnel (9,5M)</div>
-            <div class="proof-line"><span class="proof-dot"></span>MAIRIE DU PLATEAU — Plateau Fashion Street (29M FCFA)</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">2 – 8M FCFA <small>/ mois</small></div>
-          <div class="prod-targets"><span class="pt">Marques en expansion</span><span class="pt">Entreprises minières</span></div>
-        </div>
-      </div>
-
-      <div class="prod">
-        <div class="prod-accent mid"></div>
-        <div class="prod-body">
-          <div class="prod-ref">I — 04</div>
-          <div class="prod-name">Mise en relation avec les PTF</div>
-          <div class="prod-hook">Pour accéder aux financements internationaux</div>
-          <p class="prod-desc">Les PTF — Banque Mondiale, BAD, AFD, GIZ, Union Européenne — financent des projets en Côte d'Ivoire et en Afrique de l'Ouest. Y accéder demande de savoir qui contacter, comment se présenter et quels critères respecter. Marabu fait le lien.</p>
-          <div class="prod-subs">
-            <div class="sub-item"><span class="sub-dot"></span>Identification et mise en relation avec les PTF pertinents</div>
-            <div class="sub-item"><span class="sub-dot"></span>Préparation des dossiers et des argumentaires</div>
-            <div class="sub-item"><span class="sub-dot"></span>Accompagnement pendant et après les négociations</div>
-          </div>
-          <div class="proof-block">
-            <div class="proof-title">Déjà réalisé</div>
-            <div class="proof-line"><span class="proof-dot"></span>VITIB — organisation visites PTF (9,5M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>Mission PPP Guinée — Banque Mondiale (8,4M FCFA)</div>
-            <div class="proof-line"><span class="proof-dot"></span>Réseau AmCham CI et VITIB activé</div>
-          </div>
-        </div>
-        <div class="prod-foot">
-          <div class="prod-price">5 – 20% <small>du financement mobilisé</small></div>
-          <div class="prod-targets"><span class="pt">EPNs</span><span class="pt">Ministères</span><span class="pt">Associations</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-
-  <!-- ── EN DÉVELOPPEMENT ── -->
-  <div id="dev" class="panel">
-    <div class="pole-header">
-      <div class="pole-label">En développement</div>
-      <h2 class="pole-title">Offres en construction</h2>
-      <p class="pole-desc">Ces offres ont été actées en réunion comme priorités stratégiques. Elles sont en cours de structuration — pas encore disponibles à la vente mais à activer dès que le partenariat est formalisé.</p>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Coaching & Verticalisation sectorielle</div>
-      <div class="prod-grid">
-
-        <div class="prod">
-          <span class="badge" style="background:#E24B4A;color:#fff">Absent v. précédente</span>
-          <div class="prod-accent" style="background:#E24B4A"></div>
-          <div class="prod-body">
-            <div class="prod-ref">X — 01</div>
-            <div class="prod-name">Coaching dirigeants</div>
-            <div class="prod-hook">Pour les DG nommés sans formation managériale</div>
-            <p class="prod-desc">Vous venez d'être nommé DG ou directeur mais vous n'avez jamais reçu de formation pour ce rôle ? Un accompagnement mensuel personnalisé avec un expert senior, pour construire votre posture de leader et gérer les situations complexes. À co-construire avec Anthony Viruega.</p>
-            <div class="prod-subs">
-              <div class="sub-item"><span class="sub-dot"></span>Séances mensuelles individuelles avec expert senior</div>
-              <div class="sub-item"><span class="sub-dot"></span>Travail sur la posture, la prise de décision, la gestion d'équipe</div>
-              <div class="sub-item"><span class="sub-dot"></span>Accès au réseau Marabu pour mise en perspective</div>
+        <div class="section-title">Diplomatie Privée</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <span class="badge badge-green">Cœur de métier</span>
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">I — 01</div>
+              <div class="prod-name">
+                Relations gouvernementales & influence institutionnelle
+              </div>
+              <div class="prod-hook">
+                Pour naviguer les institutions ivoiriennes et WAEMU
+              </div>
+              <p class="prod-desc">
+                Vous voulez déployer votre activité en Côte d'Ivoire, obtenir
+                une licence, rencontrer les bons régulateurs ou débloquer un
+                dossier qui stagne ? On vous accompagne dans les démarches
+                institutionnelles avec méthode, discrétion et responsabilité.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Lobbying stratégique et gestion
+                  des relations institutionnelles
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Identification de partenaires et
+                  facilitation des engagements
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Relations avec les autorités
+                  publiques et gouvernements
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>YANGO — 2 ans de missions RI
+                  (ouverture bureau, villes, régulateurs)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>DGE — accompagnement
+                  recouvrement fiscal e-commerce CI
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>AMT / Taobao — déploiement CI
+                  avec parties prenantes institutionnelles
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">Retainer + success fee</div>
+              <div class="prod-targets">
+                <span class="pt">Entreprises étrangères</span
+                ><span class="pt">Tech</span
+                ><span class="pt">Investisseurs</span>
+              </div>
             </div>
           </div>
-          <div class="prod-foot">
-            <div class="prod-price">Retainer individuel <small>— à définir</small></div>
-            <div class="prod-targets"><span class="pt">DG nommés</span><span class="pt">Boards privés</span><span class="pt">Filiales</span></div>
-          </div>
-        </div>
 
-        <div class="prod">
-          <span class="badge" style="background:#E24B4A;color:#fff">Absent v. précédente</span>
-          <div class="prod-accent" style="background:#E24B4A"></div>
-          <div class="prod-body">
-            <div class="prod-ref">X — 02</div>
-            <div class="prod-name">Offres secteur financier</div>
-            <div class="prod-hook">Banques, assurances, fintechs et BCEAO</div>
-            <p class="prod-desc">Formation, conformité BCEAO, accompagnement pour licences de monnaie électronique, optimisation des processus bancaires — une verticale dédiée aux institutions financières ivoiriennes et WAEMU. À structurer avec Ibrahim et les contacts BCEAO.</p>
-            <div class="prod-subs">
-              <div class="sub-item"><span class="sub-dot"></span>Mise en conformité réglementaire BCEAO</div>
-              <div class="sub-item"><span class="sub-dot"></span>Accompagnement pour licences monnaie électronique</div>
-              <div class="sub-item"><span class="sub-dot"></span>Formation et optimisation processus bancaires</div>
+          <div class="prod">
+            <div class="prod-accent"></div>
+            <div class="prod-body">
+              <div class="prod-ref">I — 02</div>
+              <div class="prod-name">Diplomatie privée</div>
+              <div class="prod-hook">
+                Pour les projets à fort enjeu institutionnel
+              </div>
+              <p class="prod-desc">
+                Certains projets nécessitent d'accéder à des décideurs de haut
+                niveau, de gérer des sensibilités politiques ou de débloquer des
+                situations complexes. Marabu mobilise son réseau avec
+                discrétion, méthode et responsabilité. On ne promet que ce qu'on
+                peut tenir.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Médiations et négociations à
+                  l'échelle internationale
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mobilisation d'investisseurs et
+                  accompagnement post-financement
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Facilitation d'accès aux
+                  décideurs clés
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Mission PPP Guinée — Banque
+                  Mondiale (8,4M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Accès régulateurs télécoms
+                  (ARTCI, DGTTC) pour clients tech
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Accompagnement projets miniers
+                  CI
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">Sur dossier qualifié</div>
+              <div class="prod-targets">
+                <span class="pt">Sur recommandation</span
+                ><span class="pt">Grands projets</span>
+              </div>
             </div>
           </div>
-          <div class="prod-foot">
-            <div class="prod-price">À définir <small>/ mission</small></div>
-            <div class="prod-targets"><span class="pt">Banques CI</span><span class="pt">Assurances</span><span class="pt">Fintechs</span><span class="pt">BCEAO</span></div>
-          </div>
         </div>
 
+        <div class="section-title">Intelligence Économique</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <div class="prod-accent mid"></div>
+            <div class="prod-body">
+              <div class="prod-ref">I — 03</div>
+              <div class="prod-name">Relations publiques & gestion d'image</div>
+              <div class="prod-hook">
+                Pour les marques qui agissent mais que personne ne voit
+              </div>
+              <p class="prod-desc">
+                Vous opérez en Côte d'Ivoire, vous créez de l'impact réel, mais
+                votre image ne le reflète pas ? On travaille votre visibilité
+                médiatique et institutionnelle, on vous positionne dans les bons
+                cercles et on construit une réputation crédible et durable.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Cartographie des réseaux
+                  d'influence et circuits de décision
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Gestion des relations médiatiques
+                  et institutionnelles
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Analyse proactive des risques
+                  politiques et sectoriels
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>YANGO — campagnes PR,
+                  lancements, events (10+ missions, 28M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>VITIB — visites PTF et
+                  positionnement institutionnel (9,5M)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>MAIRIE DU PLATEAU — Plateau
+                  Fashion Street (29M FCFA)
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">2 – 8M FCFA <small>/ mois</small></div>
+              <div class="prod-targets">
+                <span class="pt">Marques en expansion</span
+                ><span class="pt">Entreprises minières</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <div class="prod-accent mid"></div>
+            <div class="prod-body">
+              <div class="prod-ref">I — 04</div>
+              <div class="prod-name">Mise en relation avec les PTF</div>
+              <div class="prod-hook">
+                Pour accéder aux financements internationaux
+              </div>
+              <p class="prod-desc">
+                Les PTF — Banque Mondiale, BAD, AFD, GIZ, Union Européenne —
+                financent des projets en Côte d'Ivoire et en Afrique de l'Ouest.
+                Y accéder demande de savoir qui contacter, comment se présenter
+                et quels critères respecter. Marabu fait le lien.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Identification et mise en
+                  relation avec les PTF pertinents
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Préparation des dossiers et des
+                  argumentaires
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Accompagnement pendant et après
+                  les négociations
+                </div>
+              </div>
+              <div class="proof-block">
+                <div class="proof-title">Déjà réalisé</div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>VITIB — organisation visites
+                  PTF (9,5M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Mission PPP Guinée — Banque
+                  Mondiale (8,4M FCFA)
+                </div>
+                <div class="proof-line">
+                  <span class="proof-dot"></span>Réseau AmCham CI et VITIB
+                  activé
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                5 – 20% <small>du financement mobilisé</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">EPNs</span><span class="pt">Ministères</span
+                ><span class="pt">Associations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+    </div>
+
+    <!-- ── EN DÉVELOPPEMENT ── -->
+    <div id="dev" class="panel">
+      <div class="pole-header">
+        <div class="pole-label">En développement</div>
+        <h2 class="pole-title">Offres en construction</h2>
+        <p class="pole-desc">
+          Ces offres ont été actées en réunion comme priorités stratégiques.
+          Elles sont en cours de structuration — pas encore disponibles à la
+          vente mais à activer dès que le partenariat est formalisé.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Coaching & Verticalisation sectorielle</div>
+        <div class="prod-grid">
+          <div class="prod">
+            <span class="badge" style="background: #e24b4a; color: #fff"
+              >Absent v. précédente</span
+            >
+            <div class="prod-accent" style="background: #e24b4a"></div>
+            <div class="prod-body">
+              <div class="prod-ref">X — 01</div>
+              <div class="prod-name">Coaching dirigeants</div>
+              <div class="prod-hook">
+                Pour les DG nommés sans formation managériale
+              </div>
+              <p class="prod-desc">
+                Vous venez d'être nommé DG ou directeur mais vous n'avez jamais
+                reçu de formation pour ce rôle ? Un accompagnement mensuel
+                personnalisé avec un expert senior, pour construire votre
+                posture de leader et gérer les situations complexes. À
+                co-construire avec Anthony Viruega.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Séances mensuelles individuelles
+                  avec expert senior
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Travail sur la posture, la prise
+                  de décision, la gestion d'équipe
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Accès au réseau Marabu pour mise
+                  en perspective
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">
+                Retainer individuel <small>— à définir</small>
+              </div>
+              <div class="prod-targets">
+                <span class="pt">DG nommés</span
+                ><span class="pt">Boards privés</span
+                ><span class="pt">Filiales</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prod">
+            <span class="badge" style="background: #e24b4a; color: #fff"
+              >Absent v. précédente</span
+            >
+            <div class="prod-accent" style="background: #e24b4a"></div>
+            <div class="prod-body">
+              <div class="prod-ref">X — 02</div>
+              <div class="prod-name">Offres secteur financier</div>
+              <div class="prod-hook">
+                Banques, assurances, fintechs et BCEAO
+              </div>
+              <p class="prod-desc">
+                Formation, conformité BCEAO, accompagnement pour licences de
+                monnaie électronique, optimisation des processus bancaires — une
+                verticale dédiée aux institutions financières ivoiriennes et
+                WAEMU. À structurer avec Ibrahim et les contacts BCEAO.
+              </p>
+              <div class="prod-subs">
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Mise en conformité réglementaire
+                  BCEAO
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Accompagnement pour licences
+                  monnaie électronique
+                </div>
+                <div class="sub-item">
+                  <span class="sub-dot"></span>Formation et optimisation
+                  processus bancaires
+                </div>
+              </div>
+            </div>
+            <div class="prod-foot">
+              <div class="prod-price">À définir <small>/ mission</small></div>
+              <div class="prod-targets">
+                <span class="pt">Banques CI</span
+                ><span class="pt">Assurances</span
+                ><span class="pt">Fintechs</span><span class="pt">BCEAO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height: 3rem"></div>
+    </div>
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <div class="cta-title">Un besoin concret ?<br />Parlons-en.</div>
+      <p class="cta-sub">
+        Notre équipe est disponible du lundi au vendredi, 8h30 à 19h30 · Cocody
+        Danga, Abidjan
+      </p>
+      <div class="cta-btns">
+        <a href="mailto:contact@marabu.services" class="btn-white"
+          >Nous écrire</a
+        >
+        <a href="tel:+2250720777000" class="btn-outline">+225 07 20 77 70 00</a>
       </div>
     </div>
-    <div style="height:3rem"></div>
-  </div>
-<!-- CTA -->
-<div class="cta-wrap">
-  <div class="cta-title">Un besoin concret ?<br>Parlons-en.</div>
-  <p class="cta-sub">Notre équipe est disponible du lundi au vendredi, 8h30 à 19h30 · Cocody Danga, Abidjan</p>
-  <div class="cta-btns">
-    <a href="mailto:contact@marabu.services" class="btn-white">Nous écrire</a>
-    <a href="tel:+2250720777000" class="btn-outline">+225 07 20 77 70 00</a>
-  </div>
-</div>
 
-<script>
-function show(id, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  btn.classList.add('on');
-}
-</script>
-</body>
+    <script>
+      function show(id, btn) {
+        document
+          .querySelectorAll(".panel")
+          .forEach((p) => p.classList.remove("on"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("on"));
+        document.getElementById(id).classList.add("on");
+        btn.classList.add("on");
+        // ksee
+      }
+    </script>
+  </body>
 </html>
