@@ -20,53 +20,52 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build application
         run: npm run build
         env:
           NEXT_PUBLIC_BACK_END_URL_API: ${{ secrets.NEXT_PUBLIC_BACK_END_URL_API }}
 
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Transfer files to VPS
+        uses: appleboy/scp-action@v0.1.7
         with:
-          # 168.231.106.21
           host: ${{ secrets.VPS_HOST }}
           username: admin_marabu
           key: ${{ secrets.VPS_SSH_KEY }}
           passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
           port: 22
+          source: ".next,public,package.json,package-lock.json,next.config.*"
+          target: "/home/admin_marabu/apps/marabu_website/deploy-staging"
+          strip_components: 0
 
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: admin_marabu
+          key: ${{ secrets.VPS_SSH_KEY }}
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
+          port: 22
+          command_timeout: 5m
           script: |
-            # Naviguer vers le répertoire du projet
-            cd /home/admin_marabu/apps/marabu_website
+            set -e
+            DEPLOY_DIR=/home/admin_marabu/apps/marabu_website
+            STAGING_DIR=$DEPLOY_DIR/deploy-staging
+            CURRENT_DIR=$DEPLOY_DIR/current
 
-            # Sauvegarder l'ancienne versions
-            if [ -d "current" ]; then
-              mv current backup-$(date +%Y%m%d-%H%M%S)
+            # Sauvegarder l'ancienne version
+            if [ -d "$CURRENT_DIR" ]; then
+              mv "$CURRENT_DIR" "$DEPLOY_DIR/backup-$(date +%Y%m%d-%H%M%S)"
             fi
 
-            # Créer le répertoire de déploiement
-            mkdir -p current
+            # Promouvoir le staging en current
+            mv "$STAGING_DIR" "$CURRENT_DIR"
 
-            # Cloner le code depuis GitHub
-            git clone -b clean-branch https://github.com/${{ github.repository }}.git temp-deploy
+            cd "$CURRENT_DIR"
 
-            # Copier les fichiers nécessaires
-            cp -r temp-deploy/* current/
-            cp -r temp-deploy/.* current/ 2>/dev/null || true
-
-            # Nettoyer
-            rm -rf temp-deploy
-
-            # Naviguer vers le répertoire de déploiement
-            cd current
-
-            # Installer les dépendances
-            npm ci
-
-            # Construire l'application
-            npm run build
+            # Installer uniquement les dépendances de production
+            npm ci --omit=dev
 
             # Vérifier que le build existe
             if [ ! -d ".next" ]; then
@@ -74,21 +73,15 @@ jobs:
               exit 1
             fi
 
-            # Arrêter le processus PM2 existant s'il existe
+            # Redémarrer le service PM2
             pm2 stop marabuwebtest 2>/dev/null || true
             pm2 delete marabuwebtest 2>/dev/null || true
-
-            # Tuer tout processus utilisant le port 3001
             lsof -ti:3001 | xargs kill -9 2>/dev/null || true
-
-            # Démarrer le service PM2 sur le port 3001
             pm2 start npm --name "marabuwebtest" -- start -- -p 3001
-
-            # Sauvegarder la configuration PM2
             pm2 save
 
             # Nettoyer les anciennes sauvegardes (garder les 5 plus récentes)
-            cd /home/admin_marabu/apps/marabu_website
-            ls -t backup-* | tail -n +6 | xargs -r rm -rf
+            cd "$DEPLOY_DIR"
+            ls -dt backup-* 2>/dev/null | tail -n +6 | xargs -r rm -rf
 
             echo "Déploiement terminé avec succès!"
