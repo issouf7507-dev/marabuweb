@@ -35,8 +35,8 @@ interface Pole {
 }
 
 const POLES = [
-  { id: "conseil",        num: "01", image: "/persons/conseil_2_marabu.jpg" },
-  { id: "services",       num: "02", image: "/persons/servive_1_marabu.jpg" },
+  { id: "conseil", num: "01", image: "/persons/conseil_2_marabu.jpg" },
+  { id: "services", num: "02", image: "/persons/servive_1_marabu.jpg" },
   { id: "intermediation", num: "03", image: "/persons/intermediation_1_marabu.jpg" },
 ] as const;
 
@@ -58,8 +58,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             {product.badge && (
               <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded mb-2
                 ${product.badgeType === "green" ? "bg-[#689D71]/15 text-[#689D71]"
-                : product.badgeType === "gold"  ? "bg-amber-100 text-amber-700"
-                : "bg-gray-100 text-gray-500"}`}>
+                  : product.badgeType === "gold" ? "bg-amber-100 text-amber-700"
+                    : "bg-gray-100 text-gray-500"}`}>
                 {product.badge}
               </span>
             )}
@@ -100,7 +100,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
           {product.targets.map((t, i) => (
             <span key={i} className="text-[10px] font-semibold uppercase tracking-wide
-                                      bg-[#1D4851]/6 text-[#1D4851] px-2.5 py-1 rounded-full">
+               bg-[#1D4851]/6 text-[#1D4851] px-2.5 py-1 rounded-full">
               {t}
             </span>
           ))}
@@ -115,13 +115,13 @@ export default function SolutionsPage() {
   const [activeTab, setActiveTab] = useState<string>("conseil");
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  const t  = useTranslations("solutions");
+  const t = useTranslations("solutions");
   const t2 = useTranslations("home");
   const locale = useLocale();
 
   const poles: Record<string, Pole> = {
-    conseil:        t.raw("conseil")        as Pole,
-    services:       t.raw("services")       as Pole,
+    conseil: t.raw("conseil") as Pole,
+    services: t.raw("services") as Pole,
     intermediation: t.raw("intermediation") as Pole,
   };
 
